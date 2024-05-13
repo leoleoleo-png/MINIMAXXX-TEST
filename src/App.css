@@ -32,7 +32,37 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+@font-face {
+  font-family: 'RuderPlakatLLVIPTrialWeb';
+  src: url('RuderPlakatLLVIPTrialWeb.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-stretch: 75% 150%;
+}
+
+@font-face {
+  font-family: 'ExposureItalic';
+  src: url('ExposureItalic.otf');
+}
+
+
+@font-face {
+  font-family: 'Exposure';
+  src: url('Exposure.otf');
+}
+
+
+
+.loader.loaded {
+  opacity: 1;
+}
+
+.loader {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
 }

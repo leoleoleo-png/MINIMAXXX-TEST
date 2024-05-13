@@ -1,0 +1,126 @@
+:root {
+  --black: #000000;
+  --white: #FFFFFF;
+  --dark: #1A1A1A;
+  --yellow: #FCC303;
+  --grey: #8C8C8C;
+  --lightGrey: #D8D8D8;
+}
+
+body,
+html {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1 {
+  font-family: 'RuderPlakatLLVIPTrialWeb';
+  letter-spacing: 1px;
+  width: 400px;
+  text-align: center;
+  font-weight: 500;
+  font-variation-settings: 'HGHT' 600;
+  line-height: 105%;
+  text-decoration: none;
+  font-size: 13vh;
+  padding-bottom: 20px;
+  margin: 0;
+}
+
+h2 {
+  font-family: 'RuderPlakatLLVIPTrialWeb';
+  letter-spacing: 1px;
+  width: 50%;
+  text-align: center;
+  font-weight: 900;
+  font-variation-settings: 'HGHT' 450;
+  line-height: 105%;
+  text-decoration: none;
+  font-size: 120px;
+  padding-top: 110px;
+  margin: 0;
+}
+
+h3 {
+  font-family: 'ExposureItalic';
+  font-weight: 100;
+  text-align: center;
+  font-size: 18px;
+}
+
+h4 {
+  font-family: 'Exposure';
+  font-weight: 100;
+  text-align: center;
+  font-size: 11px;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.half {
+  width: 50%;
+  transition: width 0.5s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.left {
+  background-color: var(--white);
+  color: var(--black);
+}
+
+.right {
+  background-color: var(--dark);
+  color: var(--yellow);
+}
+
+.container:hover .left,
+.container:hover .right {
+  width: 40%;
+}
+
+.container:hover .left:hover,
+.container:hover .right:hover {
+  width: 60%;
+}
+
+.animated-underline {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  --underline-color: var(--black);
+}
+
+.animated-underline::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -1px;
+  left: 0;
+  background-color: var(--underline-color);
+  transition: width 0.3s ease-in-out;
+}
+
+.animated-underline:hover::after {
+  width: 100%;
+}
+
+.yellow-underline {
+  --underline-color: var(--yellow);
+}
