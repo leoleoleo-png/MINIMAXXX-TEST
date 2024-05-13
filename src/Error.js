@@ -7,6 +7,7 @@ import aleonIcon from "./assets/aleonIcon.png"
 import barIcon from "./assets/barIcon.png"
 import Gallery from './Gallery';
 import Footer from './Footer';
+import Loader from './Loader';
 
 const useDesktopMediaQuery = () =>
     useMediaQuery({ query: "(min-width: 1280px)" })
@@ -27,7 +28,7 @@ const TabletAndBelow = ({ children }) => {
 function App() {
     window.scrollTo(0, 0);
     return (
-        <div style={{ flex: 1, width: '100%', display: 'flex', justifyContent: 'center' }}>
+        <Loader delay={300} contents={<div style={{ flex: 1, width: '100%', display: 'flex', justifyContent: 'center' }}>
             <Desktop>
                 <div className='full'>
                     <TopBar mode={false} barIcon={barIcon} aleonIcon={aleonIcon} />
@@ -49,7 +50,7 @@ function App() {
 
                 </div>
             </TabletAndBelow>
-        </div >
+        </div >} />
     )
 }
 

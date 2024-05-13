@@ -31,7 +31,7 @@ const TopBar = ({ mode, barIcon, aleonIcon }) => {
     return (
         <div style={{ flex: 1 }}>
             <Desktop>
-                <div style={{ position: 'absolute', top: '40px', left: 0, right: 0, display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', paddingLeft: '20px', paddingRight: '20px' }}>
+                <div style={{ position: 'absolute', top: '45px', left: 0, right: 0, display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', paddingLeft: '20px', paddingRight: '20px' }}>
                     {mode ? (
                         <>
                             <a style={{ width: '20%', }} target='blank' href='https://www.google.com/maps/place/35+Rue+Saint-Sauveur,+75002+Paris,+France/@48.8660551,2.345798,17z/data=!3m1!4b1!4m6!3m5!1s0x47e66e19d43340b1:0x3422baba6117b7a9!8m2!3d48.8660551!4d2.3483729!16s%2Fg%2F11cshhkpfk?entry=ttu'>
