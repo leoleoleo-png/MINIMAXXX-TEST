@@ -50,12 +50,12 @@ function Cognac() {
         <Loader delay={300} contents={<div style={{ flex: 1, width: '100%', display: 'flex', justifyContent: 'center' }}>
             <Desktop>
                 <AgeModal isOpen={isModalOpen} onClose={() => handleCloseModal(false)} />
-                <div style={{ paddingLeft: '20px', paddingRight: '20px' }}>
+                <div style={{ width: '100%', paddingLeft: '20px', paddingRight: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                     <ColorBand text="DÉCOUVREZ NOTRE BAR À PARIS →" darkMode={true} />
                     <TopBar mode={false} barIcon={barIcon} aleonIcon={aleonIcon} />
-                    <Loader delay={150} contents={<h2>{title}</h2>} />
-                    <Loader delay={200} contents={<h3 style={{ width: '30%', paddingTop: '50px' }}>{subtitle}</h3>} />
-                    <Loader delay={250} contents={<img src={flower} style={{ width: '500px', paddingTop: '40px' }} />} />
+                    <h2>{title}</h2>
+                    <h3 style={{ width: '30%', paddingTop: '50px' }}>{subtitle}</h3>
+                    <img src={flower} style={{ width: '600px', paddingTop: '40px' }} />
                     <GalleryCognac />
                     <Footer black={true} />
                 </div>
