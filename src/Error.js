@@ -41,9 +41,9 @@ function App() {
             <TabletAndBelow>
                 <div style={{ width: '100%', paddingLeft: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', height: 'calc(100vh)' }}>
                     <TopBar mode={false} barIcon={barIcon} aleonIcon={aleonIcon} />
-                    <div style={{ paddingBottom: '5px' }}>
+                    <div>
                         <h3 style={{ textAlign: 'left', width: '100%', color: '#8C8C8C', margin: 0 }}>404, Page non trouvée</h3>
-                        <a href='/'><h3 style={{ textAlign: 'left', textDecorationLine: 'underline', margin: 0, paddingBottom: '220px' }}>Retour sur la page d’accueil</h3></a>
+                        <a href='/'><h3 style={{ textAlign: 'left', textDecorationLine: 'underline', margin: 0, paddingBottom: 'calc(22vh)' }}>Retour sur la page d’accueil</h3></a>
                         <Footer black={true} />
                     </div>
 

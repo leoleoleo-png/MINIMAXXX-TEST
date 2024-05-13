@@ -44,7 +44,7 @@ function App() {
 
     window.scrollTo(0, 0);
     return (
-        <div style={{ flex: 1, minHeight: 'calc(100vh)', width: '100%', display: 'flex', justifyContent: 'center', backgroundColor: '#1A1A1A' }}>
+        <Loader delay={300} contents={<div style={{ flex: 1, minHeight: 'calc(100vh)', width: '100%', display: 'flex', justifyContent: 'center', backgroundColor: '#1A1A1A' }}>
             <Desktop>
                 <div style={{ paddingLeft: '20px', paddingRight: '20px' }}>
                     <ColorBand text="DÉCOUVREZ NOTRE COGNAC →" darkMode={false} />
@@ -56,22 +56,21 @@ function App() {
                 </div>
             </Desktop>
             <TabletAndBelow>
-                <div style={{ flex: 1, background: '#1A1A1A', position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: -1 }}></div>
                 <TopBar mode={true} barIcon={barIcon} aleonIcon={aleonIcon} />
                 <Loader delay={300} contents={<div style={{ width: '100%', display: 'flex', flexDirection: 'column', paddingLeft: '20px', paddingRight: '20px' }}>
-                 
                     <a style={{ width: '100%', paddingTop: '200px' }} target='blank' href='https://www.google.com/maps/place/35+Rue+Saint-Sauveur,+75002+Paris,@48.8660551,2.345798,17z/data=!3m1!4b1!4m6!3m5!1s0x47e66e19d43340b1:0x3422baba6117b7a9!8m2!3d48.8660551!4d2.3483729!16s%2Fg%2F11cshhkpfk?entry=ttu'>
                         <h3 style={{ textAlign: 'center', color: '#FCC303', margin: 0, padding: 0 }}>
                             35 rue Saint-Sauver<br />75002 Paris<br />Ouvert du Lundi au Samedi<br />18h30 - 02h00
                         </h3>
                     </a>
-                    <h2 style={{ color: '#FCC303', textAlign: 'center', fontSize: '62px', width: '100%', lineHeight: '120%' }}>{title}</h2>
-                    <h3 style={{ paddingTop: '30px', paddingLeft:'20px', paddingRight:'20px', color: '#FCC303' }}>{subtitle}</h3>
+                    <h2 style={{ color: '#FCC303', textAlign: 'center', fontSize: 'calc(8vh)', letterSpacing: 'calc(0.05vh)', width: '100%', lineHeight: '120%' }}>{title}</h2>
+                    <h3 style={{ paddingTop: '30px', paddingLeft: '20px', paddingRight: '20px', color: '#FCC303' }}>{subtitle}</h3>
                     <Gallery phone />
                     <Footer black={false} />
                 </div>} />
             </TabletAndBelow>
-        </div>
+        </div>} />
+
     );
 }
 

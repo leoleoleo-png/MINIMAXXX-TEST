@@ -47,8 +47,7 @@ function Cognac() {
     };
 
     return (
-        <div style={{ flex: 1, width: '100%', display: 'flex', justifyContent: 'center' }}>
-
+        <Loader delay={300} contents={<div style={{ flex: 1, width: '100%', display: 'flex', justifyContent: 'center' }}>
             <Desktop>
                 <AgeModal isOpen={isModalOpen} onClose={() => handleCloseModal(false)} />
                 <div style={{ paddingLeft: '20px', paddingRight: '20px' }}>
@@ -65,7 +64,7 @@ function Cognac() {
                 <AgeModal phone isOpen={isModalOpen} onClose={() => handleCloseModal(false)} />
                 <TopBar mode={false} barIcon={barIcon} aleonIcon={aleonIcon} />
                 <Loader delay={300} contents={<div style={{ display: 'flex', flexDirection: 'column', paddingLeft: '20px', paddingRight: '20px' }}>
-                    <h2 style={{ textAlign: 'center', fontSize: '62px', width: '100%', paddingTop: '200px' }}>{title}</h2>
+                    <h2 style={{ textAlign: 'center', fontSize: 'calc(8vh)', letterSpacing: 'calc(0.05vh)', width: '100%', paddingTop: '200px' }}>{title}</h2>
                     <h3 style={{ paddingTop: '30px', paddingLeft: '20px', paddingRight: '20px' }}>{subtitle}</h3>
                     <img src={flower} style={{ width: '110%', paddingTop: '40px', alignSelf: 'center' }} />
                     <GalleryCognac phone />
@@ -73,7 +72,8 @@ function Cognac() {
                 </div>} />
 
             </TabletAndBelow>
-        </div>
+        </div>} />
+
     );
 }
 

@@ -40,8 +40,8 @@ const AgeModal = ({ isOpen, onClose, phone }) => {
                         Êtes-vous majeur.e ?
                     </h2>
                     <div className={buttonContainer}>
-                        <button className={button} onClick={handleClose}><h4>OUI</h4></button>
-                        <button className={button} onClick={handleClose}><h4>NON</h4></button>
+                        <button className={button} onClick={handleClose}><h4 style={{ color: '#000000' }}>OUI</h4></button>
+                        <button className={button} onClick={handleClose}><h4 style={{ color: '#000000' }}>NON</h4></button>
                     </div>
                 </div>
             </div>
