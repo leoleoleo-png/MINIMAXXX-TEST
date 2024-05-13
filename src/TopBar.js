@@ -68,11 +68,11 @@ const TopBar = ({ mode, barIcon, aleonIcon }) => {
                                 <a href='https://www.instagram.com/byunveil/'><h3 style={{ margin: 0, marginBottom: '8px', color: '#FCC303' }}>Instagram</h3></a>
                                 <a><h3 style={{ margin: 0, color: '#FCC303' }}>Contact</h3></a>
                             </div>
-                            <a href="/"><img src={barIcon} style={{ width: '150px', marginRight: '-3px' }} /></a>
+                            <a href="/"><img src={barIcon} style={{ width: 'calc(20vh)', marginRight: '-3px' }} /></a>
                         </>
                     ) : (
                         <>
-                            <a href="/"><img src={aleonIcon} style={{ width: '120px', marginLeft: '-2px' }} /></a>
+                            <a href="/"><img src={aleonIcon} style={{ width: 'calc(17vh)', marginLeft: '-2px' }} /></a>
                             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-end' }}>
                                 <a onClick={toggleModal}><h3 style={{ textAlign: 'right', margin: 0, padding: 0, marginBottom: '8px' }}>Points de vente</h3></a>
                                 <a href='https://www.instagram.com/byunveil/'><h3 style={{ margin: 0, marginBottom: '8px' }}>Instagram</h3></a>

@@ -47,7 +47,7 @@ const Footer = ({ black }) => {
             </div>
         </Desktop>
         <TabletAndBelow>
-            <div style={{ display: 'flex', flexDirection: 'column', width: '100%', paddingTop: '70px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', width: '100%', paddingTop: '70px', paddingBottom:'5px' }}>
                 {black ? (
                     <>
                         <h4 style={{ textAlign: 'left', width: '50%', paddingBottom: '60px', margin: 0 }}>L'ABUS D'ALCOOL EST DANGEREUX POUR LA SANTÉ</h4>
