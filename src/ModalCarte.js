@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import './modal.css';
-import { fetchAddresses } from './apiAddresses';
+import { fetchCocktails } from './apiCocktails';
 
-const Modal = ({ isOpen, onClose, phone }) => {
-    const [addresses, setAddresses] = useState([]);
+const ModalCarte = ({ isOpen, onClose, phone }) => {
+    const [cocktails, setCocktails] = useState([]);
     const [show, setShow] = useState(isOpen);
 
     useEffect(() => {
         if (isOpen) {
             setShow(true);
-            fetchAddresses()
-                .then(data => setAddresses(data))
-                .catch(error => console.error('Error fetching addresses:', error));
+            fetchCocktails()
+                .then(data => setCocktails(data))
+                .catch(error => console.error('Error fetching cocktails:', error));
         }
     }, [isOpen]);
 
@@ -21,6 +21,10 @@ const Modal = ({ isOpen, onClose, phone }) => {
             onClose();
         }, 300);
     };
+
+
+
+
 
     const overlayClass = phone ? 'modal-overlay-mobile' : 'modal-overlay';
     const modalClass = phone ? 'modal-mobile' : 'modal';
@@ -40,14 +44,13 @@ const Modal = ({ isOpen, onClose, phone }) => {
             <div className={modalClass} onClick={e => e.stopPropagation()}>
                 <div className={contentClass}>
                     <div className={listClass}>
-                        {addresses.map((address) => (
-                            <div key={address.id}>
-                                <a href={address.link} target="_blank" rel="noopener noreferrer">
-                                    <h2 style={{ fontSize: '48px', textAlign: 'left', margin: 0, paddingTop: '15px' }}>{address.name}</h2>
-                                    <p style={{ marginBottom: '2px', marginTop: '10px' }}>{address.street}</p>
-                                    <p>{address.postcode}</p>
-                                    <p>{address.country}</p>
-                                </a>
+                        {cocktails.map((cocktail) => (
+                            <div key={cocktail.id} style={{ display: 'flex',position:'relative', flexDirection: 'column', padding: '5px', paddingBottom:'30px', minHeight:'115px' }}>
+                                <h2 style={{  fontSize: '36px', textAlign: 'left', margin: 0, paddingTop: '15px',  width:  phone ? '50%':'60%'}}>{cocktail.name}</h2>
+                                <p style={{ marginBottom: '2px', marginTop: '10px', width:  phone ? '50%':'70%' }}>{cocktail.recipe}</p>
+                                {cocktail.image && cocktail.image.url && (
+                                    <img src={cocktail.image.url} alt={cocktail.name} style={{ width: '120px', height: '120px', objectFit: 'cover', position:'absolute', right:0, top:'15px', borderRadius:'8px' }} />
+                                )}
                             </div>
                         ))}
                     </div>
@@ -57,4 +60,4 @@ const Modal = ({ isOpen, onClose, phone }) => {
     );
 };
 
-export default Modal;
+export default ModalCarte;

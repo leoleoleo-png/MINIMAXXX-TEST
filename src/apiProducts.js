@@ -1,0 +1,40 @@
+import axios from 'axios';
+
+const API_TOKEN = '002ad6d1502e52453f2eda95397aed';
+const API_URL = 'https://graphql.datocms.com/';
+
+const fetchProducts = async () => {
+    try {
+        const response = await axios.post(
+            API_URL,
+            {
+                query: `
+            {
+            productgallery {
+              product {
+                title
+                paragraph
+                images {
+                  url
+                }
+                id
+              }
+            }
+          }
+        `
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${API_TOKEN}`
+                }
+            }
+        );
+        return response.data.data.productgallery.product;
+    } catch (error) {
+        console.error('Error fetching products:', error);
+        return [];
+    }
+};
+
+export { fetchProducts };
