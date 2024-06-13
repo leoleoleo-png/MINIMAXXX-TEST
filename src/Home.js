@@ -31,7 +31,7 @@ function App() {
                     <a className="half left" href="/Cognac">
                         <img src={aleonIcon} style={{ width: '100px' }} />
                         <div>
-                            <h1>NOTRE COGNAC</h1>
+                            <h1>NOS SPIRITUEUX</h1>
                             <h3 className='animated-underline'>Découvrir</h3>
                         </div>
                         <div></div>

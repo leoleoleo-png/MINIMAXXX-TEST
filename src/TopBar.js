@@ -1,31 +1,66 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from './Modal.js';
+import ModalContact from './ModalContact.js';
+import ModalCarte from './ModalCarte.js';
 import './home.css';
-import { useMediaQuery } from 'react-responsive'
-
+import { useMediaQuery } from 'react-responsive';
+import { fetchContactInfo } from './apiContact';
+import { fetchInstagramLink } from './apiInstagram';
 
 const useDesktopMediaQuery = () =>
-    useMediaQuery({ query: "(min-width: 1280px)" })
+    useMediaQuery({ query: "(min-width: 1280px)" });
 
 const useTabletAndBelowMediaQuery = () =>
-    useMediaQuery({ query: "(max-width: 1279px)" })
+    useMediaQuery({ query: "(max-width: 1279px)" });
 
 const Desktop = ({ children }) => {
-    const isDesktop = useDesktopMediaQuery()
-    return isDesktop ? children : null
-}
+    const isDesktop = useDesktopMediaQuery();
+    return isDesktop ? children : null;
+};
 
 const TabletAndBelow = ({ children }) => {
-    const isTabletAndBelow = useTabletAndBelowMediaQuery()
-    return isTabletAndBelow ? children : null
-}
-
+    const isTabletAndBelow = useTabletAndBelowMediaQuery();
+    return isTabletAndBelow ? children : null;
+};
 
 const TopBar = ({ mode, barIcon, aleonIcon }) => {
     const [modalOpen, setModalOpen] = useState(false);
+    const [contactModalOpen, setContactModalOpen] = useState(false);
+    const [carteModalOpen, setCarteModalOpen] = useState(false);
+    const [contactInfo, setContactInfo] = useState({
+        street: '',
+        zipcode: '',
+        country: '',
+        days: '',
+        hours: '',
+        addresslink: ''
+    });
+    const [instagramLink, setInstagramLink] = useState('');
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const fetchedContactInfo = await fetchContactInfo();
+            const fetchedInstagramLink = await fetchInstagramLink();
+            if (fetchedContactInfo) {
+                setContactInfo(fetchedContactInfo);
+            }
+            if (fetchedInstagramLink) {
+                setInstagramLink(fetchedInstagramLink);
+            }
+        };
+        fetchData();
+    }, []);
 
     const toggleModal = () => {
         setModalOpen(!modalOpen);
+    };
+
+    const toggleContactModal = () => {
+        setContactModalOpen(!contactModalOpen);
+    };
+
+    const toggleCarteModal = () => {
+        setCarteModalOpen(!carteModalOpen);
     };
 
     return (
@@ -34,29 +69,34 @@ const TopBar = ({ mode, barIcon, aleonIcon }) => {
                 <div style={{ position: 'absolute', top: '45px', left: 0, right: 0, display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', paddingLeft: '20px', paddingRight: '20px' }}>
                     {mode ? (
                         <>
-                            <a style={{ width: '20%', }} target='blank' href='https://www.google.com/maps/place/35+Rue+Saint-Sauveur,+75002+Paris,+France/@48.8660551,2.345798,17z/data=!3m1!4b1!4m6!3m5!1s0x47e66e19d43340b1:0x3422baba6117b7a9!8m2!3d48.8660551!4d2.3483729!16s%2Fg%2F11cshhkpfk?entry=ttu'>
+                            <a style={{ width: '20%' }} target='_blank' href={contactInfo.addresslink}>
                                 <h3 style={{ textAlign: 'left', color: '#FCC303', margin: 0, padding: 0 }}>
-                                    35 rue Saint-Sauver<br />75002 Paris<br />Ouvert du Lundi au Samedi<br />18h30 - 02h00
+                                    {contactInfo.street}<br />
+                                    {contactInfo.zipcode} {contactInfo.country}<br />
+                                    {contactInfo.days}<br />
+                                    {contactInfo.hours}
                                 </h3>
                             </a>
                             <a href="/"><img src={barIcon} style={{ width: '150px' }} /></a>
-                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', width: '20%' }}>
-                                <a style={{ marginRight: '25px' }} onClick={toggleModal}><h3 style={{ margin: 0, color: '#FCC303' }}>Réserver</h3></a>
-                                <a style={{ marginRight: '25px' }}><h3 style={{ margin: 0, color: '#FCC303' }}>Instagram</h3></a>
-                                <a><h3 style={{ margin: 0, color: '#FCC303' }}>Contact</h3></a>
+                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', cursor: 'pointer' }}>
+                                <a onClick={toggleCarteModal}><h3 style={{ margin: 0, color: '#FCC303' }}>Nos Cocktails</h3></a>
+                                <a onClick={toggleContactModal}><h3 style={{ margin: 0, color: '#FCC303', marginLeft: '25px', marginRight: '25px' }}>Contact</h3></a>
+                                <a href={instagramLink} target="_blank" rel="noopener noreferrer"><h3 style={{ margin: 0, color: '#FCC303' }}>Instagram</h3></a>
                             </div>
                         </>
                     ) : (
                         <>
                             <a style={{ width: '20%' }} onClick={toggleModal}><h3 style={{ cursor: 'pointer', textAlign: 'left', margin: 0, padding: 0 }}>Points de vente</h3></a>
                             <a href="/"><img src={aleonIcon} style={{ width: '100px' }} /></a>
-                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', width: '20%' }}>
-                                <a style={{ marginRight: '25px' }} href='https://www.instagram.com/byunveil/'><h3 style={{ margin: 0 }}>Instagram</h3></a>
-                                <a><h3 style={{ margin: 0 }}>Contact</h3></a>
+                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', width: '20%', cursor: 'pointer' }}>
+                                <a style={{ marginRight: '25px' }} href={instagramLink} target="_blank" rel="noopener noreferrer"><h3 style={{ margin: 0 }}>Instagram</h3></a>
+                                <a onClick={toggleContactModal}><h3 style={{ margin: 0 }}>Contact</h3></a>
                             </div>
                         </>
                     )}
                     <Modal isOpen={modalOpen} onClose={toggleModal} />
+                    <ModalContact isOpen={contactModalOpen} onClose={toggleContactModal} />
+                    <ModalCarte isOpen={carteModalOpen} onClose={toggleCarteModal} />
                 </div>
             </Desktop>
             <TabletAndBelow>
@@ -64,9 +104,10 @@ const TopBar = ({ mode, barIcon, aleonIcon }) => {
                     {mode ? (
                         <>
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                                <a onClick={toggleModal}><h3 style={{ textAlign: 'left', margin: 0, padding: 0, marginBottom: '8px', color: '#FCC303' }}>Carte</h3></a>
-                                <a href='https://www.instagram.com/byunveil/'><h3 style={{ margin: 0, marginBottom: '8px', color: '#FCC303' }}>Instagram</h3></a>
-                                <a><h3 style={{ margin: 0, color: '#FCC303' }}>Contact</h3></a>
+                                <a onClick={toggleCarteModal}><h3 style={{ margin: 0,marginBottom: '8px', color: '#FCC303' }}>Nos Cocktails</h3></a>
+                                <a href={instagramLink} target="_blank" rel="noopener noreferrer"><h3 style={{ margin: 0, marginBottom: '8px', color: '#FCC303' }}>Instagram</h3></a>
+                                <a onClick={toggleContactModal}><h3 style={{ margin: 0, color: '#FCC303' }}>Contact</h3></a>
+
                             </div>
                             <a href="/"><img src={barIcon} style={{ width: 'calc(20vh)', marginRight: '-3px' }} /></a>
                         </>
@@ -75,12 +116,14 @@ const TopBar = ({ mode, barIcon, aleonIcon }) => {
                             <a href="/"><img src={aleonIcon} style={{ width: 'calc(17vh)', marginLeft: '-2px' }} /></a>
                             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-end' }}>
                                 <a onClick={toggleModal}><h3 style={{ textAlign: 'right', margin: 0, padding: 0, marginBottom: '8px' }}>Points de vente</h3></a>
-                                <a href='https://www.instagram.com/byunveil/'><h3 style={{ margin: 0, marginBottom: '8px' }}>Instagram</h3></a>
-                                <a><h3 style={{ margin: 0 }}>Contact</h3></a>
+                                <a href={instagramLink} target="_blank" rel="noopener noreferrer"><h3 style={{ margin: 0, marginBottom: '8px' }}>Instagram</h3></a>
+                                <a onClick={toggleContactModal}><h3 style={{ margin: 0 }}>Contact</h3></a>
                             </div>
                         </>
                     )}
                     <Modal phone isOpen={modalOpen} onClose={toggleModal} />
+                    <ModalContact phone isOpen={contactModalOpen} onClose={toggleContactModal} />
+                    <ModalCarte phone isOpen={carteModalOpen} onClose={toggleCarteModal} />
                 </div>
             </TabletAndBelow>
         </div>

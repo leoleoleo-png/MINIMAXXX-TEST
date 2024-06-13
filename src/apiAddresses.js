@@ -10,11 +10,16 @@ const fetchAddresses = async () => {
       {
         query: `
           {
-            allAddresses {
+            vente {
+              addresses {
+                id
+                name
+                postcode
+                street
+                link
+                country
+              }
               id
-              name
-              street
-              postcode
             }
           }
         `
@@ -26,7 +31,7 @@ const fetchAddresses = async () => {
         }
       }
     );
-    return response.data.data.allAddresses;
+    return response.data.data.vente.addresses;
   } catch (error) {
     console.error('Error fetching addresses:', error);
     return [];

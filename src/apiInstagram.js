@@ -3,22 +3,15 @@ import axios from 'axios';
 const API_TOKEN = '002ad6d1502e52453f2eda95397aed';
 const API_URL = 'https://graphql.datocms.com/';
 
-const fetchCognacData = async () => {
+const fetchInstagramLink = async () => {
   try {
     const response = await axios.post(
       API_URL,
       {
         query: `
           {
-            cognac {
-              id
-              paragraph1
-              paragraph2
-              paragraph3
-              title
-              flower {
-                url
-              }
+            instagram {
+              link
             }
           }
         `
@@ -30,11 +23,11 @@ const fetchCognacData = async () => {
         }
       }
     );
-    return response.data.data.cognac;
+    return response.data.data.instagram.link;
   } catch (error) {
-    console.error('Error fetching cognac data:', error);
+    console.error('Error fetching Instagram link:', error);
     return null;
   }
 };
 
-export { fetchCognacData };
+export { fetchInstagramLink };
