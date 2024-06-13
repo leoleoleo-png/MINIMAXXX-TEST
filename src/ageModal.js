@@ -31,7 +31,7 @@ const AgeModal = ({ isOpen, onClose, phone }) => {
     const button = phone ? 'button-mobile' : 'button-desktop';
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.8)', animation: `${animate ? 'fadeIn' : 'fadeOut'} 0.5s` }} onClick={() => handleClose(false)}>
+        <div style={{ zIndex:10000, display: 'flex', justifyContent: phone ? 'flex-end' : 'center', alignItems: phone ? 'flex-end' : 'center', position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.8)', animation: `${animate ? 'fadeIn' : 'fadeOut'} 0.5s` }} onClick={() => handleClose(false)}>
             <div className={modalClass} onClick={e => e.stopPropagation()}>
                 <div className="modal-content-new">
                     <h2 style={{ fontSize: '48px', textAlign: 'center', paddingTop: '40px', margin: 0, width: '100%' }}>
