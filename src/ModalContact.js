@@ -8,7 +8,9 @@ const ModalContact = ({ isOpen, onClose, phone }) => {
 
     useEffect(() => {
         if (isOpen) {
-            setShow(true);
+            setTimeout(() => {
+                setShow(true);
+            }, 200);
             fetchContactInfo()
                 .then(data => setContactInfo(data))
                 .catch(error => console.error('Error fetching contact info:', error));

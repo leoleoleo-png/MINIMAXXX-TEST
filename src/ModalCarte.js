@@ -8,7 +8,10 @@ const ModalCarte = ({ isOpen, onClose, phone }) => {
 
     useEffect(() => {
         if (isOpen) {
-            setShow(true);
+            setTimeout(() => {
+                setShow(true);
+            }, 200);
+   
             fetchCocktails()
                 .then(data => setCocktails(data))
                 .catch(error => console.error('Error fetching cocktails:', error));
@@ -22,10 +25,6 @@ const ModalCarte = ({ isOpen, onClose, phone }) => {
         }, 300);
     };
 
-
-
-
-
     const overlayClass = phone ? 'modal-overlay-mobile' : 'modal-overlay';
     const modalClass = phone ? 'modal-mobile' : 'modal';
     const contentClass = phone ? 'modal-content-mobile' : 'modal-content';
@@ -37,6 +36,10 @@ const ModalCarte = ({ isOpen, onClose, phone }) => {
         }
     };
 
+    const handleImageLoad = (e) => {
+        e.target.classList.add('loaded');
+    };
+
     if (!show && !isOpen) return null;
 
     return (
@@ -45,11 +48,17 @@ const ModalCarte = ({ isOpen, onClose, phone }) => {
                 <div className={contentClass}>
                     <div className={listClass}>
                         {cocktails.map((cocktail) => (
-                            <div key={cocktail.id} style={{ display: 'flex',position:'relative', flexDirection: 'column', padding: '5px', paddingBottom:'30px', minHeight:'115px' }}>
-                                <h2 style={{  fontSize: '36px', textAlign: 'left', margin: 0, paddingTop: '15px',  width:  phone ? '50%':'60%'}}>{cocktail.name}</h2>
-                                <p style={{ marginBottom: '2px', marginTop: '10px', width:  phone ? '50%':'70%' }}>{cocktail.recipe}</p>
+                            <div key={cocktail.id} style={{ display: 'flex', position: 'relative', flexDirection: 'column', padding: '5px', paddingBottom: '30px', minHeight: '115px' }}>
+                                <h2 style={{ fontSize: '36px', textAlign: 'left', margin: 0, paddingTop: '15px', width: phone ? '50%' : '60%' }}>{cocktail.name}</h2>
+                                <p style={{ marginBottom: '2px', marginTop: '10px', width: phone ? '50%' : '70%' }}>{cocktail.recipe}</p>
                                 {cocktail.image && cocktail.image.url && (
-                                    <img src={cocktail.image.url} alt={cocktail.name} style={{ width: '120px', height: '120px', objectFit: 'cover', position:'absolute', right:0, top:'15px', borderRadius:'8px' }} />
+                                    <img
+                                        src={cocktail.image.url}
+                                        alt={cocktail.name}
+                                        className="img-fade-in"
+                                        onLoad={handleImageLoad}
+                                        style={{ width: '120px', height: '120px', objectFit: 'cover', position: 'absolute', right: 0, top: '15px', borderRadius: '8px' }}
+                                    />
                                 )}
                             </div>
                         ))}

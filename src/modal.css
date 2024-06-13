@@ -11,13 +11,13 @@
   align-items: center;
   visibility: hidden;
   opacity: 0;
-  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+  transition: opacity 0.5s ease, visibility 0.5s linear 0.5s;
 }
 
 .modal-overlay.show {
   visibility: visible;
   opacity: 1;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.5s ease;
 }
 
 .modal {
@@ -111,4 +111,15 @@
   font-family: 'ExposureItalic';
   font-weight: 100;
   font-size: 18px;
+}
+
+/* Add this to your CSS file (modal.css) */
+
+.img-fade-in {
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+}
+
+.img-fade-in.loaded {
+  opacity: 1;
 }

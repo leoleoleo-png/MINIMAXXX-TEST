@@ -8,7 +8,9 @@ const Modal = ({ isOpen, onClose, phone }) => {
 
     useEffect(() => {
         if (isOpen) {
-            setShow(true);
+            setTimeout(() => {
+                setShow(true);
+            }, 200);
             fetchAddresses()
                 .then(data => setAddresses(data))
                 .catch(error => console.error('Error fetching addresses:', error));
