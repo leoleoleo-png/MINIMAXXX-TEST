@@ -21,42 +21,47 @@ a {
 }
 
 h1 {
-  font-family: 'RuderPlakatLLVIPTrialWeb';
+  font-family: 'RuderPlakatLLVIPWeb';
   letter-spacing: 2px;
   width: 400px;
   text-align: center;
-  font-weight: 500;
-  font-variation-settings: 'HGHT' 600;
-  line-height: 105%;
+  line-height: 100%;
   text-decoration: none;
-  font-size: 13vh;
+  font-size: 12.5vh;
   padding-bottom: 20px;
   margin: 0;
+  font-variation-settings: 
+  'HGHT' 550,
+  'CPTN' 100,
+  'DCND' 100;
 }
 
 h2 {
-  font-family: 'RuderPlakatLLVIPTrialWeb';
+  font-family: 'RuderPlakatLLVIPWeb';
   letter-spacing: 0.5px;
   width: 50%;
   text-align: center;
-  font-weight: 900;
-  font-variation-settings: 'HGHT' 450;
-  line-height: 105%;
+  line-height: 115%;
   text-decoration: none;
-  font-size: 120px;
+  font-size: 16vh;
   padding-top: 110px;
   margin: 0;
+  font-variation-settings: 
+  'HGHT' 550,
+  'CPTN' 100,
+  'DCND' 100;
 }
 
 h3 {
-  font-family: 'ExposureItalic';
-  font-weight: 100;
+  font-family: 'Exposure-20-Italic';
+  font-weight: 300;
   text-align: center;
   font-size: 18px;
+  line-height: 130%;
 }
 
 h4 {
-  font-family: 'Exposure';
+  font-family: 'Exposure-20-Regular';
   font-weight: 100;
   text-align: center;
   font-size: 11px;

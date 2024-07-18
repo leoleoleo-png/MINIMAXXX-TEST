@@ -3,16 +3,16 @@ import axios from 'axios';
 const API_TOKEN = '002ad6d1502e52453f2eda95397aed';
 const API_URL = 'https://graphql.datocms.com/';
 
-const fetchInstagramLinks = async () => {
+const fetchBandeData = async () => {
   try {
     const response = await axios.post(
       API_URL,
       {
         query: `
           {
-            instagram {
-              linkbar
-              linkbrand
+            bande {
+              bar
+              brand
             }
           }
         `
@@ -24,17 +24,14 @@ const fetchInstagramLinks = async () => {
         }
       }
     );
-    return {
-      linkbar: response.data.data.instagram.linkbar,
-      linkbrand: response.data.data.instagram.linkbrand,
-    };
+    return response.data.data.bande;
   } catch (error) {
-    console.error('Error fetching Instagram links:', error);
+    console.error('Error fetching bande data:', error);
     return {
-      linkbar: null,
-      linkbrand: null,
+      bar: null,
+      brand: null,
     };
   }
 };
 
-export { fetchInstagramLinks };
+export { fetchBandeData };

@@ -1,19 +1,21 @@
-
 @font-face {
-  font-family: 'RuderPlakatLLVIPTrialWeb';
-  src: url('RuderPlakatLLVIPTrialWeb.woff2') format('woff2-variations');
-  font-weight: 100 900;
-  font-stretch: 75% 150%;
+  font-family: 'Exposure-20-Italic';
+  src: url('Exposure-20-Italic.woff2') format('woff2'),
+    url('Exposure-20-Italic.woff') format('woff'),
+    url('Exposure-20-Italic.ttf') format('truetype'),
+    url('Exposure-20-Italic.eot') format('embedded-opentype');
+  font-display: swap;
 }
 
-@font-face {
-  font-family: 'ExposureItalic';
-  src: url('ExposureItalic.otf');
-}
 
 @font-face {
-  font-family: 'Exposure';
-  src: url('Exposure.otf');
+  font-family: 'Exposure-20-Regular';
+  src: url('Exposure-20-Regular.woff2') format('woff2'),
+    url('Exposure-20-Regular.woff') format('woff'),
+    url('Exposure-20-Regular.ttf') format('truetype'),
+    url('Exposure-20-Regular.eot') format('embedded-opentype');
+  font-display: swap;
+
 }
 
 .loader.loaded {
@@ -23,4 +25,28 @@
 .loader {
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
+}
+
+
+@font-face {
+  font-family: "RuderPlakatLLVIPWeb";
+  src: url("RuderPlakatLLVIPWeb.woff") format("woff");
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: "RuderPlakatLLVIPWeb";
+  src: url("RuderPlakatLLVIPWeb.woff2") format("woff2");
+  font-weight: 900;
+}
+
+
+@font-face {
+  font-family: "RuderPlakatLLVIPSub";
+  src: url("RuderPlakatLLVIPSub.woff") format("woff");
+}
+
+@font-face {
+  font-family: "RuderPlakatLLVIPSub";
+  src: url("RuderPlakatLLVIPSub.woff2") format("woff2");
 }
