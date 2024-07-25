@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+/* global YT */
+import React, { useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import './App.css';
 import './home.css';
-import Loader from './Loader';
-import { fetchHomeData } from './apiHome';
 
 const useDesktopMediaQuery = () =>
     useMediaQuery({ query: "(min-width: 1280px)" });
@@ -22,57 +21,38 @@ const TabletAndBelow = ({ children }) => {
 };
 
 function App() {
-    const [homeData, setHomeData] = useState(null);
+    const embedUrl = 'https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1&controls=0&modestbranding=1&rel=0&showinfo=0&mute=1';
 
-    useEffect(() => {
-        const getHomeData = async () => {
-            const data = await fetchHomeData();
-            setHomeData(data);
-        };
-        getHomeData();
-    }, []);
 
-    if (!homeData) {
-        return <Loader delay={100} />;
-    }
-
+    window.scrollTo(0, 3000);
     return (
-        <Loader delay={100} contents={
-            <div style={{ overflow: 'hidden', flex: 1 }}>
-                <Desktop>
-                    <div className="container">
-                        <a className="half left" href="/Cognac">
-                            <img src={homeData.logoleft.url} style={{ width: '100px' }} alt="Left Logo" />
-                            <div>
-                                <h1>{homeData.left}</h1>
-                                <h3 className='animated-underline'>Découvrir</h3>
-                            </div>
-                            <div></div>
-                        </a>
-                        <a href="/Bar" className="half right">
-                            <img src={homeData.logoright.url} style={{ width: '150px' }} alt="Right Logo" />
-                            <div>
-                                <h1>{homeData.right}</h1>
-                                <h3 style={{ color: '#FCC303' }} className='animated-underline yellow-underline'>Découvrir</h3>
-                            </div>
-                            <div></div>
-                        </a>
+        <div style={{ overflow: 'hidden', flex: 1 }}>
+            <Desktop>
+                <div style={{ overflow: 'hidden', flex: 1 }}>
+                    <iframe
+                        style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}
+                        src={embedUrl}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        title="Live Stream"
+                    ></iframe>
+                    <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: '85%', backgroundColor: '#FFFFFF' }}></div>
+                    <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, top: '85%', backgroundColor: '#FFFFFF' }}></div>
+                    <div style={{ position: 'fixed', bottom: 0, top: 0, left: 0, right: '90%', backgroundColor: '#FFFFFF' }}></div>
+                    <div style={{ position: 'fixed', bottom: 0, top: 0, right: 0, left: '90%', backgroundColor: '#FFFFFF' }}></div>
+
+                    <div style={{ position: 'fixed', top: '11%', left: '10%', right: '10%', bottom: '85%', backgroundColor: '#EEEEE', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
+                        <p style={{fontWeight:'400', paddingLeft:'8px', fontSize:'12px'}}>MINIMAXXX LIVESTREAM</p>
+                        <p style={{fontWeight:'400', paddingRight:'8px', fontSize:'12px'}}>24.12.24 POP-UP</p>
                     </div>
-                </Desktop>
-                <TabletAndBelow>
-                    <div style={{ flex: 1 }}>
-                        <a href="/Cognac" style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: '50%', backgroundColor: '#FFFFFF', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '20px' }}>
-                            <Loader delay={150} contents={<div style={{ width: '100%' }}><img src={homeData.logoleft.url} style={{ width: 'calc(16vh)', marginLeft: '-2px' }} alt="Left Logo" /></div>} />
-                            <Loader delay={150} contents={<div style={{ width: '100%' }}><h1 style={{ fontSize: 'calc(9vh)', textAlign: 'left', margin: 0, padding: 0, width: '100%' }}>{homeData.left}</h1></div>} />
-                        </a>
-                        <a href="/Bar" style={{ position: 'absolute', bottom: 0, left: 0, right: 0, top: '50%', backgroundColor: '#1A1A1A', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '20px' }}>
-                            <Loader delay={150} contents={<div style={{ width: '100%' }}><img src={homeData.logoright.url} style={{ width: 'calc(20vh)', marginLeft: '-4px' }} alt="Right Logo" /></div>} />
-                            <Loader delay={150} contents={<div style={{ width: '100%' }}><h1 style={{ fontSize: 'calc(9vh)', textAlign: 'left', margin: 0, padding: 0, color: '#FCC303', width: '80%' }}>{homeData.right}</h1></div>} />
-                        </a>
-                    </div>
-                </TabletAndBelow>
-            </div>
-        } />
+                </div>
+            </Desktop>
+            <TabletAndBelow>
+                <div style={{ flex: 1 }}>
+                </div>
+            </TabletAndBelow>
+        </div>
     );
 }
 
