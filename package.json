@@ -9,6 +9,7 @@
     "axios": "^1.6.8",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-draggable": "^4.4.6",
     "react-localization": "^1.0.19",
     "react-responsive": "^10.0.0",
     "react-router-dom": "^6.23.0",
