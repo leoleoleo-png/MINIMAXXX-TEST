@@ -21,7 +21,7 @@ const TabletAndBelow = ({ children }) => {
 };
 
 function App() {
-    const embedUrl = 'https://player.twitch.tv/?channel=leounveil&parent=localhost';
+    const embedUrl = 'https://player.twitch.tv/?channel=leounveil&parent=minimaxxx-test.vercel.app/';
 
 
     window.scrollTo(0, 3000);
