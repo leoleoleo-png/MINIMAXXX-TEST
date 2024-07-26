@@ -21,7 +21,7 @@ const TabletAndBelow = ({ children }) => {
 };
 
 function App() {
-    const embedUrl = 'https://player.twitch.tv/?channel=leounveil&parent=localhost';
+    const embedUrl = 'https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1&controls=0&modestbranding=1&rel=0&showinfo=0&mute=1';
 
 
     window.scrollTo(0, 3000);
