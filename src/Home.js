@@ -2,14 +2,34 @@
 import React, { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import Draggable from 'react-draggable';
+import wordmark from './assets/wordmark.png';
+import runner from './assets/runner.png';
 import './App.css';
 import './home.css';
+import Stream from './stream';
+import NavBarDesktop from './navBarDesktop';
+
+
+import icon_class from './assets/icon_class.png';
+import icon_hot from './assets/icon_hot.png';
+import icon_recycle from './assets/icon_recycle.png';
+import icon_org from './assets/icon_org.png';
+
+import icon_xxx from './assets/icon_xxx.png';
+import icon_ce from './assets/icon_ce.png';
+
+import icon_van from './assets/icon_van.png';
+import icon_bin from './assets/icon_bin.png';
+
+import icon_world from './assets/icon_world.png';
+import icon_24 from './assets/icon_24.png';
+import StreamPhone from './streamPhone';
 
 const useDesktopMediaQuery = () =>
-    useMediaQuery({ query: "(min-width: 1280px)" });
+    useMediaQuery({ query: "(min-width: 601px)" });
 
 const useTabletAndBelowMediaQuery = () =>
-    useMediaQuery({ query: "(max-width: 1279px)" });
+    useMediaQuery({ query: "(max-width: 600px)" });
 
 const Desktop = ({ children }) => {
     const isDesktop = useDesktopMediaQuery();
@@ -21,58 +41,121 @@ const TabletAndBelow = ({ children }) => {
     return isTabletAndBelow ? children : null;
 };
 
-function App() {
-    const [embedUrl, setEmbedUrl] = useState('https://player.twitch.tv/?channel=leounveil&parent=minimaxxx-test.vercel.app');
 
+
+
+function App() {
+    const [embedUrl, setEmbedUrl] = useState('https://player.twitch.tv/?channel=leounveil&parent=minimaxxx-test.vercel.app&autoplay=true&muted=false');
+
+    const paragraph_1 = "MINIMAXXX HAS BEEN OPEN FOR MORE THAN A YEAR IN LYON, 9 RUE HENRY IV. BASED ON A CONCEPT OF SELLING SECOND-HAND CLOTHING AND CREATIONS, WE HAVE ALREADY BEEN ESTABLISHED IN THE recycle OF EVENTS FOR 5 YEARS BY INVESTING IN EMBLEMATIC VENUES IN LYON, WHICH QUICKLY BECAME THE MONTHLY EVENT. IN ADDITION TO RESPONDING TO AN ENVIRONMENTAL PROBLEM, THE IMAGE OF THE SECOND HAND HAS EVOLVED A LOT. IT HAS BECOME A PARTICULARLY FASHIONABLE MODE OF CONSUMPTION.";
+    const paragraph_2 = "MINIMAXXX GATHERS AND ASSERTS THE VALUES OF THE SECOND HAND WHILE DETACHING ITSELF FROM THE “VINTAGE” ASPECT, OFTEN ASSOCIATED WITH SECOND-HAND STORES. INDEED, FOR FOUR YEARS THE PROJECT HAS BEEN QUESTIONING THE RELATIONSHIP BETWEEN SECOND HAND AND MODERNITY BY PROPOSING A CURRENT AND INNOVATIVE FORMAT. WITH A UNIFYING FORMAT AS WELL AS THEIR CATCHY UNIVERSE, MINIMAXXX IMMEDIATELY KNEW HOW TO FIND ITS AUDIENCE. SINCE THE OFFICIAL LAUNCH IN SEPTEMBER 2018, THEIR EVENTS HAVE BECOME THE MONTHLY APPOINTMENT NOT TO BE MISSED."
     const toggleEmbedUrl = () => {
         setEmbedUrl((prevUrl) =>
-            prevUrl === 'https://player.twitch.tv/?channel=leounveil&parent=minimaxxx-test.vercel.app'
-                ? 'https://player.twitch.tv/?channel=leounveil&parent=localhost'
-                : 'https://player.twitch.tv/?channel=leounveil&parent=minimaxxx-test.vercel.app'
+            prevUrl.includes('minimaxxx-test.vercel.app')
+                ? 'https://player.twitch.tv/?channel=leounveil&parent=localhost&autoplay=true&muted=false'
+                : 'https://player.twitch.tv/?channel=leounveil&parent=minimaxxx-test.vercel.app&autoplay=true&muted=false'
         );
     };
 
+
+    const toggleMute = () => {
+        setEmbedUrl((prevUrl) =>
+            prevUrl.includes('muted=false')
+                ? prevUrl.replace('muted=false', 'muted=true')
+                : prevUrl.replace('muted=true', 'muted=false')
+        );
+    };
+
+    const [isStreamVisible, setIsStreamVisible] = useState(true);
+
+    const handleMinimize = () => {
+        setIsStreamVisible(false);
+    };
+
     return (
-        <div style={{ overflow: 'hidden', flex: 1 }}>
+        <div style={{ overflow: 'hidden', flex: 1, background: '#FFFFFF' }}>
             <Desktop>
-                <div style={{ overflow: 'hidden', flex: 1, height: 'calc(100vh)', width: '100%', background: '#CECECE' }}>
-                    <Draggable>
-                        <div style={{ width: '720px', height: '480px', cursor: 'move', position: 'absolute', background: '#FFFFFF', display:'flex', justifyContent:'flex-end', flexDirection:'column' }}>
-                        <p style={{width:'100%', alignSelf:'center', textAlign:'center', fontSize:'10px'}}>DRAG ME AROUND</p>
-                            <iframe
-                                style={{ width: '100%', height: '94%' }}
-                                src={embedUrl}
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                                title="Live Stream"
-                            ></iframe>
-                       
+                <div style={{ overflow: 'hidden', flex: 1, height: 'calc(100vh)', width: '100%' }}>
+                    <img src={wordmark} style={{ position: 'absolute', top: 0, left: 0, right: 0, width: '100%', height: 'calc(25vh)' }} />
+                    <img src={runner} style={{ position: 'absolute', top: 0, right: '0px', width: 'calc(75vh)', objectFit: 'contain' }} />
+                    <div style={{ position: 'absolute', bottom: '30px', left: 0, right: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', paddingTop: '5px', minWidth: '23%', marginBottom: '-4px' }}>
+                            <h2>MINIMAXXX AFTERPARTY</h2>
+                            <h2>→ CLOTHES</h2>
+                            <h2>→ DJ SETS</h2>
+                            <h2>→ PERFORMANCES</h2>
+                            <h2 style={{ paddingLeft: '75px' }}>→ 19:00—LATE</h2>
+                            <h2 style={{ paddingLeft: '75px' }}>→ 21 RUE HALLÉ, 75014</h2>
+                            <h2 style={{ paddingLeft: '75px' }}>→ FREE ENTRY</h2>
                         </div>
-                    </Draggable>
+                        <h1>HAPPENING NOW</h1>
+                        <Draggable>
+                            <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', marginTop: '-1%' }}>
+                                <h5 style={{ width: '22%', fontSize: '5pt', lineHeight: '4pt', fontWeight: 400 }}>{paragraph_1}</h5>
+                                <h5 style={{ width: '22%', paddingLeft: '8%', fontSize: '5pt', lineHeight: '4pt', fontWeight: 400 }}>{paragraph_2}</h5>
+                            </div>
+                        </Draggable>
+                        <img src={icon_24} style={{ height: '8px', objectFit: 'contain', paddingLeft: '50px', paddingBottom: '5px' }} />
+                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', paddingBottom: '10px' }}>
+                            <img src={icon_hot} style={{ width: '18px', objectFit: 'contain', paddingRight: '2px' }} />
+                            <img src={icon_org} style={{ height: '22px', objectFit: 'contain', paddingRight: '5px' }} />
+                            <img src={icon_recycle} style={{ width: '18px', objectFit: 'contain', paddingRight: '5px' }} />
+                            <img src={icon_ce} style={{ width: '18px', objectFit: 'contain', paddingRight: '8px' }} />
+                            <img src={icon_class} style={{ width: '30px', objectFit: 'contain', paddingRight: '6px' }} />
+                            <img src={icon_world} style={{ width: '35px', objectFit: 'contain', paddingRight: '6px' }} />
+                            <img src={icon_bin} style={{ width: '30px', objectFit: 'contain' }} />
+                        </div>
+                        {/*   <h2 style={{ fontWeight: 400, fontSize: '8pt', letterSpacing: -0.8, position: 'absolute', left: '48%', top: '130px' }}>ONE RULE:: SECOND HAND ONLY</h2>
+                        <h2 style={{ fontWeight: 400, fontSize: '8pt', letterSpacing: -0.8, position: 'absolute', left: '46%', top: '180px' }}>5000 ARTICLES:: 10€ MAXXX</h2> */}
+                    </div>
+                    {isStreamVisible && <Stream onMinimize={handleMinimize} />}
+
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', paddingLeft: 'calc(65vh)', paddingRight: 'calc(65vh)', position: 'fixed', bottom: 0, left: 0, right: 0, height: '30px', borderTopStyle: 'solid', borderTopWidth: '1px', borderTopColor: '#000000', background: '#FFFFFF' }}>
+                    <h4 onClick={() => setIsStreamVisible(true)} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>LIVE</h4>
+                    <h4 style={{ color: 'black', fontSize: '11pt' }}>CONTACT</h4>
+                    <h4 style={{ color: 'black', fontSize: '11pt' }}>ABOUT</h4>
                 </div>
             </Desktop>
+
             <TabletAndBelow>
-            <div style={{ overflow: 'hidden', flex: 1, height: 'calc(100vh)', width: '100%', background: '#CECECE' }}>
-                    <Draggable>
-                        <div style={{ width: '80%', height: 'auto', cursor: 'move', position: 'absolute', background: '#FFFFFF', display:'flex', justifyContent:'flex-end', flexDirection:'column' }}>
-                        <p style={{width:'100%', alignSelf:'center', textAlign:'center', fontSize:'10px'}}>DRAG ME AROUND</p>
-                            <iframe
-                                style={{ width: '100%', height: '94%' }}
-                                src={embedUrl}
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                                title="Live Stream"
-                            ></iframe>
-                       
+                <div style={{ overflow: 'hidden', flex: 1, height: 'calc(100vh)', width: '100%' }}>
+                    <img src={wordmark} style={{ position: 'absolute', top: '0', left: '0', right: '0', width: '100%', height: 'auto' }} />
+                    <img src={runner} style={{ position: 'absolute', top: 0, right: '0px', width: '40%', objectFit: 'contain' }} />
+                    <div style={{ position: 'absolute', bottom: '30px', left: 0, right: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', paddingTop: '5px', minWidth: '23%', maxWidth: '90%', marginBottom: '-4px' }}>
+                            <h2>MINIMAXXX AFTERPARTY</h2>
+                            <h2>→ CLOTHES</h2>
+                            <h2>→ DJ SETS</h2>
+                            <h2>→ PERFORMANCES</h2>
+                            <h2 style={{ paddingLeft: '75px' }}>→ 19:00—LATE</h2>
+                            <h2 style={{ paddingLeft: '75px' }}>→ 21 RUE HALLÉ, 75014</h2>
+                            <h2 style={{ paddingLeft: '75px' }}>→ FREE ENTRY</h2>
                         </div>
-                    </Draggable>
+                        <h1>HAPPENING NOW</h1>
+                        <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', marginTop: '-5%' }}>
+                            <h5 style={{ width: '80%', fontSize: '5pt', lineHeight: '4pt', fontWeight: 400 }}>{paragraph_1}</h5>
+                            <h5 style={{ width: '80%', paddingLeft: '8%', fontSize: '5pt', lineHeight: '4pt', fontWeight: 400 }}>{paragraph_2}</h5>
+                        </div>
+                        <img src={icon_24} style={{ height: '8px', objectFit: 'contain', paddingLeft: '50px', paddingBottom: '5px' }} />
+                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', paddingBottom: '10px' }}>
+                            <img src={icon_hot} style={{ width: '18px', objectFit: 'contain', paddingRight: '2px' }} />
+                            <img src={icon_org} style={{ height: '22px', objectFit: 'contain', paddingRight: '5px' }} />
+                            <img src={icon_recycle} style={{ width: '18px', objectFit: 'contain', paddingRight: '5px' }} />
+                            <img src={icon_ce} style={{ width: '18px', objectFit: 'contain', paddingRight: '8px' }} />
+                            <img src={icon_class} style={{ width: '30px', objectFit: 'contain', paddingRight: '6px' }} />
+                            <img src={icon_world} style={{ width: '35px', objectFit: 'contain', paddingRight: '6px' }} />
+                            <img src={icon_bin} style={{ width: '30px', objectFit: 'contain' }} />
+                        </div>
+                    </div>
+                    {isStreamVisible && <Stream mobile onMinimize={handleMinimize} />}
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', paddingLeft: '5%', paddingRight: '5%', position: 'fixed', bottom: 0, left: 0, right: 0, height: '30px', borderTopStyle: 'solid', borderTopWidth: '1px', borderTopColor: '#000000', background: '#FFFFFF' }}>
+                    <h4 onClick={() => setIsStreamVisible(true)} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>LIVE</h4>
+                    <h4 style={{ color: 'black', fontSize: '11pt' }}>CONTACT</h4>
+                    <h4 style={{ color: 'black', fontSize: '11pt' }}>ABOUT</h4>
                 </div>
             </TabletAndBelow>
-            <button onClick={toggleEmbedUrl} style={{ position: 'fixed', bottom: '10px', right: '10px', padding: '10px', zIndex: 1000 }}>
-                Toggle Embed URL
-            </button>
         </div>
     );
 }

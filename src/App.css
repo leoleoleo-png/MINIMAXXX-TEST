@@ -1,52 +1,72 @@
-@font-face {
-  font-family: 'Exposure-20-Italic';
-  src: url('Exposure-20-Italic.woff2') format('woff2'),
-    url('Exposure-20-Italic.woff') format('woff'),
-    url('Exposure-20-Italic.ttf') format('truetype'),
-    url('Exposure-20-Italic.eot') format('embedded-opentype');
-  font-display: swap;
+h1 {
+  font-family: "nimbus-sans-condensed", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 60pt;
+  letter-spacing: -3.5pt;
+  width: 30%;
+  text-align: center;
+  line-height: 45pt;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 50pt;
+    letter-spacing: -1.75pt; 
+    width: 100%; 
+    line-height: 39pt; 
+  }
+}
+
+h2 {
+  font-family: "nimbus-sans", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  margin: 0;
+  font-size: 16pt;
+  letter-spacing: -0.3pt;
+  line-height: 13pt;
 }
 
 
-@font-face {
-  font-family: 'Exposure-20-Regular';
-  src: url('Exposure-20-Regular.woff2') format('woff2'),
-    url('Exposure-20-Regular.woff') format('woff'),
-    url('Exposure-20-Regular.ttf') format('truetype'),
-    url('Exposure-20-Regular.eot') format('embedded-opentype');
-  font-display: swap;
-
-}
-
-.loader.loaded {
-  opacity: 1;
-}
-
-.loader {
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
+h4 {
+  font-family: "nimbus-sans", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: -0.3px;
 }
 
 
-@font-face {
-  font-family: "RuderPlakatLLVIPWeb";
-  src: url("RuderPlakatLLVIPWeb.woff") format("woff");
-  font-weight: 900;
+h5 {
+  font-family: "nimbus-sans", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: -0.3px;
+  font-size: 8pt;
+  line-height: 7pt;
+  text-align: center;
+  margin: 0;
 }
 
-@font-face {
-  font-family: "RuderPlakatLLVIPWeb";
-  src: url("RuderPlakatLLVIPWeb.woff2") format("woff2");
-  font-weight: 900;
+h3 {
+  font-family: "nimbus-sans-condensed", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 15px;
+  letter-spacing: 3%;
+  color:#FFF;
+}
+
+@keyframes blink {
+  0% { background-color: red; }
+  50% { background-color: black; }
+  100% { background-color: red; }
+}
+
+.blink {
+  animation: blink 1.5s infinite ease-in-out;
 }
 
 
-@font-face {
-  font-family: "RuderPlakatLLVIPSub";
-  src: url("RuderPlakatLLVIPSub.woff") format("woff");
-}
 
-@font-face {
-  font-family: "RuderPlakatLLVIPSub";
-  src: url("RuderPlakatLLVIPSub.woff2") format("woff2");
-}
