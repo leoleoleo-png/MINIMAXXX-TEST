@@ -1,4 +1,3 @@
-/* global YT */
 import React, { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import Draggable from 'react-draggable';
@@ -6,24 +5,18 @@ import wordmark from './assets/wordmark.png';
 import runner from './assets/runner.png';
 import './App.css';
 import './home.css';
-import Stream from './stream';
-import NavBarDesktop from './navBarDesktop';
-
+import AboutPopup from './AboutPopup'; // Updated import for the new component
 
 import icon_class from './assets/icon_class.png';
 import icon_hot from './assets/icon_hot.png';
 import icon_recycle from './assets/icon_recycle.png';
 import icon_org from './assets/icon_org.png';
-
 import icon_xxx from './assets/icon_xxx.png';
 import icon_ce from './assets/icon_ce.png';
-
-import icon_van from './assets/icon_van.png';
 import icon_bin from './assets/icon_bin.png';
-
 import icon_world from './assets/icon_world.png';
 import icon_24 from './assets/icon_24.png';
-import StreamPhone from './streamPhone';
+import Stream from './stream';
 
 const useDesktopMediaQuery = () =>
     useMediaQuery({ query: "(min-width: 601px)" });
@@ -41,35 +34,31 @@ const TabletAndBelow = ({ children }) => {
     return isTabletAndBelow ? children : null;
 };
 
-
-
-
 function App() {
-    const [embedUrl, setEmbedUrl] = useState('https://player.twitch.tv/?channel=leounveil&parent=minimaxxx-test.vercel.app&autoplay=true&muted=false');
-
-    const paragraph_1 = "MINIMAXXX HAS BEEN OPEN FOR MORE THAN A YEAR IN LYON, 9 RUE HENRY IV. BASED ON A CONCEPT OF SELLING SECOND-HAND CLOTHING AND CREATIONS, WE HAVE ALREADY BEEN ESTABLISHED IN THE recycle OF EVENTS FOR 5 YEARS BY INVESTING IN EMBLEMATIC VENUES IN LYON, WHICH QUICKLY BECAME THE MONTHLY EVENT. IN ADDITION TO RESPONDING TO AN ENVIRONMENTAL PROBLEM, THE IMAGE OF THE SECOND HAND HAS EVOLVED A LOT. IT HAS BECOME A PARTICULARLY FASHIONABLE MODE OF CONSUMPTION.";
+    const paragraph_1 = "MINIMAXXX HAS BEEN OPEN FOR MORE THAN A YEAR IN LYON, 9 RUE HENRY IV. BASED ON A CONCEPT OF SELLING SECOND-HAND CLOTHING AND CREATIONS, WE HAVE ALREADY BEEN ESTABLISHED IN THE WORLD OF EVENTS FOR 5 YEARS BY INVESTING IN EMBLEMATIC VENUES IN LYON, WHICH QUICKLY BECAME THE MONTHLY EVENT. IN ADDITION TO RESPONDING TO AN ENVIRONMENTAL PROBLEM, THE IMAGE OF THE SECOND HAND HAS EVOLVED A LOT. IT HAS BECOME A PARTICULARLY FASHIONABLE MODE OF CONSUMPTION.";
     const paragraph_2 = "MINIMAXXX GATHERS AND ASSERTS THE VALUES OF THE SECOND HAND WHILE DETACHING ITSELF FROM THE “VINTAGE” ASPECT, OFTEN ASSOCIATED WITH SECOND-HAND STORES. INDEED, FOR FOUR YEARS THE PROJECT HAS BEEN QUESTIONING THE RELATIONSHIP BETWEEN SECOND HAND AND MODERNITY BY PROPOSING A CURRENT AND INNOVATIVE FORMAT. WITH A UNIFYING FORMAT AS WELL AS THEIR CATCHY UNIVERSE, MINIMAXXX IMMEDIATELY KNEW HOW TO FIND ITS AUDIENCE. SINCE THE OFFICIAL LAUNCH IN SEPTEMBER 2018, THEIR EVENTS HAVE BECOME THE MONTHLY APPOINTMENT NOT TO BE MISSED."
-    const toggleEmbedUrl = () => {
-        setEmbedUrl((prevUrl) =>
-            prevUrl.includes('minimaxxx-test.vercel.app')
-                ? 'https://player.twitch.tv/?channel=leounveil&parent=localhost&autoplay=true&muted=false'
-                : 'https://player.twitch.tv/?channel=leounveil&parent=minimaxxx-test.vercel.app&autoplay=true&muted=false'
-        );
-    };
 
-
-    const toggleMute = () => {
-        setEmbedUrl((prevUrl) =>
-            prevUrl.includes('muted=false')
-                ? prevUrl.replace('muted=false', 'muted=true')
-                : prevUrl.replace('muted=true', 'muted=false')
-        );
-    };
-
+    const [isAboutVisible, setIsAboutVisible] = useState(false);
     const [isStreamVisible, setIsStreamVisible] = useState(true);
+    const [aboutZIndex, setAboutZIndex] = useState(1);
+    const [streamZIndex, setStreamZIndex] = useState(2);
 
-    const handleMinimize = () => {
+    const handleMinimizeAbout = () => {
+        setIsAboutVisible(false);
+    };
+
+    const handleMinimizeStream = () => {
         setIsStreamVisible(false);
+    };
+
+    const bringAboutToFront = () => {
+        setAboutZIndex(3);
+        setStreamZIndex(2);
+    };
+
+    const bringStreamToFront = () => {
+        setAboutZIndex(2);
+        setStreamZIndex(3);
     };
 
     return (
@@ -105,16 +94,17 @@ function App() {
                             <img src={icon_world} style={{ width: '35px', objectFit: 'contain', paddingRight: '6px' }} />
                             <img src={icon_bin} style={{ width: '30px', objectFit: 'contain' }} />
                         </div>
-                        {/*   <h2 style={{ fontWeight: 400, fontSize: '8pt', letterSpacing: -0.8, position: 'absolute', left: '48%', top: '130px' }}>ONE RULE:: SECOND HAND ONLY</h2>
-                        <h2 style={{ fontWeight: 400, fontSize: '8pt', letterSpacing: -0.8, position: 'absolute', left: '46%', top: '180px' }}>5000 ARTICLES:: 10€ MAXXX</h2> */}
                     </div>
-                    {isStreamVisible && <Stream onMinimize={handleMinimize} />}
-
+                    <div style={{position:'fixed', top:0, left:0, right:0, bottom:0}}>
+                    {isAboutVisible && <AboutPopup paragraph_1={paragraph_1} paragraph_2={paragraph_2} onMinimize={handleMinimizeAbout} zIndex={aboutZIndex} onClick={bringAboutToFront} />}
+                    
+                    </div>
+                    {isStreamVisible && <Stream onMinimize={handleMinimizeStream} zIndex={streamZIndex} onClick={bringStreamToFront} />}
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', paddingLeft: 'calc(65vh)', paddingRight: 'calc(65vh)', position: 'fixed', bottom: 0, left: 0, right: 0, height: '30px', borderTopStyle: 'solid', borderTopWidth: '1px', borderTopColor: '#000000', background: '#FFFFFF' }}>
                     <h4 onClick={() => setIsStreamVisible(true)} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>LIVE</h4>
                     <h4 style={{ color: 'black', fontSize: '11pt' }}>CONTACT</h4>
-                    <h4 style={{ color: 'black', fontSize: '11pt' }}>ABOUT</h4>
+                    <h4 onClick={() => setIsAboutVisible(true)} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>ABOUT</h4>
                 </div>
             </Desktop>
 
@@ -148,12 +138,13 @@ function App() {
                             <img src={icon_bin} style={{ width: '30px', objectFit: 'contain' }} />
                         </div>
                     </div>
-                    {isStreamVisible && <Stream mobile onMinimize={handleMinimize} />}
+                    {isAboutVisible && <AboutPopup mobile paragraph_1={paragraph_1} paragraph_2={paragraph_2} onMinimize={handleMinimizeAbout} zIndex={aboutZIndex} onClick={bringAboutToFront} />}
+                    {isStreamVisible && <Stream mobile onMinimize={handleMinimizeStream} zIndex={streamZIndex} onClick={bringStreamToFront} />}
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', paddingLeft: '5%', paddingRight: '5%', position: 'fixed', bottom: 0, left: 0, right: 0, height: '30px', borderTopStyle: 'solid', borderTopWidth: '1px', borderTopColor: '#000000', background: '#FFFFFF' }}>
-                    <h4 onClick={() => setIsStreamVisible(true)} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>LIVE</h4>
+                    <h4 style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>LIVE</h4>
                     <h4 style={{ color: 'black', fontSize: '11pt' }}>CONTACT</h4>
-                    <h4 style={{ color: 'black', fontSize: '11pt' }}>ABOUT</h4>
+                    <h4 onClick={() => setIsAboutVisible(true)} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>ABOUT</h4>
                 </div>
             </TabletAndBelow>
         </div>
