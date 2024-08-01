@@ -5,6 +5,7 @@ import runner from './assets/runner.png';
 import './App.css';
 import './home.css';
 import AboutPopup from './AboutPopup'; // Updated import for the new component
+import ContactPopup from './contact'; // New import for the ContactPopup component
 
 import icon_class from './assets/icon_class.png';
 import icon_hot from './assets/icon_hot.png';
@@ -37,10 +38,14 @@ function App() {
     const paragraph_1 = "MINIMAXXX HAS BEEN OPEN FOR MORE THAN A YEAR IN LYON, 9 RUE HENRY IV. BASED ON A CONCEPT OF SELLING SECOND-HAND CLOTHING AND CREATIONS, WE HAVE ALREADY BEEN ESTABLISHED IN THE WORLD OF EVENTS FOR 5 YEARS BY INVESTING IN EMBLEMATIC VENUES IN LYON, WHICH QUICKLY BECAME THE MONTHLY EVENT. IN ADDITION TO RESPONDING TO AN ENVIRONMENTAL PROBLEM, THE IMAGE OF THE SECOND HAND HAS EVOLVED A LOT. IT HAS BECOME A PARTICULARLY FASHIONABLE MODE OF CONSUMPTION.";
     const paragraph_2 = "MINIMAXXX GATHERS AND ASSERTS THE VALUES OF THE SECOND HAND WHILE DETACHING ITSELF FROM THE “VINTAGE” ASPECT, OFTEN ASSOCIATED WITH SECOND-HAND STORES. INDEED, FOR FOUR YEARS THE PROJECT HAS BEEN QUESTIONING THE RELATIONSHIP BETWEEN SECOND HAND AND MODERNITY BY PROPOSING A CURRENT AND INNOVATIVE FORMAT. WITH A UNIFYING FORMAT AS WELL AS THEIR CATCHY UNIVERSE, MINIMAXXX IMMEDIATELY KNEW HOW TO FIND ITS AUDIENCE. SINCE THE OFFICIAL LAUNCH IN SEPTEMBER 2018, THEIR EVENTS HAVE BECOME THE MONTHLY APPOINTMENT NOT TO BE MISSED."
 
+    const contacts = ["MAIL", "TIKTOK", "INSTAGRAM", "JOBS"];
+
     const [isAboutVisible, setIsAboutVisible] = useState(false);
     const [isStreamVisible, setIsStreamVisible] = useState(true);
+    const [isContactVisible, setIsContactVisible] = useState(false); // New state for ContactPopup
     const [aboutZIndex, setAboutZIndex] = useState(1);
     const [streamZIndex, setStreamZIndex] = useState(2);
+    const [contactZIndex, setContactZIndex] = useState(1); // New zIndex state for ContactPopup
 
     const handleMinimizeAbout = () => {
         setIsAboutVisible(false);
@@ -50,26 +55,47 @@ function App() {
         setIsStreamVisible(false);
     };
 
+    const handleMinimizeContact = () => { // New minimize handler for ContactPopup
+        setIsContactVisible(false);
+    };
+
     const bringAboutToFront = () => {
         setAboutZIndex(3);
         setStreamZIndex(2);
+        setContactZIndex(2);
     };
 
     const bringStreamToFront = () => {
         setAboutZIndex(2);
         setStreamZIndex(3);
+        setContactZIndex(2);
+    };
+
+    const bringContactToFront = () => { // New bring to front handler for ContactPopup
+        setAboutZIndex(2);
+        setStreamZIndex(2);
+        setContactZIndex(3);
     };
 
     const showAbout = () => {
         setIsAboutVisible(true);
         setAboutZIndex(3);
         setStreamZIndex(2);
+        setContactZIndex(2);
     };
 
     const showStream = () => {
         setIsStreamVisible(true);
         setStreamZIndex(3);
         setAboutZIndex(2);
+        setContactZIndex(2);
+    };
+
+    const showContact = () => { // New show handler for ContactPopup
+        setIsContactVisible(true);
+        setContactZIndex(3);
+        setAboutZIndex(2);
+        setStreamZIndex(2);
     };
 
     return (
@@ -128,10 +154,23 @@ function App() {
                             </div>
                         </div>
                     )}
+                    {isContactVisible && ( // New ContactPopup
+                        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
+                            <div style={{ pointerEvents: 'auto' }}>
+                                <ContactPopup
+                                    contacts={contacts}
+                                    mobile={false}
+                                    onMinimize={handleMinimizeContact}
+                                    zIndex={contactZIndex}
+                                    onClick={bringContactToFront}
+                                />
+                            </div>
+                        </div>
+                    )}
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', paddingLeft: 'calc(65vh)', paddingRight: 'calc(65vh)', position: 'fixed', bottom: 0, left: 0, right: 0, height: '30px', borderTopStyle: 'solid', borderTopWidth: '1px', borderTopColor: '#000000', background: '#FFFFFF' }}>
                     <h4 onClick={showStream} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>LIVE</h4>
-                    <h4 style={{ color: 'black', fontSize: '11pt' }}>CONTACT</h4>
+                    <h4 onClick={showContact} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>CONTACT</h4>
                     <h4 onClick={showAbout} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>ABOUT</h4>
                 </div>
             </Desktop>
@@ -192,10 +231,23 @@ function App() {
                             </div>
                         </div>
                     )}
+                    {isContactVisible && ( // New ContactPopup for mobile
+                        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
+                            <div style={{ pointerEvents: 'auto' }}>
+                                <ContactPopup
+                                    contacts={contacts}
+                                    mobile={true}
+                                    onMinimize={handleMinimizeContact}
+                                    zIndex={contactZIndex}
+                                    onClick={bringContactToFront}
+                                />
+                            </div>
+                        </div>
+                    )}
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', paddingLeft: '5%', paddingRight: '5%', position: 'fixed', bottom: 0, left: 0, right: 0, height: '30px', borderTopStyle: 'solid', borderTopWidth: '1px', borderTopColor: '#000000', background: '#FFFFFF' }}>
                     <h4 onClick={showStream} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>LIVE</h4>
-                    <h4 style={{ color: 'black', fontSize: '11pt' }}>CONTACT</h4>
+                    <h4 onClick={showContact} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>CONTACT</h4>
                     <h4 onClick={showAbout} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>ABOUT</h4>
                 </div>
             </TabletAndBelow>

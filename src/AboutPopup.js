@@ -30,8 +30,8 @@ const AboutPopup = ({ paragraph_1, paragraph_2, mobile, onMinimize, zIndex, onCl
             setBounds({
                 left: 0,
                 top: 0,
-                right: window.innerWidth - width / 2,
-                bottom: window.innerHeight - height / 2,
+                right: window.innerWidth - width,
+                bottom: window.innerHeight - height,
             });
         }
     };
@@ -43,8 +43,10 @@ const AboutPopup = ({ paragraph_1, paragraph_2, mobile, onMinimize, zIndex, onCl
     }, []);
 
     const getRandomPosition = () => {
-        const x = Math.random() * (window.innerWidth - 700);
-        const y = Math.random() * (window.innerHeight - 450);
+        const width = mobile ? window.innerWidth / 1.2 : 300;
+        const height = mobile ? 150 : 450;
+        const x = Math.random() * (window.innerWidth - width);
+        const y = Math.random() * (window.innerHeight - height);
         return { x, y };
     };
 
@@ -131,7 +133,7 @@ const AboutPopup = ({ paragraph_1, paragraph_2, mobile, onMinimize, zIndex, onCl
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
-                            overflow: 'hidden', // Set overflow to auto to show scrollbars if needed
+                            overflow: mobile ? 'auto' : 'hidden',
                             paddingTop: '30px',
                         }}>
                             <h4 style={{
