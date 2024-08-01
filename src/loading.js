@@ -6,7 +6,7 @@ const Loading = ({ onComplete }) => {
     useEffect(() => {
         const timer = setTimeout(() => {
             onComplete();
-        }, 2000); 
+        }, 2500); 
 
         return () => clearTimeout(timer);
     }, [onComplete]);

@@ -6,7 +6,7 @@ import './App.css';
 import './home.css';
 import AboutPopup from './AboutPopup';
 import ContactPopup from './contact';
-import Loading from './loading'; 
+import Loading from './loading';
 
 import icon_class from './assets/icon_class.png';
 import icon_hot from './assets/icon_hot.png';
@@ -42,10 +42,10 @@ function App() {
 
     const [isAboutVisible, setIsAboutVisible] = useState(false);
     const [isStreamVisible, setIsStreamVisible] = useState(true);
-    const [isContactVisible, setIsContactVisible] = useState(false); 
+    const [isContactVisible, setIsContactVisible] = useState(false);
     const [aboutZIndex, setAboutZIndex] = useState(1);
     const [streamZIndex, setStreamZIndex] = useState(2);
-    const [contactZIndex, setContactZIndex] = useState(1); 
+    const [contactZIndex, setContactZIndex] = useState(1);
     const [loadingComplete, setLoadingComplete] = useState(false); // New state for loading
 
     const handleMinimizeAbout = () => {
@@ -56,7 +56,7 @@ function App() {
         setIsStreamVisible(false);
     };
 
-    const handleMinimizeContact = () => { 
+    const handleMinimizeContact = () => {
         setIsContactVisible(false);
     };
 
@@ -92,16 +92,16 @@ function App() {
         setContactZIndex(2);
     };
 
-    const showContact = () => { 
+    const showContact = () => {
         setIsContactVisible(true);
         setContactZIndex(3);
         setAboutZIndex(2);
         setStreamZIndex(2);
     };
 
-   /*  if (!loadingComplete) {
-        return ;
-    } */
+    /*  if (!loadingComplete) {
+         return ;
+     } */
 
     return (
         <div style={{ overflow: 'hidden', flex: 1, background: '#FFFFFF' }}>
@@ -256,7 +256,7 @@ function App() {
                     <h4 onClick={showAbout} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>ABOUT</h4>
                 </div>
             </TabletAndBelow>
-          {!loadingComplete && <Loading onComplete={() => setLoadingComplete(true)} /> }  
+         {!loadingComplete && <Loading onComplete={() => setLoadingComplete(true)} /> }   
         </div>
     );
 }
