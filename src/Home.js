@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import Draggable from 'react-draggable';
 import wordmark from './assets/wordmark.png';
 import runner from './assets/runner.png';
 import './App.css';
@@ -78,12 +77,10 @@ function App() {
                             <h2 style={{ paddingLeft: '75px' }}>→ FREE ENTRY</h2>
                         </div>
                         <h1>HAPPENING NOW</h1>
-                        <Draggable>
-                            <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', marginTop: '-1%' }}>
-                                <h5 style={{ width: '22%', fontSize: '5pt', lineHeight: '4pt', fontWeight: 400 }}>{paragraph_1}</h5>
-                                <h5 style={{ width: '22%', paddingLeft: '8%', fontSize: '5pt', lineHeight: '4pt', fontWeight: 400 }}>{paragraph_2}</h5>
-                            </div>
-                        </Draggable>
+                        <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', marginTop: '-1%' }}>
+                            <h5 style={{ width: '22%', fontSize: '5pt', lineHeight: '4pt', fontWeight: 400 }}>{paragraph_1}</h5>
+                            <h5 style={{ width: '22%', paddingLeft: '8%', fontSize: '5pt', lineHeight: '4pt', fontWeight: 400 }}>{paragraph_2}</h5>
+                        </div>
                         <img src={icon_24} style={{ height: '8px', objectFit: 'contain', paddingLeft: '50px', paddingBottom: '5px' }} />
                         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', paddingBottom: '10px' }}>
                             <img src={icon_hot} style={{ width: '18px', objectFit: 'contain', paddingRight: '2px' }} />
@@ -95,11 +92,30 @@ function App() {
                             <img src={icon_bin} style={{ width: '30px', objectFit: 'contain' }} />
                         </div>
                     </div>
-                    <div style={{position:'fixed', top:0, left:0, right:0, bottom:0}}>
-                    {isAboutVisible && <AboutPopup paragraph_1={paragraph_1} paragraph_2={paragraph_2} onMinimize={handleMinimizeAbout} zIndex={aboutZIndex} onClick={bringAboutToFront} />}
-                    
-                    </div>
-                    {isStreamVisible && <Stream onMinimize={handleMinimizeStream} zIndex={streamZIndex} onClick={bringStreamToFront} />}
+                    {isAboutVisible && (
+                        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
+                            <div style={{ pointerEvents: 'auto' }}>
+                                <AboutPopup
+                                    paragraph_1={paragraph_1}
+                                    paragraph_2={paragraph_2}
+                                    onMinimize={handleMinimizeAbout}
+                                    zIndex={aboutZIndex}
+                                    onClick={bringAboutToFront}
+                                />
+                            </div>
+                        </div>
+                    )}
+                    {isStreamVisible && (
+                        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
+                            <div style={{ pointerEvents: 'auto' }}>
+                                <Stream
+                                    onMinimize={handleMinimizeStream}
+                                    zIndex={streamZIndex}
+                                    onClick={bringStreamToFront}
+                                />
+                            </div>
+                        </div>
+                    )}
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', paddingLeft: 'calc(65vh)', paddingRight: 'calc(65vh)', position: 'fixed', bottom: 0, left: 0, right: 0, height: '30px', borderTopStyle: 'solid', borderTopWidth: '1px', borderTopColor: '#000000', background: '#FFFFFF' }}>
                     <h4 onClick={() => setIsStreamVisible(true)} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>LIVE</h4>
@@ -138,8 +154,32 @@ function App() {
                             <img src={icon_bin} style={{ width: '30px', objectFit: 'contain' }} />
                         </div>
                     </div>
-                    {isAboutVisible && <AboutPopup mobile paragraph_1={paragraph_1} paragraph_2={paragraph_2} onMinimize={handleMinimizeAbout} zIndex={aboutZIndex} onClick={bringAboutToFront} />}
-                    {isStreamVisible && <Stream mobile onMinimize={handleMinimizeStream} zIndex={streamZIndex} onClick={bringStreamToFront} />}
+                    {isAboutVisible && (
+                        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
+                            <div style={{ pointerEvents: 'auto' }}>
+                                <AboutPopup
+                                    mobile
+                                    paragraph_1={paragraph_1}
+                                    paragraph_2={paragraph_2}
+                                    onMinimize={handleMinimizeAbout}
+                                    zIndex={aboutZIndex}
+                                    onClick={bringAboutToFront}
+                                />
+                            </div>
+                        </div>
+                    )}
+                    {isStreamVisible && (
+                        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
+                            <div style={{ pointerEvents: 'auto' }}>
+                                <Stream
+                                    mobile
+                                    onMinimize={handleMinimizeStream}
+                                    zIndex={streamZIndex}
+                                    onClick={bringStreamToFront}
+                                />
+                            </div>
+                        </div>
+                    )}
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', paddingLeft: '5%', paddingRight: '5%', position: 'fixed', bottom: 0, left: 0, right: 0, height: '30px', borderTopStyle: 'solid', borderTopWidth: '1px', borderTopColor: '#000000', background: '#FFFFFF' }}>
                     <h4 style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>LIVE</h4>
