@@ -60,6 +60,18 @@ function App() {
         setStreamZIndex(3);
     };
 
+    const showAbout = () => {
+        setIsAboutVisible(true);
+        setAboutZIndex(3);
+        setStreamZIndex(2);
+    };
+
+    const showStream = () => {
+        setIsStreamVisible(true);
+        setStreamZIndex(3);
+        setAboutZIndex(2);
+    };
+
     return (
         <div style={{ overflow: 'hidden', flex: 1, background: '#FFFFFF' }}>
             <Desktop>
@@ -118,9 +130,9 @@ function App() {
                     )}
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', paddingLeft: 'calc(65vh)', paddingRight: 'calc(65vh)', position: 'fixed', bottom: 0, left: 0, right: 0, height: '30px', borderTopStyle: 'solid', borderTopWidth: '1px', borderTopColor: '#000000', background: '#FFFFFF' }}>
-                    <h4 onClick={() => setIsStreamVisible(true)} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>LIVE</h4>
+                    <h4 onClick={showStream} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>LIVE</h4>
                     <h4 style={{ color: 'black', fontSize: '11pt' }}>CONTACT</h4>
-                    <h4 onClick={() => setIsAboutVisible(true)} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>ABOUT</h4>
+                    <h4 onClick={showAbout} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>ABOUT</h4>
                 </div>
             </Desktop>
 
@@ -182,9 +194,9 @@ function App() {
                     )}
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', paddingLeft: '5%', paddingRight: '5%', position: 'fixed', bottom: 0, left: 0, right: 0, height: '30px', borderTopStyle: 'solid', borderTopWidth: '1px', borderTopColor: '#000000', background: '#FFFFFF' }}>
-                    <h4 style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>LIVE</h4>
+                    <h4 onClick={showStream} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>LIVE</h4>
                     <h4 style={{ color: 'black', fontSize: '11pt' }}>CONTACT</h4>
-                    <h4 onClick={() => setIsAboutVisible(true)} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>ABOUT</h4>
+                    <h4 onClick={showAbout} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>ABOUT</h4>
                 </div>
             </TabletAndBelow>
         </div>

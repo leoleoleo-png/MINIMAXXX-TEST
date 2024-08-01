@@ -4,7 +4,7 @@ import { ResizableBox } from 'react-resizable';
 import 'react-resizable/css/styles.css';
 import './App.css';
 import move from './assets/move.png';
-import resize from './assets/resize.png';
+import resize from './assets/resize_black.png';
 import minimise from './assets/minimise.png';
 
 const AboutPopup = ({ paragraph_1, paragraph_2, mobile, onMinimize, zIndex, onClick }) => {
@@ -66,14 +66,14 @@ const AboutPopup = ({ paragraph_1, paragraph_2, mobile, onMinimize, zIndex, onCl
             <div
                 ref={resizableBoxRef}
                 style={{
-                    width: mobile ? window.innerWidth / 1.2 : 700,
+                    width: mobile ? window.innerWidth / 1.2 : 300,
                     height: mobile ? 150 : 450,
                     position: 'relative',
                     zIndex: zIndex,
                 }}
             >
                 <ResizableBox
-                    width={mobile ? window.innerWidth / 1.2 : 700}
+                    width={mobile ? window.innerWidth / 1.2 : 300}
                     height={mobile ? 200 : 450}
                     minConstraints={mobile ? ['1%', 100] : [200, 225]}
                     maxConstraints={[window.innerWidth, window.innerHeight]}
