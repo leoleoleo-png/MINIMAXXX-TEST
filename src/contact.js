@@ -87,7 +87,7 @@ const ContactPopup = ({ contacts, mobile, onMinimize, zIndex, onClick }) => {
                             onClick={handleMinimizeClick}
                             onTouchStart={handleMinimizeClick}
                             src={minimise}
-                            style={{ width: '21px', height: '21px', cursor: 'pointer' }}
+                            style={{ width: '21px', height: '21px', cursor: 'pointer',  paddingRight: '5px' }}
                         />
                         <img src={move} style={{ width: '21px', height: '21px', pointerEvents: 'none' }} />
                     </div>

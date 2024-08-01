@@ -68,5 +68,8 @@ h3 {
   animation: blink 1.5s infinite ease-in-out;
 }
 
-
+.invert-effect {
+  filter: invert(1);
+  -webkit-filter: invert(1);
+}
 

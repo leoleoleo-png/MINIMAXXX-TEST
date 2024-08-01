@@ -7,7 +7,6 @@ import './home.css';
 import AboutPopup from './AboutPopup';
 import ContactPopup from './contact';
 import Loading from './loading';
-
 import icon_class from './assets/icon_class.png';
 import icon_hot from './assets/icon_hot.png';
 import icon_recycle from './assets/icon_recycle.png';
@@ -16,6 +15,7 @@ import icon_ce from './assets/icon_ce.png';
 import icon_bin from './assets/icon_bin.png';
 import icon_world from './assets/icon_world.png';
 import icon_24 from './assets/icon_24.png';
+import invert from './assets/invert.png';
 import Stream from './stream';
 
 const useDesktopMediaQuery = () =>
@@ -37,19 +37,22 @@ const TabletAndBelow = ({ children }) => {
 function App() {
     const paragraph_1 = "MINIMAXXX HAS BEEN OPEN FOR MORE THAN A YEAR IN LYON, 9 RUE HENRY IV. BASED ON A CONCEPT OF SELLING SECOND-HAND CLOTHING AND CREATIONS, WE HAVE ALREADY BEEN ESTABLISHED IN THE WORLD OF EVENTS FOR 5 YEARS BY INVESTING IN EMBLEMATIC VENUES IN LYON, WHICH QUICKLY BECAME THE MONTHLY EVENT. IN ADDITION TO RESPONDING TO AN ENVIRONMENTAL PROBLEM, THE IMAGE OF THE SECOND HAND HAS EVOLVED A LOT. IT HAS BECOME A PARTICULARLY FASHIONABLE MODE OF CONSUMPTION.";
     const paragraph_2 = "MINIMAXXX GATHERS AND ASSERTS THE VALUES OF THE SECOND HAND WHILE DETACHING ITSELF FROM THE “VINTAGE” ASPECT, OFTEN ASSOCIATED WITH SECOND-HAND STORES. INDEED, FOR FOUR YEARS THE PROJECT HAS BEEN QUESTIONING THE RELATIONSHIP BETWEEN SECOND HAND AND MODERNITY BY PROPOSING A CURRENT AND INNOVATIVE FORMAT. WITH A UNIFYING FORMAT AS WELL AS THEIR CATCHY UNIVERSE, MINIMAXXX IMMEDIATELY KNEW HOW TO FIND ITS AUDIENCE. SINCE THE OFFICIAL LAUNCH IN SEPTEMBER 2018, THEIR EVENTS HAVE BECOME THE MONTHLY APPOINTMENT NOT TO BE MISSED."
-
     const contacts = ["MAIL", "TIKTOK", "INSTAGRAM", "JOBS"];
-
+    const [isInverted, setInverted] = useState(false);
     const [isAboutVisible, setIsAboutVisible] = useState(false);
     const [isStreamVisible, setIsStreamVisible] = useState(true);
     const [isContactVisible, setIsContactVisible] = useState(false);
     const [aboutZIndex, setAboutZIndex] = useState(1);
     const [streamZIndex, setStreamZIndex] = useState(2);
     const [contactZIndex, setContactZIndex] = useState(1);
-    const [loadingComplete, setLoadingComplete] = useState(false); // New state for loading
+    const [loadingComplete, setLoadingComplete] = useState(false);
 
     const handleMinimizeAbout = () => {
         setIsAboutVisible(false);
+    };
+
+    const handleInvert = () => {
+        setInverted(!isInverted);
     };
 
     const handleMinimizeStream = () => {
@@ -99,15 +102,11 @@ function App() {
         setStreamZIndex(2);
     };
 
-    /*  if (!loadingComplete) {
-         return ;
-     } */
-
     return (
-        <div style={{ overflow: 'hidden', flex: 1, background: '#FFFFFF' }}>
+        <div className={isInverted ? "invert-effect" : null} style={{ overflow: 'hidden', flex: 1, background: '#FFFFFF' }}>
             <Desktop>
                 <div style={{ overflow: 'hidden', flex: 1, height: 'calc(100vh)', width: '100%' }}>
-                    <img src={wordmark} style={{ position: 'absolute', top: 0, left: 0, right: 0, width: '100%', height: 'auto', objectFit:'contain' }} />
+                    <img src={wordmark} style={{ position: 'absolute', top: 0, left: 0, right: 0, width: '100%', height: 'auto', objectFit: 'contain' }} />
                     <img src={runner} style={{ position: 'absolute', top: 0, right: '0px', width: 'calc(75vh)', objectFit: 'contain' }} />
                     <div style={{ position: 'absolute', bottom: '30px', left: 0, right: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', paddingTop: '5px', minWidth: '23%', marginBottom: '-4px' }}>
@@ -148,17 +147,7 @@ function App() {
                             </div>
                         </div>
                     )}
-                    {isStreamVisible && (
-                        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
-                            <div style={{ pointerEvents: 'auto' }}>
-                                <Stream
-                                    onMinimize={handleMinimizeStream}
-                                    zIndex={streamZIndex}
-                                    onClick={bringStreamToFront}
-                                />
-                            </div>
-                        </div>
-                    )}
+
                     {isContactVisible && (
                         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
                             <div style={{ pointerEvents: 'auto' }}>
@@ -177,12 +166,28 @@ function App() {
                     <h4 onClick={showStream} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>LIVE</h4>
                     <h4 onClick={showContact} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>CONTACT</h4>
                     <h4 onClick={showAbout} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>ABOUT</h4>
+                    <img
+                            onClick={handleInvert}
+                            src={invert}
+                            style={{ position:'absolute', right:'5px', width: '21px', height: '21px', cursor: 'pointer' }}
+                        />
                 </div>
+                {isStreamVisible && (
+                    <div className={isInverted ? "invert-effect" : null} style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
+                        <div style={{ pointerEvents: 'auto' }}>
+                            <Stream
+                                onMinimize={handleMinimizeStream}
+                                zIndex={streamZIndex}
+                                onClick={bringStreamToFront}
+                            />
+                        </div>
+                    </div>
+                )}
             </Desktop>
 
             <TabletAndBelow>
                 <div style={{ overflow: 'hidden', flex: 1, height: 'calc(100vh)', width: '100%' }}>
-                    <img src={wordmark} style={{ position: 'absolute', top: '0', left: '0', right: '0', width: '100%', height: 'auto', objectFit:'contain' }} />
+                    <img src={wordmark} style={{ position: 'absolute', top: '0', left: '0', right: '0', width: '100%', height: 'auto', objectFit: 'contain' }} />
                     <img src={runner} style={{ position: 'absolute', top: 0, right: '0px', width: '40%', objectFit: 'contain' }} />
                     <div style={{ position: 'absolute', bottom: '30px', left: 0, right: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', paddingTop: '5px', minWidth: '23%', maxWidth: '90%', marginBottom: '-4px' }}>
@@ -225,7 +230,7 @@ function App() {
                         </div>
                     )}
                     {isStreamVisible && (
-                        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
+                        <div className={isInverted ? "invert-effect" : null} style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
                             <div style={{ pointerEvents: 'auto' }}>
                                 <Stream
                                     mobile
@@ -250,13 +255,18 @@ function App() {
                         </div>
                     )}
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', paddingLeft: '5%', paddingRight: '5%', position: 'fixed', bottom: 0, left: 0, right: 0, height: '30px', borderTopStyle: 'solid', borderTopWidth: '1px', borderTopColor: '#000000', background: '#FFFFFF' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', paddingLeft: '10%', paddingRight: '10%', position: 'fixed', bottom: 0, left: 0, right: 0, height: '30px', borderTopStyle: 'solid', borderTopWidth: '1px', borderTopColor: '#000000', background: '#FFFFFF' }}>
                     <h4 onClick={showStream} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>LIVE</h4>
                     <h4 onClick={showContact} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>CONTACT</h4>
                     <h4 onClick={showAbout} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>ABOUT</h4>
+                    <img
+                            onClick={handleInvert}
+                            src={invert}
+                            style={{ position:'absolute', right:'5px', width: '21px', height: '21px', cursor: 'pointer' }}
+                        />
                 </div>
             </TabletAndBelow>
-         {!loadingComplete && <Loading onComplete={() => setLoadingComplete(true)} /> }   
+            {!loadingComplete && <Loading onComplete={() => setLoadingComplete(true)} />}
         </div>
     );
 }

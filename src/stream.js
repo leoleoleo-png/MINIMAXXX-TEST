@@ -76,6 +76,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                     minConstraints={mobile ? ['1%', 100] : [400, 225]}
                     maxConstraints={[1200, 675]}
                     resizeHandles={['se']}
+                    handle={<div style={{ position: 'absolute', bottom: 0, right: 0, height: mobile ? '50px' : '100px', width: mobile ? '50px' : '100px', cursor: 'se-resize' }} />}
                     className="resizable-box"
                     onResizeStart={onResizeStart}
                     onResizeStop={onResizeStop}
@@ -95,12 +96,14 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                             className="drag-handle"
                             style={{
                                 position: 'absolute',
-                                top: 0,
+                                top: '-1px',
+                                left: '0',
+                                right: '0',
                                 display: 'flex',
                                 justifyContent: 'space-between',
                                 alignItems: 'center',
                                 backgroundColor: '#000000',
-                                width: '100%',
+                              
                                 height: '30px',
                                 cursor: 'move',
                                 zIndex: 2
@@ -113,9 +116,9 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                                     onClick={handleMinimizeClick}
                                     onTouchStart={handleMinimizeClick}
                                     src={minimise}
-                                    style={{ width: '21px', height: '21px', cursor: 'pointer' }}
+                                    style={{ width: '18px', height: '18px', cursor: 'pointer',  paddingRight: '5px' }}
                                 />
-                                <img src={move} style={{ width: '21px', height: '21px', pointerEvents: 'none' }} />
+                                <img src={move} style={{ width: '18px', height: '18px', pointerEvents: 'none' }} />
                             </div>
 
                         </div>
@@ -145,7 +148,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                                 <h5 style={{ position: 'absolute', bottom: '10%', textAlign: 'center', color: '#FFFFFF', width: '70%', fontWeight: '400', fontSize: '7pt' }}>FIND INFORMATION ABOUT OUR NEXT EVENT BY MOVING THIS WINDOW OR BY HEADING TO OUR SOCIAL NETWORKS.</h5>
                             </div>
                         )}
-                        <img src={resize} style={{ zIndex: 3, position: 'absolute', bottom: '0', right: '0', height: '23px', objectFit: 'contain', pointerEvents: 'none' }} />
+                        <img src={resize} style={{ zIndex: 3, position: 'absolute', bottom: '0', right: '0', height: '18px', objectFit: 'contain', pointerEvents: 'none' }} />
                     </div>
                 </ResizableBox>
             </div>

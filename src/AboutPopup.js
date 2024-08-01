@@ -81,6 +81,7 @@ const AboutPopup = ({ paragraph_1, paragraph_2, mobile, onMinimize, zIndex, onCl
                     maxConstraints={[window.innerWidth, window.innerHeight]}
                     resizeHandles={['se']}
                     className="resizable-box"
+                    handle={<div style={{position:'absolute', bottom:0, right:0, height: mobile ? '50px' : '100px', width:mobile ? '50px' : '100px', cursor:'se-resize'}} />}
                     onResizeStart={onResizeStart}
                     onResizeStop={onResizeStop}
                     onResize={updateBounds}
@@ -121,7 +122,7 @@ const AboutPopup = ({ paragraph_1, paragraph_2, mobile, onMinimize, zIndex, onCl
                                     onClick={handleMinimizeClick}
                                     onTouchStart={handleMinimizeClick}
                                     src={minimise}
-                                    style={{ width: '21px', height: '21px', cursor: 'pointer' }}
+                                    style={{ width: '21px', height: '21px', cursor: 'pointer',  paddingRight: '5px' }}
                                 />
                                 <img src={move} style={{ width: '21px', height: '21px', pointerEvents: 'none' }} />
                             </div>
