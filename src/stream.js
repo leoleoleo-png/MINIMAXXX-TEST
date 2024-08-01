@@ -44,7 +44,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
         return () => window.removeEventListener('resize', updateBounds);
     }, []);
 
-    const initialPosition = mobile ? { x: window.innerWidth / 11, y: window.innerHeight / 9 } : { x: (window.innerWidth - 700) / 2, y: (window.innerHeight - 450) / 2 };
+    const initialPosition = mobile ? { x: window.innerWidth / 11, y: window.innerHeight / 8 } : { x: (window.innerWidth - 700) / 2, y: (window.innerHeight - 450) / 2 };
 
     const handleMinimizeClick = (event) => {
         event.stopPropagation();

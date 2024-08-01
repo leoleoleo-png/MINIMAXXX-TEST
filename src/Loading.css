@@ -1,0 +1,41 @@
+.loading-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loading-gif {
+    width: 120px;
+    height: 120px;
+}
+
+.loading-bar-container {
+    width: 120px;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin-top: 10px;
+}
+
+.loading-bar {
+    height: 100%;
+    background-color: white;
+    animation: fill 2s ease-out forwards;
+}
+
+@keyframes fill {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}

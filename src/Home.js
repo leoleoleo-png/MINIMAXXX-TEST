@@ -4,14 +4,14 @@ import wordmark from './assets/wordmark.png';
 import runner from './assets/runner.png';
 import './App.css';
 import './home.css';
-import AboutPopup from './AboutPopup'; // Updated import for the new component
-import ContactPopup from './contact'; // New import for the ContactPopup component
+import AboutPopup from './AboutPopup';
+import ContactPopup from './contact';
+import Loading from './loading'; 
 
 import icon_class from './assets/icon_class.png';
 import icon_hot from './assets/icon_hot.png';
 import icon_recycle from './assets/icon_recycle.png';
 import icon_org from './assets/icon_org.png';
-import icon_xxx from './assets/icon_xxx.png';
 import icon_ce from './assets/icon_ce.png';
 import icon_bin from './assets/icon_bin.png';
 import icon_world from './assets/icon_world.png';
@@ -42,10 +42,11 @@ function App() {
 
     const [isAboutVisible, setIsAboutVisible] = useState(false);
     const [isStreamVisible, setIsStreamVisible] = useState(true);
-    const [isContactVisible, setIsContactVisible] = useState(false); // New state for ContactPopup
+    const [isContactVisible, setIsContactVisible] = useState(false); 
     const [aboutZIndex, setAboutZIndex] = useState(1);
     const [streamZIndex, setStreamZIndex] = useState(2);
-    const [contactZIndex, setContactZIndex] = useState(1); // New zIndex state for ContactPopup
+    const [contactZIndex, setContactZIndex] = useState(1); 
+    const [loadingComplete, setLoadingComplete] = useState(false); // New state for loading
 
     const handleMinimizeAbout = () => {
         setIsAboutVisible(false);
@@ -55,7 +56,7 @@ function App() {
         setIsStreamVisible(false);
     };
 
-    const handleMinimizeContact = () => { // New minimize handler for ContactPopup
+    const handleMinimizeContact = () => { 
         setIsContactVisible(false);
     };
 
@@ -71,7 +72,7 @@ function App() {
         setContactZIndex(2);
     };
 
-    const bringContactToFront = () => { // New bring to front handler for ContactPopup
+    const bringContactToFront = () => {
         setAboutZIndex(2);
         setStreamZIndex(2);
         setContactZIndex(3);
@@ -91,12 +92,16 @@ function App() {
         setContactZIndex(2);
     };
 
-    const showContact = () => { // New show handler for ContactPopup
+    const showContact = () => { 
         setIsContactVisible(true);
         setContactZIndex(3);
         setAboutZIndex(2);
         setStreamZIndex(2);
     };
+
+    if (!loadingComplete) {
+        return <Loading onComplete={() => setLoadingComplete(true)} />;
+    }
 
     return (
         <div style={{ overflow: 'hidden', flex: 1, background: '#FFFFFF' }}>
@@ -154,7 +159,7 @@ function App() {
                             </div>
                         </div>
                     )}
-                    {isContactVisible && ( // New ContactPopup
+                    {isContactVisible && (
                         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
                             <div style={{ pointerEvents: 'auto' }}>
                                 <ContactPopup
@@ -168,7 +173,7 @@ function App() {
                         </div>
                     )}
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', paddingLeft: 'calc(65vh)', paddingRight: 'calc(65vh)', position: 'fixed', bottom: 0, left: 0, right: 0, height: '30px', borderTopStyle: 'solid', borderTopWidth: '1px', borderTopColor: '#000000', background: '#FFFFFF' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', paddingLeft: '30%', paddingRight: '30%', position: 'fixed', bottom: 0, left: 0, right: 0, height: '30px', borderTopStyle: 'solid', borderTopWidth: '1px', borderTopColor: '#000000', background: '#FFFFFF' }}>
                     <h4 onClick={showStream} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>LIVE</h4>
                     <h4 onClick={showContact} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>CONTACT</h4>
                     <h4 onClick={showAbout} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>ABOUT</h4>
