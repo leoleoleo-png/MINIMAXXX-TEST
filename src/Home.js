@@ -106,6 +106,15 @@ function App() {
         <div className={isInverted ? "invert-effect" : null} style={{ overflow: 'hidden', flex: 1, background: '#FFFFFF' }}>
             <Desktop>
                 <div style={{ overflow: 'hidden', flex: 1, height: 'calc(100vh)', width: '100%' }}>
+                   {/*  <div style={{ position: 'absolute', left: window.innerWidth * 0.2, display: 'flex', flexDirection: 'column', transform: 'scaleX(-10) scaleY(12) ', opacity: 0.03 }}>
+                        <h2>MINIMAXXX AFTERPARTY</h2>
+                        <h2>→ CLOTHES</h2>
+                        <h2>→ DJ SETS</h2>
+                        <h2>→ PERFORMANCES</h2>
+                        <h2 style={{ paddingLeft: '75px' }}>→ 19:00—LATE</h2>
+                        <h2 style={{ paddingLeft: '75px' }}>→ 21 RUE HALLÉ, 75014</h2>
+                        <h2 style={{ paddingLeft: '75px' }}>→ FREE ENTRY</h2>
+                    </div> */}
                     <img src={wordmark} style={{ position: 'absolute', top: 0, left: 0, right: 0, width: '100%', height: 'auto', objectFit: 'contain' }} />
                     <img src={runner} style={{ position: 'absolute', top: 0, right: '0px', width: 'calc(75vh)', objectFit: 'contain' }} />
                     <div style={{ position: 'absolute', bottom: '30px', left: 0, right: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
@@ -167,10 +176,10 @@ function App() {
                     <h4 onClick={showContact} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>CONTACT</h4>
                     <h4 onClick={showAbout} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>ABOUT</h4>
                     <img
-                            onClick={handleInvert}
-                            src={invert}
-                            style={{ position:'absolute', right:'5px', width: '21px', height: '21px', cursor: 'pointer' }}
-                        />
+                        onClick={handleInvert}
+                        src={invert}
+                        style={{ position: 'absolute', right: '5px', width: '21px', height: '21px', cursor: 'pointer' }}
+                    />
                 </div>
                 {isStreamVisible && (
                     <div className={isInverted ? "invert-effect" : null} style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
@@ -187,6 +196,9 @@ function App() {
 
             <TabletAndBelow>
                 <div style={{ overflow: 'hidden', flex: 1, height: 'calc(100vh)', width: '100%' }}>
+
+
+
                     <img src={wordmark} style={{ position: 'absolute', top: '0', left: '0', right: '0', width: '100%', height: 'auto', objectFit: 'contain' }} />
                     <img src={runner} style={{ position: 'absolute', top: 0, right: '0px', width: '40%', objectFit: 'contain' }} />
                     <div style={{ position: 'absolute', bottom: '30px', left: 0, right: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
@@ -260,10 +272,10 @@ function App() {
                     <h4 onClick={showContact} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>CONTACT</h4>
                     <h4 onClick={showAbout} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>ABOUT</h4>
                     <img
-                            onClick={handleInvert}
-                            src={invert}
-                            style={{ position:'absolute', right:'5px', width: '21px', height: '21px', cursor: 'pointer' }}
-                        />
+                        onClick={handleInvert}
+                        src={invert}
+                        style={{ position: 'absolute', right: '5px', width: '21px', height: '21px', cursor: 'pointer' }}
+                    />
                 </div>
             </TabletAndBelow>
             {!loadingComplete && <Loading onComplete={() => setLoadingComplete(true)} />}
