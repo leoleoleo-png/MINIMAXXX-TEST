@@ -99,9 +99,9 @@ function App() {
         setStreamZIndex(2);
     };
 
-    if (!loadingComplete) {
-        return <Loading onComplete={() => setLoadingComplete(true)} />;
-    }
+   /*  if (!loadingComplete) {
+        return ;
+    } */
 
     return (
         <div style={{ overflow: 'hidden', flex: 1, background: '#FFFFFF' }}>
@@ -256,6 +256,7 @@ function App() {
                     <h4 onClick={showAbout} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>ABOUT</h4>
                 </div>
             </TabletAndBelow>
+          {!loadingComplete && <Loading onComplete={() => setLoadingComplete(true)} /> }  
         </div>
     );
 }
