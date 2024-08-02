@@ -200,13 +200,16 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                                             autoComplete="off"
                                             style={{
                                                 width: '20px',
+                                                fontFamily:'nimbus-sans',
+                                                fontWeight:700,
                                                 height: mobile ? '30px' : '40px',
                                                 textAlign: 'center',
                                                 fontSize: '18px',
                                                 border: 'none',
                                                 borderBottom: '1.5px solid #000',
                                                 backgroundColor: 'transparent',
-                                                outline: 'none'
+                                                outline: 'none',
+                                                borderRadius:0
                                             }}
                                         />
                                     ))}
