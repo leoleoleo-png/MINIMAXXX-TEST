@@ -68,9 +68,9 @@ const ContactPopup = ({ contacts, mobile, onMinimize, zIndex, onClick }) => {
                     className="drag-handle"
                     style={{
                         position: 'absolute',
-                        top: '-1.5px',
-                        left: '-1.5px',
-                        right: '-1.5px',
+                        top: '-1px',
+                        left: '-0.5px',
+                        right: '-0.5px',
                         display: 'flex',
                         justifyContent: 'space-between',
                         alignItems: 'center',
