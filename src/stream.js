@@ -131,7 +131,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                     height: mobile ? 220 : 450,
                     position: 'relative',
                     zIndex: zIndex,
-                   
+
                 }}
             >
                 <ResizableBox
@@ -154,7 +154,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                         display: 'flex',
                         justifyContent: 'flex-end',
                         flexDirection: 'column',
-                         overflow:'hidden'
+                        overflow: 'hidden'
                     }}>
                         <div
                             ref={dragHandleRef}
@@ -174,7 +174,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                             }}
                         >
                             <div style={{ width: '50px' }} />
-                            <h3 style={{ fontSize: mobile ? '10pt' : '11pt' }}>{isOnline ? 'MINIMAXXX PARIS AFTERPARTY' : 'OFFLINE'}</h3>
+                            <h3 style={{ fontSize: mobile ? '10pt' : '11pt' }}>{isOnline ? 'MINIMAXXX PARIS AFTERPARTY' : isLocked ? 'MINIMAXXX SECRET EVENT' : 'OFFLINE'}</h3>
                             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', paddingRight: '5px' }}>
                                 <img
                                     onClick={handleMinimizeClick}
@@ -209,8 +209,8 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                                             autoComplete="off"
                                             style={{
                                                 width: '20px',
-                                                fontFamily:'nimbus-sans',
-                                                fontWeight:700,
+                                                fontFamily: 'nimbus-sans',
+                                                fontWeight: 700,
                                                 height: mobile ? '30px' : '40px',
                                                 textAlign: 'center',
                                                 fontSize: '18px',
@@ -218,7 +218,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                                                 borderBottom: '1.5px solid #000',
                                                 backgroundColor: 'transparent',
                                                 outline: 'none',
-                                                borderRadius:0
+                                                borderRadius: 0
                                             }}
                                         />
                                     ))}

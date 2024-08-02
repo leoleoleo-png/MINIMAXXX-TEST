@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import wordmark from './assets/wordmark.png';
 import runner from './assets/runner.png';
 import './App.css';
 import './home.css';
@@ -17,6 +16,7 @@ import icon_world from './assets/icon_world.png';
 import icon_24 from './assets/icon_24.png';
 import invert from './assets/invert.png';
 import Stream from './stream';
+import cmsDataPromise from './cms/cmsImages.js';
 
 const useDesktopMediaQuery = () =>
     useMediaQuery({ query: "(min-width: 601px)" });
@@ -35,6 +35,8 @@ const TabletAndBelow = ({ children }) => {
 };
 
 function App() {
+    const [wordmarkUrl, setWordmarkUrl] = useState('');
+    const [runnerUrl, setRunnerUrl] = useState('');
     const paragraph_1 = "MINIMAXXX HAS BEEN OPEN FOR MORE THAN A YEAR IN LYON, 9 RUE HENRY IV. BASED ON A CONCEPT OF SELLING SECOND-HAND CLOTHING AND CREATIONS, WE HAVE ALREADY BEEN ESTABLISHED IN THE WORLD OF EVENTS FOR 5 YEARS BY INVESTING IN EMBLEMATIC VENUES IN LYON, WHICH QUICKLY BECAME THE MONTHLY EVENT. IN ADDITION TO RESPONDING TO AN ENVIRONMENTAL PROBLEM, THE IMAGE OF THE SECOND HAND HAS EVOLVED A LOT. IT HAS BECOME A PARTICULARLY FASHIONABLE MODE OF CONSUMPTION.";
     const paragraph_2 = "MINIMAXXX GATHERS AND ASSERTS THE VALUES OF THE SECOND HAND WHILE DETACHING ITSELF FROM THE “VINTAGE” ASPECT, OFTEN ASSOCIATED WITH SECOND-HAND STORES. INDEED, FOR FOUR YEARS THE PROJECT HAS BEEN QUESTIONING THE RELATIONSHIP BETWEEN SECOND HAND AND MODERNITY BY PROPOSING A CURRENT AND INNOVATIVE FORMAT. WITH A UNIFYING FORMAT AS WELL AS THEIR CATCHY UNIVERSE, MINIMAXXX IMMEDIATELY KNEW HOW TO FIND ITS AUDIENCE. SINCE THE OFFICIAL LAUNCH IN SEPTEMBER 2018, THEIR EVENTS HAVE BECOME THE MONTHLY APPOINTMENT NOT TO BE MISSED."
     const contacts = ["MAIL", "TIKTOK", "INSTAGRAM", "JOBS"];
@@ -46,6 +48,15 @@ function App() {
     const [streamZIndex, setStreamZIndex] = useState(2);
     const [contactZIndex, setContactZIndex] = useState(1);
     const [loadingComplete, setLoadingComplete] = useState(false);
+
+    useEffect(() => {
+        cmsDataPromise.then(data => {
+            if (data) {
+                setWordmarkUrl(data.wordmarkUrl);
+                setRunnerUrl(data.runnerUrl);
+            }
+        });
+    }, []);
 
     const handleMinimizeAbout = () => {
         setIsAboutVisible(false);
@@ -106,17 +117,13 @@ function App() {
         <div className={isInverted ? "invert-effect" : null} style={{ overflow: 'hidden', flex: 1, background: '#FFFFFF' }}>
             <Desktop>
                 <div style={{ overflow: 'hidden', flex: 1, height: 'calc(100vh)', width: '100%' }}>
-                    {/*  <div style={{ position: 'absolute', left: window.innerWidth * 0.2, display: 'flex', flexDirection: 'column', transform: 'scaleX(-10) scaleY(12) ', opacity: 0.03 }}>
-                        <h2>MINIMAXXX AFTERPARTY</h2>
-                        <h2>→ CLOTHES</h2>
-                        <h2>→ DJ SETS</h2>
-                        <h2>→ PERFORMANCES</h2>
-                        <h2 style={{ paddingLeft: '75px' }}>→ 19:00—LATE</h2>
-                        <h2 style={{ paddingLeft: '75px' }}>→ 21 RUE HALLÉ, 75014</h2>
-                        <h2 style={{ paddingLeft: '75px' }}>→ FREE ENTRY</h2>
-                    </div> */}
-                    <img src={wordmark} style={{ position: 'absolute', top: 0, left: 0, right: 0, width: '100%', height: 'auto', objectFit: 'contain' }} />
-                    <img src={runner} style={{ position: 'absolute', top: 0, right: '0px', width: 'calc(75vh)', objectFit: 'contain' }} />
+                    <img src={wordmarkUrl} style={{ position: 'absolute', top: 0, left: 0, right: 0, width: '100%', height: 'auto', objectFit: 'contain' }} />
+
+                    <div style={{ position: 'absolute', width: '100%', bottom: 0, display: 'flex', flexDirection: 'column', transform: 'scaleX(-1.1) scaleY(1.1)', opacity: 0.02 }}>
+                        <h6 style={{ width: '100%', textAlign: 'justify', fontFamily: 'nimbus-sans', fontWeight: 900, fontStyle: 'normal' }}>MINIMAXXX AFTERPARTY<br />CLOTHES<br />DJ SETS<br />PERFORMANCES<br />19:00—LATE<br />21 RUE HALLÉ, 75014<br />FREE ENTRY</h6>
+                    </div>
+
+                    <img src={runnerUrl} style={{ position: 'absolute', top: 0, right: '0px', width: 'calc(75vh)', objectFit: 'contain' }} />
                     <div style={{ position: 'absolute', bottom: '30px', left: 0, right: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', paddingTop: '5px', minWidth: '23%', marginBottom: '-4px' }}>
                             <h2>MINIMAXXX AFTERPARTY</h2>
@@ -196,10 +203,7 @@ function App() {
 
             <TabletAndBelow>
                 <div style={{ overflow: 'hidden', flex: 1, height: 'calc(100vh)', width: '100%' }}>
-
-
-
-                    <img src={wordmark} style={{ position: 'absolute', top: '0', left: '0', right: '0', width: '100%', height: 'auto', objectFit: 'contain' }} />
+                    <img src={wordmarkUrl} style={{ position: 'absolute', top: '0', left: '0', right: '0', width: '100%', height: 'auto', objectFit: 'contain' }} />
                     <img src={runner} style={{ position: 'absolute', top: 0, right: '0px', width: '40%', objectFit: 'contain' }} />
                     <div style={{ position: 'absolute', bottom: '30px', left: 0, right: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', paddingTop: '5px', minWidth: '23%', maxWidth: '90%', marginBottom: '-4px' }}>
@@ -267,7 +271,7 @@ function App() {
                         </div>
                     )}
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', paddingLeft: '10%', paddingRight: '10%', position: 'fixed', bottom: 0, left: 0, right: 0, height: '30px', borderTopStyle: 'solid',  borderTopWidth: '0.5px', borderTopColor: '#000000', background: '#FFFFFF' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', paddingLeft: '10%', paddingRight: '10%', position: 'fixed', bottom: 0, left: 0, right: 0, height: '30px', borderTopStyle: 'solid', borderTopWidth: '0.5px', borderTopColor: '#000000', background: '#FFFFFF' }}>
                     <h4 onClick={showStream} style={{ cursor: 'pointer' }}>LIVE</h4>
                     <h4 onClick={showContact} style={{ cursor: 'pointer' }}>CONTACT</h4>
                     <h4 onClick={showAbout} style={{ cursor: 'pointer' }}>ABOUT</h4>
