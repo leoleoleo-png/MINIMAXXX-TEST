@@ -117,7 +117,7 @@ function App() {
     };
 
     return (
-        <div className={isInverted ? "invert-effect" : null} style={{ filter: 'url(#grain)', overflow: 'hidden', flex: 1, background: '#FFFFFF' }}>
+        <div className={isInverted ? "invert-effect" : null} style={{ overflow: 'hidden', flex: 1, background: '#FFFFFF' }}>
             <Desktop>
                 <div style={{ overflow: 'hidden', flex: 1, height: 'calc(100vh)', width: '100%' }}>
                     <div style={{ position: 'absolute', top: 0, left: 0, right: 0 }}>
@@ -125,28 +125,10 @@ function App() {
                         <img src={runnerUrl} style={{ position: 'absolute', top: 0, right: '0px', width: 'calc(75vh)', objectFit: 'contain' }} />
                     </div>
 
-                    <svg width="0" height="0">
-                        <filter id="grain">
-                            <feTurbulence type="fractalNoise" baseFrequency="0.35" numOctaves="23" result="turbulence" />
-                            <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="1" xChannelSelector="R" yChannelSelector="G" />
-                        </filter>
-                    </svg>
-
-                    {/*     <svg width="0" height="0">
-                        <filter id="grain-big">
-                            <feTurbulence type="fractalNoise" baseFrequency="0.15" numOctaves="23" result="turbulence" />
-                            <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="3" xChannelSelector="R" yChannelSelector="G" />
-                        </filter>
-                    </svg>
-                   
-
-                   <div style={{filter: 'url(#grain-big)', position: 'absolute', width: '100%', bottom: 0, display: 'flex', flexDirection: 'column', transform: 'scaleX(-1)', opacity: 0.05 }}>
+                    {/*    <div style={{ position: 'absolute', width: '100%', bottom: 0, display: 'flex', flexDirection: 'column', transform: 'scaleX(-1)', opacity: 0.03 }}>
                         <h6 style={{ width: '100%', textAlign: 'justify', fontFamily: 'nimbus-sans', fontWeight: 900, fontStyle: 'normal' }}>MINIMAXXX AFTERPARTY<br />CLOTHES<br />DJ SETS<br />PERFORMANCES<br />19:00—LATE<br />21 RUE HALLÉ, 75014<br />FREE ENTRY</h6>
                     </div> */}
 
-                    {/*  <div style={{ position: 'absolute', width: '100%', bottom: 0, display: 'flex', flexDirection: 'column', transform: 'scaleX(-1)', opacity: 0.03 }}>
-                        <h6 style={{ width: '100%', textAlign: 'justify', fontFamily: 'nimbus-sans', fontWeight: 900, fontStyle: 'normal' }}>MINIMAXXX AFTERPARTY<br />CLOTHES<br />DJ SETS<br />PERFORMANCES<br />19:00—LATE<br />21 RUE HALLÉ, 75014<br />FREE ENTRY</h6>
-                    </div> */}
                     <div style={{ position: 'absolute', bottom: '30px', left: 0, right: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', paddingTop: '5px', minWidth: '23%', marginBottom: '-4px' }}>
                             <h2>MINIMAXXX AFTERPARTY</h2>
@@ -226,13 +208,8 @@ function App() {
             </Desktop>
 
             <TabletAndBelow>
-                <div style={{filter: 'url(#grain)',  overflow: 'hidden', flex: 1, height: 'calc(100vh)', width: '100%' }}>
-                <svg width="0" height="0">
-                        <filter id="grain">
-                            <feTurbulence type="fractalNoise" baseFrequency="0.35" numOctaves="23" result="turbulence" />
-                            <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="1" xChannelSelector="R" yChannelSelector="G" />
-                        </filter>
-                    </svg>
+                <div style={{ overflow: 'hidden', flex: 1, height: 'calc(100vh)', width: '100%' }}>
+
                     <img src={wordmarkUrl} style={{ position: 'absolute', top: '0', left: '0', right: '0', width: '100%', height: 'auto', objectFit: 'contain' }} />
                     <img src={runner} style={{ position: 'absolute', top: 0, right: '0px', width: '40%', objectFit: 'contain' }} />
                     <div style={{ position: 'absolute', bottom: '30px', left: 0, right: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
