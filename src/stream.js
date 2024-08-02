@@ -192,7 +192,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                                         <input
                                             key={index}
                                             id={`password-input-${index}`}
-                                            type="password"
+                                            type="tel"
                                             value={digit}
                                             onChange={(e) => handlePasswordChange(e, index)}
                                             onKeyDown={(e) => handleKeyDown(e, index)}
