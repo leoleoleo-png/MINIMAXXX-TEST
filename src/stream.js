@@ -14,6 +14,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
     const [isOnline, setIsOnline] = useState(false);
     const [isLocked, setIsLocked] = useState(true);
     const [password, setPassword] = useState(new Array(6).fill(''));
+    const [maskedPassword, setMaskedPassword] = useState(new Array(6).fill(''));
     const [wrongPassword, setWrongPassword] = useState(false);
     const dragHandleRef = useRef(null);
     const resizableBoxRef = useRef(null);
@@ -60,10 +61,13 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
     const handlePasswordChange = (e, index) => {
         const value = e.target.value;
         const newPass = [...password];
+        const newMaskedPass = [...maskedPassword];
 
         if (value.match(/^[0-9]$/)) {
             newPass[index] = value;
+            newMaskedPass[index] = '*';
             setPassword(newPass);
+            setMaskedPassword(newMaskedPass);
             if (index < 5) {
                 document.getElementById(`password-input-${index + 1}`).focus();
             }
@@ -81,7 +85,9 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
             }
         } else if (value === '' && index > 0) {
             newPass[index] = '';
+            newMaskedPass[index] = '';
             setPassword(newPass);
+            setMaskedPassword(newMaskedPass);
             document.getElementById(`password-input-${index - 1}`).focus();
         }
     };
@@ -89,8 +95,11 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
     const handleKeyDown = (e, index) => {
         if (e.key === 'Backspace') {
             const newPass = [...password];
+            const newMaskedPass = [...maskedPassword];
             newPass[index] = '';
+            newMaskedPass[index] = '';
             setPassword(newPass);
+            setMaskedPassword(newMaskedPass);
             if (index > 0) {
                 document.getElementById(`password-input-${index - 1}`).focus();
             }
@@ -119,7 +128,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                 ref={resizableBoxRef}
                 style={{
                     width: mobile ? window.innerWidth / 1.2 : 700,
-                    height: mobile ? 150 : 450,
+                    height: mobile ? 220 : 450,
                     position: 'relative',
                     zIndex: zIndex,
                    
@@ -127,7 +136,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
             >
                 <ResizableBox
                     width={mobile ? window.innerWidth / 1.2 : 700}
-                    height={mobile ? 200 : 450}
+                    height={mobile ? 220 : 450}
                     minConstraints={mobile ? ['1%', 100] : [400, 225]}
                     maxConstraints={[1200, 675]}
                     resizeHandles={['se']}
@@ -188,7 +197,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                             }}>
                                 <h2 style={{ textAlign: 'center', color: '#000000', width: mobile ? '90%' : '30%', marginBottom: mobile ? '0' : '10px' }}>ENTER PASSWORD TO UNLOCK THE STREAM</h2>
                                 <div style={{ display: 'flex', gap: '10px', marginBottom: mobile ? '20px' : '40px' }}>
-                                    {password.map((digit, index) => (
+                                    {maskedPassword.map((digit, index) => (
                                         <input
                                             key={index}
                                             id={`password-input-${index}`}
