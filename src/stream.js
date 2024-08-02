@@ -206,7 +206,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                                 backgroundColor: 'red'
                             }}>
                                 <h2 style={{ textAlign: 'center', color: '#000000', width: mobile ? '90%' : '30%', marginBottom: mobile ? '0' : '10px' }}>ENTER PASSWORD TO UNLOCK THE STREAM</h2>
-                                <div style={{ display: 'flex', gap: '10px', marginBottom: mobile ? '20px' : '40px' }}>
+                                <div style={{ display: 'flex', gap: '10px', marginBottom: mobile ? '10px' : '20px' }}>
                                     {maskedPassword.map((digit, index) => (
                                         <input
                                             key={index}
@@ -236,7 +236,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                                 {/* <button onClick={handlePasswordSubmit} style={{ padding: '8px 80px', backgroundColor: '#000', color: '#fff', border: 'none', cursor: 'pointer' }}>
                                     <h3 style={{ fontSize: mobile ? '10pt' : '11pt', color: 'red', margin: 0 }}>CONFIRM</h3>
                                 </button> */}
-                                {wrongPassword && <h5 style={{ marginTop: '20px', textAlign: 'center', color: '#000000', width: '20%', fontWeight: '400', fontSize: '7pt' }}>YOU ENTERED THE WRONG PASSWORD</h5>}
+                                {wrongPassword && <h5 style={{ textAlign: 'center', color: '#000000', width: '20%', fontWeight: '400', fontSize: '7pt' }}>YOU ENTERED THE WRONG PASSWORD</h5>}
                             </div>
                         ) : isOnline ? (
                             <video
