@@ -12,6 +12,9 @@ import minimise from './assets/minimise.png';
 const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
     const [isResizing, setIsResizing] = useState(false);
     const [isOnline, setIsOnline] = useState(false);
+    const [isLocked, setIsLocked] = useState(true);
+    const [password, setPassword] = useState(new Array(6).fill(''));
+    const [wrongPassword, setWrongPassword] = useState(false);
     const dragHandleRef = useRef(null);
     const resizableBoxRef = useRef(null);
     const [bounds, setBounds] = useState({ left: 0, top: 0, right: window.innerWidth, bottom: window.innerHeight });
@@ -51,6 +54,51 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
         event.stopPropagation();
         if (onMinimize) {
             onMinimize();
+        }
+    };
+
+    const handlePasswordChange = (e, index) => {
+        const value = e.target.value;
+        if (value.match(/^[0-9]$/)) {
+            const newPass = [...password];
+            newPass[index] = value;
+            setPassword(newPass);
+            if (index < 5) {
+                document.getElementById(`password-input-${index + 1}`).focus();
+            }
+            const pass = newPass.join('');
+            if (pass === '123456') { // Change to your desired password
+                setIsLocked(false);
+                setWrongPassword(false);
+            } else {
+                setWrongPassword(true);
+            }
+        } else if (value === '' && index > 0) {
+            const newPass = [...password];
+            newPass[index] = '';
+            setPassword(newPass);
+            document.getElementById(`password-input-${index - 1}`).focus();
+        }
+    };
+
+    const handleKeyDown = (e, index) => {
+        if (e.key === 'Backspace') {
+            const newPass = [...password];
+            newPass[index] = '';
+            setPassword(newPass);
+            if (index > 0) {
+                document.getElementById(`password-input-${index - 1}`).focus();
+            }
+        }
+    };
+
+    const handlePasswordSubmit = () => {
+        const pass = password.join('');
+        if (pass === '123456') { // Change to your desired password
+            setIsLocked(false);
+            setWrongPassword(false);
+        } else {
+            setWrongPassword(true);
         }
     };
 
@@ -103,26 +151,65 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                                 display: 'flex',
                                 justifyContent: 'space-between',
                                 alignItems: 'center',
-                                backgroundColor: '#000000',                            
+                                backgroundColor: '#000000',
                                 height: '30px',
                                 cursor: 'move',
                                 zIndex: 2
                             }}
                         >
                             <div style={{ width: '50px' }} />
-                            <h3 style={{fontSize: mobile ? '10pt': '11pt'}}>{isOnline ? 'MINIMAXXX PARIS AFTERPARTY' : 'OFFLINE'}</h3>
+                            <h3 style={{ fontSize: mobile ? '10pt' : '11pt' }}>{isOnline ? 'MINIMAXXX PARIS AFTERPARTY' : 'OFFLINE'}</h3>
                             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', paddingRight: '5px' }}>
                                 <img
                                     onClick={handleMinimizeClick}
                                     onTouchStart={handleMinimizeClick}
                                     src={minimise}
-                                    style={{ width: '18px', height: '18px', cursor: 'pointer',  paddingRight: '5px' }}
+                                    style={{ width: '18px', height: '18px', cursor: 'pointer', paddingRight: '5px' }}
                                 />
                                 <img src={move} style={{ width: '18px', height: '18px', pointerEvents: 'none' }} />
                             </div>
-
                         </div>
-                        {isOnline ? (
+                        {isLocked ? (
+                            <div className="blink" style={{
+                                width: '100%',
+                                height: '100%',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                backgroundColor: 'red'
+                            }}>
+                                <h2 style={{ textAlign: 'center', color: '#000000', width: '30%', marginBottom: '10px' }}>ENTER PASSWORD TO UNLOCK THE STREAM</h2>
+                                <div style={{ display: 'flex', gap: '10px', marginBottom: '40px' }}>
+                                    {password.map((digit, index) => (
+                                        <input
+                                            key={index}
+                                            id={`password-input-${index}`}
+                                            type="password"
+                                            value={digit}
+                                            onChange={(e) => handlePasswordChange(e, index)}
+                                            onKeyDown={(e) => handleKeyDown(e, index)}
+                                            maxLength="1"
+                                            autocomplete="off"
+                                            style={{
+                                                width: '20px',
+                                                height: '40px',
+                                                textAlign: 'center',
+                                                fontSize: '18px',
+                                                border: 'none',
+                                                borderBottom: '1.5px solid #000',
+                                                backgroundColor: 'transparent',
+                                                outline: 'none'
+                                            }}
+                                        />
+                                    ))}
+                                </div>
+                                <button onClick={handlePasswordSubmit} style={{ padding: '8px 80px', backgroundColor: '#000', color: '#fff', border: 'none', cursor: 'pointer' }}>
+                                    <h3 style={{ fontSize: mobile ? '10pt' : '11pt', color: 'red', margin: 0 }}>CONFIRM</h3>
+                                </button>
+                                {wrongPassword && <p style={{ color: 'black', marginTop: '10px' }}>WRONG PASSWORD</p>}
+                            </div>
+                        ) : isOnline ? (
                             <video
                                 style={{
                                     width: '100%',

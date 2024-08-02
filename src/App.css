@@ -10,6 +10,15 @@ h1 {
   margin: 0;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
 @media (max-width: 600px) {
   h1 {
     font-size: 50pt;
