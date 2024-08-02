@@ -59,22 +59,27 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
 
     const handlePasswordChange = (e, index) => {
         const value = e.target.value;
+        const newPass = [...password];
+
         if (value.match(/^[0-9]$/)) {
-            const newPass = [...password];
             newPass[index] = value;
             setPassword(newPass);
             if (index < 5) {
                 document.getElementById(`password-input-${index + 1}`).focus();
             }
-            const pass = newPass.join('');
-            if (pass === '123456') { // Change to your desired password
-                setIsLocked(false);
-                setWrongPassword(false);
+
+            if (newPass.every((digit) => digit !== '')) {
+                const pass = newPass.join('');
+                if (pass === '123456') { // Change to your desired password
+                    setIsLocked(false);
+                    setWrongPassword(false);
+                } else {
+                    setWrongPassword(true);
+                }
             } else {
-                setWrongPassword(true);
+                setWrongPassword(false);
             }
         } else if (value === '' && index > 0) {
-            const newPass = [...password];
             newPass[index] = '';
             setPassword(newPass);
             document.getElementById(`password-input-${index - 1}`).focus();
@@ -98,7 +103,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
             setIsLocked(false);
             setWrongPassword(false);
         } else {
-            setWrongPassword(true);
+            setWrongPassword(password.every((digit) => digit !== ''));
         }
     };
 
@@ -117,6 +122,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                     height: mobile ? 150 : 450,
                     position: 'relative',
                     zIndex: zIndex,
+                   
                 }}
             >
                 <ResizableBox
@@ -138,7 +144,8 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                         background: '#CACACA',
                         display: 'flex',
                         justifyContent: 'flex-end',
-                        flexDirection: 'column'
+                        flexDirection: 'column',
+                         overflow:'hidden'
                     }}>
                         <div
                             ref={dragHandleRef}
@@ -179,8 +186,8 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                                 alignItems: 'center',
                                 backgroundColor: 'red'
                             }}>
-                                <h2 style={{ textAlign: 'center', color: '#000000', width: '30%', marginBottom: '10px' }}>ENTER PASSWORD TO UNLOCK THE STREAM</h2>
-                                <div style={{ display: 'flex', gap: '10px', marginBottom: '40px' }}>
+                                <h2 style={{ textAlign: 'center', color: '#000000', width: mobile ? '90%' : '30%', marginBottom: mobile ? '0' : '10px' }}>ENTER PASSWORD TO UNLOCK THE STREAM</h2>
+                                <div style={{ display: 'flex', gap: '10px', marginBottom: mobile ? '20px' : '40px' }}>
                                     {password.map((digit, index) => (
                                         <input
                                             key={index}
@@ -190,10 +197,10 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                                             onChange={(e) => handlePasswordChange(e, index)}
                                             onKeyDown={(e) => handleKeyDown(e, index)}
                                             maxLength="1"
-                                            autocomplete="off"
+                                            autoComplete="off"
                                             style={{
                                                 width: '20px',
-                                                height: '40px',
+                                                height: mobile ? '30px' : '40px',
                                                 textAlign: 'center',
                                                 fontSize: '18px',
                                                 border: 'none',
@@ -207,7 +214,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                                 <button onClick={handlePasswordSubmit} style={{ padding: '8px 80px', backgroundColor: '#000', color: '#fff', border: 'none', cursor: 'pointer' }}>
                                     <h3 style={{ fontSize: mobile ? '10pt' : '11pt', color: 'red', margin: 0 }}>CONFIRM</h3>
                                 </button>
-                                {wrongPassword && <p style={{ color: 'black', marginTop: '10px' }}>WRONG PASSWORD</p>}
+                                {wrongPassword && <h5 style={{ marginTop: '20px', textAlign: 'center', color: '#000000', width: '20%', fontWeight: '400', fontSize: '7pt' }}>YOU ENTERED THE WRONG PASSWORD</h5>}
                             </div>
                         ) : isOnline ? (
                             <video
