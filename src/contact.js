@@ -57,7 +57,7 @@ const ContactPopup = ({ contacts, mobile, onMinimize, zIndex, onClick }) => {
                     position: 'relative',
                     zIndex: zIndex,
                     background: '#FFFFFF',
-                    border: '1px solid #000000',
+                    border: '0.5px solid #000000',
                     display: 'flex',
                     flexDirection: 'column',
                     width: mobile ? window.innerWidth / 1.2 : window.innerWidth/5,
@@ -81,7 +81,7 @@ const ContactPopup = ({ contacts, mobile, onMinimize, zIndex, onClick }) => {
                     }}
                 >
                     <div style={{ width: '50px' }} />
-                    <h3>CONTACT</h3>
+                    <h3 style={{fontSize: mobile ? '10pt': '11pt'}}>CONTACT</h3>
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', paddingRight: '5px' }}>
                         <img
                             onClick={handleMinimizeClick}
@@ -102,7 +102,7 @@ const ContactPopup = ({ contacts, mobile, onMinimize, zIndex, onClick }) => {
                     paddingRight: '20px',
                 }}>
                     {contacts.map((contact, index) => (
-                        <h3  key={index} style={{ margin: '10px 0', color:'#0029FF', textDecorationLine:'underline' }}>{contact}</h3>
+                        <h3  key={index} style={{ margin: '12px 0', color:'#0029FF', textDecorationLine:'underline', fontSize: mobile ? '10pt': '11pt' }}>{contact}</h3>
                     ))}
                 </div>
             </div>
@@ -111,3 +111,5 @@ const ContactPopup = ({ contacts, mobile, onMinimize, zIndex, onClick }) => {
 };
 
 export default ContactPopup;
+
+

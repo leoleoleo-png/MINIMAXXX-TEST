@@ -6,6 +6,7 @@ import './App.css';
 import video from './assets/MINIMAXXX.mp4';
 import move from './assets/move.png';
 import resize from './assets/resize.png';
+import resize_black from './assets/resize_black.png';
 import minimise from './assets/minimise.png';
 
 const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
@@ -76,7 +77,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                     minConstraints={mobile ? ['1%', 100] : [400, 225]}
                     maxConstraints={[1200, 675]}
                     resizeHandles={['se']}
-                    handle={<div style={{ position: 'absolute', bottom: 0, right: 0, height: mobile ? '50px' : '100px', width: mobile ? '50px' : '100px', cursor: 'se-resize' }} />}
+                    handle={<div style={{ position: 'absolute', bottom: 0, right: 0, height: mobile ? '100px' : '100%', width: mobile ? '100px' : '100px', cursor: 'se-resize' }} />}
                     className="resizable-box"
                     onResizeStart={onResizeStart}
                     onResizeStop={onResizeStop}
@@ -102,15 +103,14 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                                 display: 'flex',
                                 justifyContent: 'space-between',
                                 alignItems: 'center',
-                                backgroundColor: '#000000',
-                              
+                                backgroundColor: '#000000',                            
                                 height: '30px',
                                 cursor: 'move',
                                 zIndex: 2
                             }}
                         >
                             <div style={{ width: '50px' }} />
-                            <h3>{isOnline ? 'MINIMAXXX PARIS AFTERPARTY' : 'OFFLINE'}</h3>
+                            <h3 style={{fontSize: mobile ? '10pt': '11pt'}}>{isOnline ? 'MINIMAXXX PARIS AFTERPARTY' : 'OFFLINE'}</h3>
                             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', paddingRight: '5px' }}>
                                 <img
                                     onClick={handleMinimizeClick}
@@ -144,11 +144,11 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                                 justifyContent: 'center',
                                 alignItems: 'center',
                             }}>
-                                <h2 style={{ textAlign: 'center', color: '#FFFFFF', width: '80%' }}>THE STREAM IS CURRENTLY OFFLINE. COME BACK FOR THE NEXT EVENT OR JOIN US IN PERSON.</h2>
-                                <h5 style={{ position: 'absolute', bottom: '10%', textAlign: 'center', color: '#FFFFFF', width: '70%', fontWeight: '400', fontSize: '7pt' }}>FIND INFORMATION ABOUT OUR NEXT EVENT BY MOVING THIS WINDOW OR BY HEADING TO OUR SOCIAL NETWORKS.</h5>
+                                <h2 style={{ textAlign: 'center', color: '#000000', width: '80%' }}>THE STREAM IS CURRENTLY OFFLINE. COME BACK FOR THE NEXT EVENT OR JOIN US IN PERSON.</h2>
+                                <h5 style={{ position: 'absolute', bottom: '10%', textAlign: 'center', color: '#000000', width: '70%', fontWeight: '400', fontSize: '7pt' }}>FIND INFORMATION ABOUT OUR NEXT EVENT BY MOVING THIS WINDOW OR BY HEADING TO OUR SOCIAL NETWORKS.</h5>
                             </div>
                         )}
-                        <img src={resize} style={{ zIndex: 3, position: 'absolute', bottom: '0', right: '0', height: '18px', objectFit: 'contain', pointerEvents: 'none' }} />
+                        <img src={resize_black} style={{ zIndex: 3, position: 'absolute', bottom: '0', right: '0', height: '18px', objectFit: 'contain', pointerEvents: 'none' }} />
                     </div>
                 </ResizableBox>
             </div>

@@ -81,7 +81,7 @@ const AboutPopup = ({ paragraph_1, paragraph_2, mobile, onMinimize, zIndex, onCl
                     maxConstraints={[window.innerWidth, window.innerHeight]}
                     resizeHandles={['se']}
                     className="resizable-box"
-                    handle={<div style={{position:'absolute', bottom:0, right:0, height: mobile ? '50px' : '100px', width:mobile ? '50px' : '100px', cursor:'se-resize'}} />}
+                    handle={<div style={{ position: 'absolute', bottom: 0, right: 0, height: mobile ? '50px' : '100px', width: mobile ? '50px' : '100px', cursor: 'se-resize' }} />}
                     onResizeStart={onResizeStart}
                     onResizeStop={onResizeStop}
                     onResize={updateBounds}
@@ -94,9 +94,7 @@ const AboutPopup = ({ paragraph_1, paragraph_2, mobile, onMinimize, zIndex, onCl
                         display: 'flex',
                         justifyContent: 'flex-end',
                         flexDirection: 'column',
-                        borderStyle: 'solid',
-                        borderWidth: '1px',
-                        borderColor: '#000000'
+                        border: '0.5px solid #000000',
                     }}>
                         <div
                             ref={dragHandleRef}
@@ -116,13 +114,13 @@ const AboutPopup = ({ paragraph_1, paragraph_2, mobile, onMinimize, zIndex, onCl
                             }}
                         >
                             <div style={{ width: '50px' }} />
-                            <h3>ABOUT</h3>
+                            <h3 style={{ fontSize: mobile ? '10pt' : '11pt' }}>ABOUT</h3>
                             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', paddingRight: '5px' }}>
                                 <img
                                     onClick={handleMinimizeClick}
                                     onTouchStart={handleMinimizeClick}
                                     src={minimise}
-                                    style={{ width: '21px', height: '21px', cursor: 'pointer',  paddingRight: '5px' }}
+                                    style={{ width: '21px', height: '21px', cursor: 'pointer', paddingRight: '5px' }}
                                 />
                                 <img src={move} style={{ width: '21px', height: '21px', pointerEvents: 'none' }} />
                             </div>
@@ -134,11 +132,11 @@ const AboutPopup = ({ paragraph_1, paragraph_2, mobile, onMinimize, zIndex, onCl
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
-                            overflow: mobile ? 'auto' : 'hidden',
+                            overflow: 'auto',
                             paddingTop: '30px',
                         }}>
                             <h4 style={{
-                                fontSize: '11pt',
+                                fontSize: mobile ? '10pt' : '11pt',
                                 paddingLeft: '20px',
                                 paddingRight: '20px',
                                 whiteSpace: 'pre-wrap',

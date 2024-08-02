@@ -106,7 +106,7 @@ function App() {
         <div className={isInverted ? "invert-effect" : null} style={{ overflow: 'hidden', flex: 1, background: '#FFFFFF' }}>
             <Desktop>
                 <div style={{ overflow: 'hidden', flex: 1, height: 'calc(100vh)', width: '100%' }}>
-                   {/*  <div style={{ position: 'absolute', left: window.innerWidth * 0.2, display: 'flex', flexDirection: 'column', transform: 'scaleX(-10) scaleY(12) ', opacity: 0.03 }}>
+                    {/*  <div style={{ position: 'absolute', left: window.innerWidth * 0.2, display: 'flex', flexDirection: 'column', transform: 'scaleX(-10) scaleY(12) ', opacity: 0.03 }}>
                         <h2>MINIMAXXX AFTERPARTY</h2>
                         <h2>→ CLOTHES</h2>
                         <h2>→ DJ SETS</h2>
@@ -171,10 +171,10 @@ function App() {
                         </div>
                     )}
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', paddingLeft: '30%', paddingRight: '30%', position: 'fixed', bottom: 0, left: 0, right: 0, height: '30px', borderTopStyle: 'solid', borderTopWidth: '1px', borderTopColor: '#000000', background: '#FFFFFF' }}>
-                    <h4 onClick={showStream} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>LIVE</h4>
-                    <h4 onClick={showContact} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>CONTACT</h4>
-                    <h4 onClick={showAbout} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>ABOUT</h4>
+                <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', paddingLeft: '30%', paddingRight: '30%', position: 'fixed', bottom: 0, left: 0, right: 0, height: '30px', borderTopStyle: 'solid', borderTopWidth: '0.5px', borderTopColor: '#000000', background: '#FFFFFF' }}>
+                    <h4 onClick={showStream} style={{ cursor: 'pointer' }}>LIVE</h4>
+                    <h4 onClick={showContact} style={{ cursor: 'pointer' }}>CONTACT</h4>
+                    <h4 onClick={showAbout} style={{ cursor: 'pointer' }}>ABOUT</h4>
                     <img
                         onClick={handleInvert}
                         src={invert}
@@ -267,10 +267,10 @@ function App() {
                         </div>
                     )}
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', paddingLeft: '10%', paddingRight: '10%', position: 'fixed', bottom: 0, left: 0, right: 0, height: '30px', borderTopStyle: 'solid', borderTopWidth: '1px', borderTopColor: '#000000', background: '#FFFFFF' }}>
-                    <h4 onClick={showStream} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>LIVE</h4>
-                    <h4 onClick={showContact} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>CONTACT</h4>
-                    <h4 onClick={showAbout} style={{ cursor: 'pointer', color: 'black', fontSize: '11pt' }}>ABOUT</h4>
+                <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', paddingLeft: '10%', paddingRight: '10%', position: 'fixed', bottom: 0, left: 0, right: 0, height: '30px', borderTopStyle: 'solid',  borderTopWidth: '0.5px', borderTopColor: '#000000', background: '#FFFFFF' }}>
+                    <h4 onClick={showStream} style={{ cursor: 'pointer' }}>LIVE</h4>
+                    <h4 onClick={showContact} style={{ cursor: 'pointer' }}>CONTACT</h4>
+                    <h4 onClick={showAbout} style={{ cursor: 'pointer' }}>ABOUT</h4>
                     <img
                         onClick={handleInvert}
                         src={invert}
