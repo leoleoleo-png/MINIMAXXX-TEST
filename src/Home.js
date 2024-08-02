@@ -6,6 +6,7 @@ import './home.css';
 import AboutPopup from './AboutPopup';
 import ContactPopup from './contact';
 import Loading from './loading';
+
 import icon_class from './assets/icon_class.png';
 import icon_hot from './assets/icon_hot.png';
 import icon_recycle from './assets/icon_recycle.png';
@@ -37,6 +38,7 @@ const TabletAndBelow = ({ children }) => {
 function App() {
     const [wordmarkUrl, setWordmarkUrl] = useState('');
     const [runnerUrl, setRunnerUrl] = useState('');
+    const [iconUrls, setIconUrls] = useState([]);
     const paragraph_1 = "MINIMAXXX HAS BEEN OPEN FOR MORE THAN A YEAR IN LYON, 9 RUE HENRY IV. BASED ON A CONCEPT OF SELLING SECOND-HAND CLOTHING AND CREATIONS, WE HAVE ALREADY BEEN ESTABLISHED IN THE WORLD OF EVENTS FOR 5 YEARS BY INVESTING IN EMBLEMATIC VENUES IN LYON, WHICH QUICKLY BECAME THE MONTHLY EVENT. IN ADDITION TO RESPONDING TO AN ENVIRONMENTAL PROBLEM, THE IMAGE OF THE SECOND HAND HAS EVOLVED A LOT. IT HAS BECOME A PARTICULARLY FASHIONABLE MODE OF CONSUMPTION.";
     const paragraph_2 = "MINIMAXXX GATHERS AND ASSERTS THE VALUES OF THE SECOND HAND WHILE DETACHING ITSELF FROM THE “VINTAGE” ASPECT, OFTEN ASSOCIATED WITH SECOND-HAND STORES. INDEED, FOR FOUR YEARS THE PROJECT HAS BEEN QUESTIONING THE RELATIONSHIP BETWEEN SECOND HAND AND MODERNITY BY PROPOSING A CURRENT AND INNOVATIVE FORMAT. WITH A UNIFYING FORMAT AS WELL AS THEIR CATCHY UNIVERSE, MINIMAXXX IMMEDIATELY KNEW HOW TO FIND ITS AUDIENCE. SINCE THE OFFICIAL LAUNCH IN SEPTEMBER 2018, THEIR EVENTS HAVE BECOME THE MONTHLY APPOINTMENT NOT TO BE MISSED."
     const contacts = ["MAIL", "TIKTOK", "INSTAGRAM", "JOBS"];
@@ -54,6 +56,7 @@ function App() {
             if (data) {
                 setWordmarkUrl(data.wordmarkUrl);
                 setRunnerUrl(data.runnerUrl);
+                setIconUrls(data.icons); // Ensure this line sets an array
             }
         });
     }, []);
@@ -114,16 +117,36 @@ function App() {
     };
 
     return (
-        <div className={isInverted ? "invert-effect" : null} style={{ overflow: 'hidden', flex: 1, background: '#FFFFFF' }}>
+        <div className={isInverted ? "invert-effect" : null} style={{ filter: 'url(#grain)', overflow: 'hidden', flex: 1, background: '#FFFFFF' }}>
             <Desktop>
                 <div style={{ overflow: 'hidden', flex: 1, height: 'calc(100vh)', width: '100%' }}>
-                    <img src={wordmarkUrl} style={{ position: 'absolute', top: 0, left: 0, right: 0, width: '100%', height: 'auto', objectFit: 'contain' }} />
-
-                    <div style={{ position: 'absolute', width: '100%', bottom: 0, display: 'flex', flexDirection: 'column', transform: 'scaleX(-1.1) scaleY(1.1)', opacity: 0.02 }}>
-                        <h6 style={{ width: '100%', textAlign: 'justify', fontFamily: 'nimbus-sans', fontWeight: 900, fontStyle: 'normal' }}>MINIMAXXX AFTERPARTY<br />CLOTHES<br />DJ SETS<br />PERFORMANCES<br />19:00—LATE<br />21 RUE HALLÉ, 75014<br />FREE ENTRY</h6>
+                    <div style={{ position: 'absolute', top: 0, left: 0, right: 0 }}>
+                        <img src={wordmarkUrl} style={{ position: 'absolute', top: 0, left: 0, right: 0, width: '100%', height: 'auto', objectFit: 'contain' }} />
+                        <img src={runnerUrl} style={{ position: 'absolute', top: 0, right: '0px', width: 'calc(75vh)', objectFit: 'contain' }} />
                     </div>
 
-                    <img src={runnerUrl} style={{ position: 'absolute', top: 0, right: '0px', width: 'calc(75vh)', objectFit: 'contain' }} />
+                    <svg width="0" height="0">
+                        <filter id="grain">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.35" numOctaves="23" result="turbulence" />
+                            <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="1" xChannelSelector="R" yChannelSelector="G" />
+                        </filter>
+                    </svg>
+
+                    {/*     <svg width="0" height="0">
+                        <filter id="grain-big">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.15" numOctaves="23" result="turbulence" />
+                            <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="3" xChannelSelector="R" yChannelSelector="G" />
+                        </filter>
+                    </svg>
+                   
+
+                   <div style={{filter: 'url(#grain-big)', position: 'absolute', width: '100%', bottom: 0, display: 'flex', flexDirection: 'column', transform: 'scaleX(-1)', opacity: 0.05 }}>
+                        <h6 style={{ width: '100%', textAlign: 'justify', fontFamily: 'nimbus-sans', fontWeight: 900, fontStyle: 'normal' }}>MINIMAXXX AFTERPARTY<br />CLOTHES<br />DJ SETS<br />PERFORMANCES<br />19:00—LATE<br />21 RUE HALLÉ, 75014<br />FREE ENTRY</h6>
+                    </div> */}
+
+                    {/*  <div style={{ position: 'absolute', width: '100%', bottom: 0, display: 'flex', flexDirection: 'column', transform: 'scaleX(-1)', opacity: 0.03 }}>
+                        <h6 style={{ width: '100%', textAlign: 'justify', fontFamily: 'nimbus-sans', fontWeight: 900, fontStyle: 'normal' }}>MINIMAXXX AFTERPARTY<br />CLOTHES<br />DJ SETS<br />PERFORMANCES<br />19:00—LATE<br />21 RUE HALLÉ, 75014<br />FREE ENTRY</h6>
+                    </div> */}
                     <div style={{ position: 'absolute', bottom: '30px', left: 0, right: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', paddingTop: '5px', minWidth: '23%', marginBottom: '-4px' }}>
                             <h2>MINIMAXXX AFTERPARTY</h2>
@@ -141,14 +164,15 @@ function App() {
                         </div>
                         <img src={icon_24} style={{ height: '8px', objectFit: 'contain', paddingLeft: '50px', paddingBottom: '5px' }} />
                         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', paddingBottom: '10px' }}>
-                            <img src={icon_hot} style={{ width: '18px', objectFit: 'contain', paddingRight: '2px' }} />
-                            <img src={icon_org} style={{ height: '22px', objectFit: 'contain', paddingRight: '5px' }} />
-                            <img src={icon_recycle} style={{ width: '18px', objectFit: 'contain', paddingRight: '5px' }} />
-                            <img src={icon_ce} style={{ width: '18px', objectFit: 'contain', paddingRight: '8px' }} />
-                            <img src={icon_class} style={{ width: '30px', objectFit: 'contain', paddingRight: '6px' }} />
-                            <img src={icon_world} style={{ width: '35px', objectFit: 'contain', paddingRight: '6px' }} />
-                            <img src={icon_bin} style={{ width: '30px', objectFit: 'contain' }} />
+                            <img src={iconUrls[0]} style={{ width: '18px', objectFit: 'contain', paddingRight: '2px' }} />
+                            <img src={iconUrls[1]} style={{ height: '22px', objectFit: 'contain', paddingRight: '5px', marginTop: '-2px' }} />
+                            <img src={iconUrls[2]} style={{ width: '18px', objectFit: 'contain', paddingRight: '5px' }} />
+                            <img src={iconUrls[3]} style={{ width: '18px', objectFit: 'contain', paddingRight: '8px' }} />
+                            <img src={iconUrls[4]} style={{ width: '30px', objectFit: 'contain', paddingRight: '6px' }} />
+                            <img src={iconUrls[5]} style={{ width: '35px', objectFit: 'contain', paddingRight: '6px' }} />
+                            <img src={iconUrls[6]} style={{ width: '30px', objectFit: 'contain' }} />
                         </div>
+
                     </div>
                     {isAboutVisible && (
                         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>

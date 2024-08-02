@@ -20,6 +20,12 @@ const fetchData = async () => {
               url
             }
           }
+          icon {
+            icons {
+              url
+              id
+            }
+          }
         }
         `
       },
@@ -30,9 +36,11 @@ const fetchData = async () => {
         }
       }
     );
+
     return {
       wordmarkUrl: response.data.data.wordmark.wordmark.url,
-      runnerUrl: response.data.data.runner.runner.url
+      runnerUrl: response.data.data.runner.runner.url,
+      icons: response.data.data.icon.icons.map(icon => icon.url) // Convert icons to an array of URLs
     };
   } catch (error) {
     console.error('Error fetching data:', error);
