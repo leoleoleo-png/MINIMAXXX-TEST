@@ -49,10 +49,6 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
         return () => window.removeEventListener('resize', updateBounds);
     }, []);
 
-    useEffect(() => {
-        document.getElementById('password-input-0').focus();
-    }, []);
-
     const initialPosition = mobile ? { x: window.innerWidth / 11, y: window.innerHeight / 8 } : { x: (window.innerWidth - 700) / 2, y: (window.innerHeight - 450) / 2 };
 
     const handleMinimizeClick = (event) => {
@@ -94,11 +90,6 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
             setMaskedPassword(newMaskedPass);
             document.getElementById(`password-input-${index - 1}`).focus();
         }
-
-        // If the first input is empty, focus it
-        if (newPass[0] === '') {
-            document.getElementById('password-input-0').focus();
-        }
     };
 
     const handleKeyDown = (e, index) => {
@@ -111,8 +102,6 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
             setMaskedPassword(newMaskedPass);
             if (index > 0) {
                 document.getElementById(`password-input-${index - 1}`).focus();
-            } else {
-                document.getElementById('password-input-0').focus();
             }
         }
     };
@@ -142,6 +131,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                     height: mobile ? 220 : 450,
                     position: 'relative',
                     zIndex: zIndex,
+
                 }}
             >
                 <ResizableBox
@@ -233,9 +223,6 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                                         />
                                     ))}
                                 </div>
-                                {/* <button onClick={handlePasswordSubmit} style={{ padding: '8px 80px', backgroundColor: '#000', color: '#fff', border: 'none', cursor: 'pointer' }}>
-                                    <h3 style={{ fontSize: mobile ? '10pt' : '11pt', color: 'red', margin: 0 }}>CONFIRM</h3>
-                                </button> */}
                                 {wrongPassword && <h5 style={{ textAlign: 'center', color: '#000000', width: '20%', fontWeight: '400', fontSize: '7pt' }}>YOU ENTERED THE WRONG PASSWORD</h5>}
                             </div>
                         ) : isOnline ? (
