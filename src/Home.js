@@ -226,7 +226,13 @@ function App() {
             </Desktop>
 
             <TabletAndBelow>
-                <div style={{ overflow: 'hidden', flex: 1, height: 'calc(100vh)', width: '100%' }}>
+                <div style={{filter: 'url(#grain)',  overflow: 'hidden', flex: 1, height: 'calc(100vh)', width: '100%' }}>
+                <svg width="0" height="0">
+                        <filter id="grain">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.35" numOctaves="23" result="turbulence" />
+                            <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="1" xChannelSelector="R" yChannelSelector="G" />
+                        </filter>
+                    </svg>
                     <img src={wordmarkUrl} style={{ position: 'absolute', top: '0', left: '0', right: '0', width: '100%', height: 'auto', objectFit: 'contain' }} />
                     <img src={runner} style={{ position: 'absolute', top: 0, right: '0px', width: '40%', objectFit: 'contain' }} />
                     <div style={{ position: 'absolute', bottom: '30px', left: 0, right: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
