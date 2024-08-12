@@ -6,7 +6,7 @@ import './App.css';
 import move from './assets/move.png';
 import resize_black from './assets/resize_black.png';
 import minimise from './assets/minimise.png';
-import cmsStreamDataPromise from './cms/cmsStream.js'; // Importing the CMS stream data
+import cmsStreamDataPromise from './cms/cmsStream.js';
 
 const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
     const [isResizing, setIsResizing] = useState(false);
@@ -15,7 +15,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
     const [password, setPassword] = useState(new Array(6).fill(''));
     const [maskedPassword, setMaskedPassword] = useState(new Array(6).fill(''));
     const [wrongPassword, setWrongPassword] = useState(false);
-    const [cmsPassword, setCmsPassword] = useState(''); // State variable for CMS password
+    const [cmsPassword, setCmsPassword] = useState(''); 
     const [streamLink, setStreamLink] = useState('');
     const [streamTitle, setStreamTitle] = useState('MINIMAXXX PARIS AFTERPARTY');
     const [streamTitleOffline, setStreamTitleOffline] = useState('OFFLINE');
@@ -94,7 +94,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
 
             if (newPass.every((digit) => digit !== '')) {
                 const pass = newPass.join('');
-                if (pass === cmsPassword) { // Correct reference to the state variable
+                if (pass === cmsPassword) { 
                     setIsLocked(false);
                     setWrongPassword(false);
                 } else {

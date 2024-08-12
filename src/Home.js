@@ -133,7 +133,7 @@ function App() {
     };
 
     return (
-        <div className={isInverted ? "invert-effect" : null} style={{ overflow: 'hidden', flex: 1, background: '#FFFFFF' }}>
+        <div /* className={isInverted ? "invert-effect" : null} */ style={{ overflow: 'hidden', flex: 1, background: '#FFFFFF' }}>
             <Desktop>
                 <div style={{ overflow: 'hidden', flex: 1, height: 'calc(100vh)', width: '100%' }}>
                     <div style={{ position: 'absolute', top: 0, left: 0, right: 0 }}>

@@ -15,6 +15,7 @@ const fetchStreamData = async () => {
             password
             secret
             streamLink
+            domain
             streamTitle
             streamTitleOffline
             infos {
