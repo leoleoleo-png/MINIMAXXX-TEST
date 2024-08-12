@@ -107,3 +107,9 @@ h3 {
   filter: invert(1);
   -webkit-filter: invert(1);
 }
+
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}

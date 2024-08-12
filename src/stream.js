@@ -3,19 +3,24 @@ import Draggable from 'react-draggable';
 import { ResizableBox } from 'react-resizable';
 import 'react-resizable/css/styles.css';
 import './App.css';
-import video from './assets/MINIMAXXX.mp4';
 import move from './assets/move.png';
-import resize from './assets/resize.png';
 import resize_black from './assets/resize_black.png';
 import minimise from './assets/minimise.png';
+import cmsStreamDataPromise from './cms/cmsStream.js'; // Importing the CMS stream data
 
 const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
     const [isResizing, setIsResizing] = useState(false);
     const [isOnline, setIsOnline] = useState(false);
-    const [isLocked, setIsLocked] = useState(true);
+    const [isLocked, setIsLocked] = useState(false);
     const [password, setPassword] = useState(new Array(6).fill(''));
     const [maskedPassword, setMaskedPassword] = useState(new Array(6).fill(''));
     const [wrongPassword, setWrongPassword] = useState(false);
+    const [cmsPassword, setCmsPassword] = useState(''); // State variable for CMS password
+    const [streamLink, setStreamLink] = useState('');
+    const [streamTitle, setStreamTitle] = useState('MINIMAXXX PARIS AFTERPARTY');
+    const [streamTitleOffline, setStreamTitleOffline] = useState('OFFLINE');
+    const [infos, setInfos] = useState([]);
+    const [infoOverlay, setInfoOverlay] = useState(false);
     const dragHandleRef = useRef(null);
     const resizableBoxRef = useRef(null);
     const [bounds, setBounds] = useState({ left: 0, top: 0, right: window.innerWidth, bottom: window.innerHeight });
@@ -49,6 +54,21 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
         return () => window.removeEventListener('resize', updateBounds);
     }, []);
 
+    useEffect(() => {
+        cmsStreamDataPromise.then(data => {
+            if (data) {
+                setIsOnline(data.online);
+                setIsLocked(data.online && data.secret); // Stream can only be locked if it is online
+                setStreamLink(data.streamLink);
+                setStreamTitle(data.streamTitle);
+                setStreamTitleOffline(data.streamTitleOffline);
+                setInfos(data.infos);
+                setInfoOverlay(data.infoOverlay);
+                setCmsPassword(data.password); // Set the CMS password here
+            }
+        });
+    }, []);
+
     const initialPosition = mobile ? { x: window.innerWidth / 11, y: window.innerHeight / 8 } : { x: (window.innerWidth - 700) / 2, y: (window.innerHeight - 450) / 2 };
 
     const handleMinimizeClick = (event) => {
@@ -74,7 +94,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
 
             if (newPass.every((digit) => digit !== '')) {
                 const pass = newPass.join('');
-                if (pass === '123456') { // Change to your desired password
+                if (pass === cmsPassword) { // Correct reference to the state variable
                     setIsLocked(false);
                     setWrongPassword(false);
                 } else {
@@ -106,16 +126,6 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
         }
     };
 
-    const handlePasswordSubmit = () => {
-        const pass = password.join('');
-        if (pass === '123456') { // Change to your desired password
-            setIsLocked(false);
-            setWrongPassword(false);
-        } else {
-            setWrongPassword(password.every((digit) => digit !== ''));
-        }
-    };
-
     return (
         <Draggable
             handle=".drag-handle"
@@ -131,7 +141,6 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                     height: mobile ? 220 : 450,
                     position: 'relative',
                     zIndex: zIndex,
-
                 }}
             >
                 <ResizableBox
@@ -174,7 +183,9 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                             }}
                         >
                             <div style={{ width: '50px' }} />
-                            <h3 style={{ fontSize: mobile ? '10pt' : '11pt' }}>{isOnline ? 'MINIMAXXX PARIS AFTERPARTY' : isLocked ? 'MINIMAXXX SECRET EVENT' : 'OFFLINE'}</h3>
+                            <h3 style={{ fontSize: mobile ? '10pt' : '11pt' }}>
+                                {isOnline ? streamTitle : streamTitleOffline}
+                            </h3>
                             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', paddingRight: '5px' }}>
                                 <img
                                     onClick={handleMinimizeClick}
@@ -185,59 +196,79 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                                 <img src={move} style={{ width: '18px', height: '18px', pointerEvents: 'none' }} />
                             </div>
                         </div>
-                        {isLocked ? (
-                            <div className="blink" style={{
-                                width: '100%',
-                                height: '100%',
-                                display: 'flex',
-                                flexDirection: 'column',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                backgroundColor: 'red'
-                            }}>
-                                <h2 style={{ textAlign: 'center', color: '#000000', width: mobile ? '90%' : '30%', marginBottom: mobile ? '0' : '10px' }}>ENTER PASSWORD TO UNLOCK THE STREAM</h2>
-                                <div style={{ display: 'flex', gap: '10px', marginBottom: mobile ? '10px' : '20px' }}>
-                                    {maskedPassword.map((digit, index) => (
-                                        <input
-                                            key={index}
-                                            id={`password-input-${index}`}
-                                            type="tel"
-                                            value={digit}
-                                            onChange={(e) => handlePasswordChange(e, index)}
-                                            onKeyDown={(e) => handleKeyDown(e, index)}
-                                            maxLength="1"
-                                            autoComplete="off"
-                                            style={{
-                                                width: '20px',
-                                                fontFamily: 'nimbus-sans',
-                                                fontWeight: 700,
-                                                height: mobile ? '30px' : '40px',
-                                                textAlign: 'center',
-                                                fontSize: '18px',
-                                                border: 'none',
-                                                borderBottom: '1.5px solid #000',
-                                                backgroundColor: 'transparent',
-                                                outline: 'none',
-                                                borderRadius: 0
-                                            }}
-                                        />
-                                    ))}
-                                </div>
-                                {wrongPassword && <h5 style={{ textAlign: 'center', color: '#000000', width: '20%', fontWeight: '400', fontSize: '7pt' }}>YOU ENTERED THE WRONG PASSWORD</h5>}
-                            </div>
-                        ) : isOnline ? (
-                            <video
-                                style={{
+                        {isOnline ? (
+                            isLocked ? (
+                                <div className="blink" style={{
                                     width: '100%',
                                     height: '100%',
-                                    objectFit: 'cover'
-                                }}
-                                autoPlay
-                                muted
-                                loop
-                            >
-                                <source src={video} type="video/mp4" />
-                            </video>
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    backgroundColor: 'red'
+                                }}>
+                                    <h2 style={{ textAlign: 'center', color: '#000000', width: mobile ? '90%' : '30%', marginBottom: mobile ? '0' : '10px' }}>ENTER PASSWORD TO UNLOCK THE STREAM</h2>
+                                    <div style={{ display: 'flex', gap: '10px', marginBottom: mobile ? '10px' : '20px' }}>
+                                        {maskedPassword.map((digit, index) => (
+                                            <input
+                                                key={index}
+                                                id={`password-input-${index}`}
+                                                type="tel"
+                                                value={digit}
+                                                onChange={(e) => handlePasswordChange(e, index)}
+                                                onKeyDown={(e) => handleKeyDown(e, index)}
+                                                maxLength="1"
+                                                autoComplete="off"
+                                                style={{
+                                                    width: '20px',
+                                                    fontFamily: 'nimbus-sans',
+                                                    fontWeight: 700,
+                                                    height: mobile ? '30px' : '40px',
+                                                    textAlign: 'center',
+                                                    fontSize: '18px',
+                                                    border: 'none',
+                                                    borderBottom: '1.5px solid #000',
+                                                    backgroundColor: 'transparent',
+                                                    outline: 'none',
+                                                    borderRadius: 0
+                                                }}
+                                            />
+                                        ))}
+                                    </div>
+                                    {wrongPassword && <h5 style={{ textAlign: 'center', color: '#000000', width: '20%', fontWeight: '400', fontSize: '7pt' }}>YOU ENTERED THE WRONG PASSWORD</h5>}
+                                </div>
+                            ) : (
+                                <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                                    <iframe
+                                        src={streamLink}
+                                        title="Live Stream"
+                                        style={{
+                                            width: '100%',
+                                            height: '100%',
+                                            border: 'none',
+                                            objectFit: 'cover',
+                                        }}
+                                        allow="autoplay; fullscreen"
+                                    />
+                                    {infoOverlay && (
+                                        <div style={{
+                                            position: 'absolute',
+                                            top: '10px',
+                                            left: '10px',
+                                            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                                            color: 'white',
+                                            padding: '10px',
+                                            borderRadius: '5px',
+                                            zIndex: 4,
+                                            maxWidth: '90%',
+                                        }}>
+                                            {infos.map((info, index) => (
+                                                <p key={index} style={{ margin: 0, fontSize: '10pt' }}>• {info}</p>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            )
                         ) : (
                             <div className="blink" style={{
                                 width: '100%',
