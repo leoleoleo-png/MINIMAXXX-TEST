@@ -258,14 +258,14 @@ function App() {
                     </div>
 
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', position: 'absolute', bottom: '8px', left: '8px', right: '8px' }}>
-                        <div onClick={showAbout} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '35px', border: 'solid', flexGrow: 1, justifyContent: 'center' }}>
+                        <div onClick={showAbout} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '35px', border: 'solid', borderWidth:'1px', flexGrow: 1, justifyContent: 'center' }}>
                             <h4 style={{ cursor: 'pointer', margin: 0 }}>ABOUT</h4>
                         </div>
-                        <div onClick={showStream} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '35px', border: 'solid', flexGrow: 1, justifyContent: 'center' }}>
+                        <div onClick={showStream} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '35px', border: 'solid',  borderWidth:'1px', flexGrow: 1, justifyContent: 'center' }}>
                             <div style={{ height: '7px', width: '7px',  animation: isOnline ? 'fadeInOut 1.5s infinite' : 'none', background: isOnline ? '#FF0000' : '#CACACA', borderRadius: '100px', marginRight: '5px' }} />
                             <h4 style={{ cursor: 'pointer', margin: 0 }}>LIVE</h4>
                         </div>
-                        <div onClick={showContact} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '35px', border: 'solid', flexGrow: 1, justifyContent: 'center' }}>
+                        <div onClick={showContact} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '35px', border: 'solid', borderWidth:'1px', flexGrow: 1, justifyContent: 'center' }}>
                             <h4 style={{ cursor: 'pointer', margin: 0 }}>CONTACT</h4>
                         </div>
                     </div>
