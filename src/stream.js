@@ -5,11 +5,13 @@ import 'react-resizable/css/styles.css';
 import './App.css';
 import move from './assets/move.png';
 import resize_black from './assets/resize_black.png';
+import resize from './assets/resize.png';
 import minimise from './assets/minimise.png';
 import cmsStreamDataPromise from './cms/cmsStream.js';
 import './squares.css';
 
 const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
+    const [currentTime, setCurrentTime] = useState('');
     const [isResizing, setIsResizing] = useState(false);
     const [isOnline, setIsOnline] = useState(false);
     const [isLocked, setIsLocked] = useState(false);
@@ -25,6 +27,31 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
     const dragHandleRef = useRef(null);
     const resizableBoxRef = useRef(null);
     const [bounds, setBounds] = useState({ left: 0, top: 0, right: window.innerWidth, bottom: window.innerHeight });
+
+    const formatDate = (date) => {
+        const days = ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"];
+        const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+
+        const day = days[date.getDay()];
+        const dayNumber = String(date.getDate()).padStart(2, '0');
+        const month = months[date.getMonth()];
+        const year = date.getFullYear();
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const seconds = String(date.getSeconds()).padStart(2, '0');
+
+        return `${day} ${dayNumber} ${month} ${hours}:${minutes}:${seconds}`;
+    };
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const now = new Date();
+            setCurrentTime(formatDate(now));
+        }, 1000);
+
+        // Cleanup interval on component unmount
+        return () => clearInterval(interval);
+    }, []);
 
     const onResizeStart = () => {
         setIsResizing(true);
@@ -254,18 +281,33 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                                     {infoOverlay && (
                                         <div style={{
                                             position: 'absolute',
-                                            top: '10px',
-                                            left: '10px',
+                                            bottom: '0',
+                                            left: '0',
                                             backgroundColor: 'rgba(0, 0, 0, 0.5)',
                                             color: 'white',
-                                            padding: '10px',
-                                            borderRadius: '5px',
+                                            padding: '5px',
+                                            paddingRight: '15px',
                                             zIndex: 4,
-                                            maxWidth: '90%',
+                                            opacity: 0.9
                                         }}>
                                             {infos.map((info, index) => (
-                                                <p key={index} style={{ margin: 0, fontSize: '10pt' }}>• {info}</p>
+                                                <h4 key={index} style={{ margin: 0, fontSize: '8pt', color: '#FFF', letterSpacing: '0.3pt' }}>{info}</h4>
                                             ))}
+                                        </div>
+                                    )}
+
+                                    {infoOverlay && (
+                                        <div style={{
+                                            position: 'absolute',
+                                            top: '28px',
+                                            left: '0',
+                                            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                                            color: 'white',
+                                            padding: '5px',
+                                            zIndex: 4,
+                                            opacity: 0.9
+                                        }}>
+                                            <h4 style={{ margin: 0, fontSize: '8pt', color: '#FFF', letterSpacing: '0.3pt' }}>{currentTime}</h4>
                                         </div>
                                     )}
                                 </div>
@@ -283,7 +325,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                                 <h5 style={{ position: 'absolute', bottom: '10%', textAlign: 'center', color: '#000000', width: '70%', fontWeight: '400', fontSize: '7pt' }}>FIND INFORMATION ABOUT OUR NEXT EVENT BY MOVING THIS WINDOW OR BY HEADING TO OUR SOCIAL NETWORKS.</h5>
                             </div>
                         )}
-                        <img src={resize_black} style={{ zIndex: 3, position: 'absolute', bottom: '0', right: '0', height: '21px', objectFit: 'contain', pointerEvents: 'none' }} />
+                        <img src={isOnline ? resize : resize_black} style={{ zIndex: 3, position: 'absolute', bottom: '0', right: '0', height: '21px', objectFit: 'contain', pointerEvents: 'none' }} />
                         {/*  {true && (
                             <>
                                 <div className="editable-indicator bottom-left corner-indicator"></div>
@@ -293,6 +335,9 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                                 <div className="editable-indicator bottom-side"></div>
                             </>
                         )} */}
+                        <div style={{ position: 'absolute', top: '33px', right: '5px', background: 'red', borderRadius: '5px', padding: '2px 7px', animation: 'fadeInOut 1.5s infinite' }}>
+                            <h4 style={{ color: '#FFFFFF', margin: 0, letterSpacing: 0 }}>LIVE</h4>
+                        </div>
                     </div>
                 </ResizableBox>
             </div>
