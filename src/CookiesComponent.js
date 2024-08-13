@@ -9,7 +9,7 @@ const enableAnalytics = () => {
     ReactGA.send('pageview'); 
 };
 
-const CookiesComponent = () => {
+const CookiesComponent = ({mobile}) => {
     const [isVisible, setIsVisible] = useState(true);
 
     const handleAccept = () => {
@@ -31,11 +31,11 @@ const CookiesComponent = () => {
                 style={{
                     position: 'fixed',
                     top: '20%',
-                    left: '15%',
+                    left: mobile ? '15%' : '25%',
                     transform: 'translate(-50%, -50%)',
                     zIndex: 1000,
                     background: '#FFFFFF',
-                    border: '0.5px solid #000000',
+                    border: '1px solid #000000',
                     display: 'flex',
                     flexDirection: 'column',
                     width: '300px'
@@ -62,17 +62,17 @@ const CookiesComponent = () => {
                     padding: '20px',
                     textAlign: 'center',
                 }}>
-                    <h4>MAY WE COLLECT COOKIES TO HELP MINIMAXXX GROW?</h4>
+                    <h4>ALLOW COOKIES?</h4>
                     <button
                         onClick={handleAccept}
                         style={{
                             borderStyle: 'solid',
-                            borderWidth: '1.2px',
+                            borderWidth: '1px',
                             borderColor: '#000000',
                             background: '#FFFFFF',
                             cursor: 'pointer',
                             height: '30px',
-                            padding: '2px 15px',
+                            padding: '2px 35px',
                             marginRight: '10px'
                         }}
                     >
@@ -82,12 +82,12 @@ const CookiesComponent = () => {
                         onClick={handleDecline}
                         style={{
                             borderStyle: 'solid',
-                            borderWidth: '1.2px',
+                            borderWidth: '1px',
                             borderColor: '#000000',
                             background: 'red',
                             cursor: 'pointer',
                             height: '30px',
-                            padding: '2px 15px',
+                            padding: '2px 35px',
                             marginRight: '4px'
                         }}
                     >

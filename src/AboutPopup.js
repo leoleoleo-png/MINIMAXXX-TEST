@@ -141,22 +141,11 @@ const AboutPopup = ({ paragraph_1, paragraph_2, mobile, onMinimize, zIndex, onCl
                                 paddingLeft: '20px',
                                 paddingRight: '20px',
                                 whiteSpace: 'pre-wrap',
-                            }}>
-                                {paragraph_1} <br /><br /> {paragraph_2}
-                            </h4>
+                            }}>{paragraph_1}<br /><br />{paragraph_2}</h4>
                         </div>
                         <div style={{ position: 'absolute', bottom: '0', right: '0', height: '21px', width: '21px' }}>
                             <img src={resize} style={{ zIndex: 3, height: '21px', objectFit: 'contain', pointerEvents: 'none' }} />
                         </div>
-                        {/*  {true && (
-                            <>
-                                <div className="editable-indicator bottom-left corner-indicator"></div>
-                                <div className="editable-indicator bottom-right corner-indicator"></div>
-                                <div className="editable-indicator left-side"></div>
-                                <div className="editable-indicator right-side"></div>
-                                <div className="editable-indicator bottom-side"></div>
-                            </>
-                        )} */}
                     </div>
                 </ResizableBox>
             </div>

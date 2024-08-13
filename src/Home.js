@@ -51,7 +51,7 @@ function App() {
     const [streamZIndex, setStreamZIndex] = useState(2);
     const [contactZIndex, setContactZIndex] = useState(1);
     const [loadingComplete, setLoadingComplete] = useState(false);
-    const contacts = ["MAIL", "TIKTOK", "INSTAGRAM", "JOBS"];
+
 
 
     useEffect(() => {
@@ -137,34 +137,34 @@ function App() {
     };
 
     return (
-        <div /* className={isInverted ? "invert-effect" : null} */ style={{ overflow: 'hidden', width:'100%', flex: 1, background: '#FFFFFF' }}>
+        <div /* className={isInverted ? "invert-effect" : null} */ style={{ overflow: 'hidden', width: '100%', flex: 1, background: '#FFFFFF' }}>
             <Desktop>
                 <div style={{ overflow: 'hidden', flex: 1, height: 'calc(100vh)', width: '100%' }}>
                     <div style={{ position: 'absolute', top: 0, left: 0, right: 0 }}>
                         <img src={wordmarkUrl} style={{ position: 'absolute', top: 0, left: 0, right: 0, width: '100%', height: 'calc(24vh)' }} />
-                        <img src={runnerUrl} style={{ position: 'absolute', top: 0, right: '0px', width: 'calc(75vh)', objectFit: 'contain' }} />
+                        <img src={runnerUrl} style={{ position: 'absolute', top: 0, right: '0px', width: 'calc(70vh)', objectFit: 'contain' }} />
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', position: 'fixed', top: 'calc(24vh)', left: '4px' }}>
-                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', height: '30px', border: 'solid', padding: '2px 15px', marginRight: '4px', borderWidth: '1.2px' }}>
-                            <h4 style={{ cursor: 'pointer' }}>ABOUT</h4>
+                        <div style={{ cursor: 'pointer', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', height: '30px', border: 'solid', padding: '2px 15px', marginRight: '4px', borderWidth: '1px' }}>
+                            <h4>ABOUT</h4>
                         </div>
-                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', height: '30px', border: 'solid', padding: '2px 15px', marginRight: '4px', borderWidth: '1.2px' }}>
+                        <div style={{ cursor: 'pointer', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', height: '30px', border: 'solid', padding: '2px 15px', marginRight: '4px', borderWidth: '1px' }}>
                             <div style={{ height: '7px', width: '7px', animation: isOnline ? 'fadeInOut 1.5s infinite' : 'none', background: isOnline ? '#FF0000' : '#CACACA', borderRadius: '100px', marginRight: '5px' }} />
-                            <h4 style={{ cursor: 'pointer', margin: 0 }}>LIVE</h4>
+                            <h4 style={{ margin: 0 }}>LIVE</h4>
                         </div>
-                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', height: '30px', border: 'solid', padding: '2px 15px', borderWidth: '1.2px' }}>
-                            <h4 style={{ cursor: 'pointer' }}>CONTACT</h4>
+                        <div style={{ cursor: 'pointer', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', height: '30px', border: 'solid', padding: '2px 15px', borderWidth: '1px' }}>
+                            <h4 >CONTACT</h4>
                         </div>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', position: 'fixed', top: 'calc(24vh)', left: '4px', opacity: 0, zIndex: 100000 }}>
-                        <div onClick={showAbout} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '30px', border: 'solid', padding: '2px 15px', marginRight: '4px' }}>
+                        <div onClick={showAbout} style={{ cursor: 'pointer', display: 'flex', flexDirection: 'row', alignItems: 'center', height: '30px', border: 'solid', padding: '2px 15px', marginRight: '4px' }}>
                             <h4 style={{ cursor: 'pointer' }}>ABOUT</h4>
                         </div>
-                        <div onClick={showStream} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '30px', border: 'solid', padding: '2px 15px', marginRight: '4px' }}>
+                        <div onClick={showStream} style={{ cursor: 'pointer', display: 'flex', flexDirection: 'row', alignItems: 'center', height: '30px', border: 'solid', padding: '2px 15px', marginRight: '4px' }}>
                             <div style={{ height: '7px', width: '7px', background: '#CACACA', borderRadius: '100px', marginRight: '5px' }} />
                             <h4 style={{ cursor: 'pointer', margin: 0 }}>LIVE</h4>
                         </div>
-                        <div onClick={showContact} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '30px', border: 'solid', padding: '2px 15px' }}>
+                        <div onClick={showContact} style={{ cursor: 'pointer', display: 'flex', flexDirection: 'row', alignItems: 'center', height: '30px', border: 'solid', padding: '2px 15px' }}>
                             <h4 style={{ cursor: 'pointer' }}>CONTACT</h4>
                         </div>
                     </div>
@@ -208,7 +208,6 @@ function App() {
                         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
                             <div style={{ pointerEvents: 'auto' }}>
                                 <ContactPopup
-                                    contacts={contacts}
                                     mobile={false}
                                     onMinimize={handleMinimizeContact}
                                     zIndex={contactZIndex}
@@ -236,12 +235,12 @@ function App() {
                 <div style={{ overflow: 'hidden', flex: 1, width: '100%' }}>
                     <img src={wordmarkUrl} style={{ position: 'absolute', top: '2px', left: '2px', right: '2px', width: '99%', height: 'auto', objectFit: 'contain' }} />
                     <img src={runnerUrl} style={{ position: 'absolute', top: 0, right: '2px', width: '45%', objectFit: 'contain' }} />
-                    <div style={{ position: 'absolute', bottom: '40px', left: 0, right: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                    <div style={{ position: 'absolute', bottom: '50px', left: 0, right: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', paddingTop: '5px', minWidth: '23%', marginBottom: '-4px', maxWidth: '90%' }}>
                             {isOnline ? null : <h2 style={{ fontSize: '20pt', marginBottom: '6px', letterSpacing: '-1px' }}>NEXT EVENT ::</h2>}
                             <h2 style={{ fontSize: '20pt', marginBottom: '4px', letterSpacing: '-1px' }}>{eventName}</h2>
                             {eventDetails.map((detail, index) => (
-                                <h2 key={index} style={index > 2 ? { paddingLeft: '35px', fontSize:'12pt', lineHeight:'10pt' } : {fontSize:'12pt', lineHeight:'10pt'}}>— {detail}</h2>
+                                <h2 key={index} style={index > 2 ? { paddingLeft: '35px', fontSize: '12pt', lineHeight: '10pt' } : { fontSize: '12pt', lineHeight: '10pt' }}>— {detail}</h2>
                             ))}
                         </div>
                         <h1 style={{ fontSize: isOnline ? '50pt' : '60pt' }}>{isOnline ? largeText : largeTextOffline}</h1>
@@ -306,7 +305,6 @@ function App() {
                         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
                             <div style={{ pointerEvents: 'auto' }}>
                                 <ContactPopup
-                                    contacts={contacts}
                                     mobile={true}
                                     onMinimize={handleMinimizeContact}
                                     zIndex={contactZIndex}
@@ -316,7 +314,7 @@ function App() {
                         </div>
                     )}
                 </div>
-                <CookiesComponent/>
+                <CookiesComponent mobile />
             </TabletAndBelow>
 
             {!loadingComplete && <Loading onComplete={() => setLoadingComplete(true)} />}

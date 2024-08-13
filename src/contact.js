@@ -3,11 +3,13 @@ import Draggable from 'react-draggable';
 import './App.css';
 import move from './assets/move.png';
 import minimise from './assets/minimise.png';
+import cmsContactDataPromise from './cms/cmsContact'; // Importing the CMS data
 
-const ContactPopup = ({ contacts, mobile, onMinimize, zIndex, onClick }) => {
+const ContactPopup = ({ mobile, onMinimize, zIndex, onClick }) => {
     const dragHandleRef = useRef(null);
     const popupRef = useRef(null);
     const [bounds, setBounds] = useState({ left: 0, top: 0, right: window.innerWidth, bottom: window.innerHeight });
+    const [contacts, setContacts] = useState(null);
 
     const updateBounds = () => {
         if (popupRef.current) {
@@ -29,6 +31,15 @@ const ContactPopup = ({ contacts, mobile, onMinimize, zIndex, onClick }) => {
         return () => window.removeEventListener('resize', updateBounds);
     }, []);
 
+    useEffect(() => {
+        // Fetch the contact data from the CMS
+        cmsContactDataPromise.then(data => {
+            setContacts(data);
+        }).catch(error => {
+            console.error('Failed to load contact data:', error);
+        });
+    }, []);
+
     const getRandomPosition = () => {
         const width = mobile ? window.innerWidth / 1.2 : popupRef.current ? popupRef.current.getBoundingClientRect().width : 300;
         const height = mobile ? 150 : popupRef.current ? popupRef.current.getBoundingClientRect().height : 450;
@@ -44,6 +55,10 @@ const ContactPopup = ({ contacts, mobile, onMinimize, zIndex, onClick }) => {
         }
     };
 
+    if (!contacts) {
+        return null; // Render nothing or a loading indicator while data is being fetched
+    }
+
     return (
         <Draggable
             handle=".drag-handle"
@@ -57,10 +72,10 @@ const ContactPopup = ({ contacts, mobile, onMinimize, zIndex, onClick }) => {
                     position: 'relative',
                     zIndex: zIndex,
                     background: '#FFFFFF',
-                    border: '0.5px solid #000000',
+                    border: '1px solid #000000',
                     display: 'flex',
                     flexDirection: 'column',
-                    width: mobile ? window.innerWidth / 1.2 : window.innerWidth/5,
+                    width: mobile ? window.innerWidth / 1.2 : window.innerWidth / 5,
                 }}
             >
                 <div
@@ -81,13 +96,13 @@ const ContactPopup = ({ contacts, mobile, onMinimize, zIndex, onClick }) => {
                     }}
                 >
                     <div style={{ width: '50px' }} />
-                    <h3 style={{fontSize: mobile ? '10pt': '11pt'}}>CONTACT</h3>
+                    <h3 style={{ fontSize: mobile ? '10pt' : '11pt' }}>CONTACT</h3>
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', paddingRight: '5px' }}>
                         <img
                             onClick={handleMinimizeClick}
                             onTouchStart={handleMinimizeClick}
                             src={minimise}
-                            style={{ width: '21px', height: '21px', cursor: 'pointer',  paddingRight: '5px' }}
+                            style={{ width: '21px', height: '21px', cursor: 'pointer', paddingRight: '5px' }}
                         />
                         <img src={move} style={{ width: '21px', height: '21px', pointerEvents: 'none' }} />
                     </div>
@@ -101,8 +116,20 @@ const ContactPopup = ({ contacts, mobile, onMinimize, zIndex, onClick }) => {
                     paddingLeft: '20px',
                     paddingRight: '20px',
                 }}>
-                    {contacts.map((contact, index) => (
-                        <h3  key={index} style={{ margin: '12px 0', color:'#0029FF', textDecorationLine:'underline', fontSize: mobile ? '10pt': '11pt' }}>{contact}</h3>
+                    {contacts.email && (
+                        <h3 style={{ margin: '12px 0', color: '#0029FF', textDecorationLine: 'underline', fontSize: mobile ? '10pt' : '11pt' }}>
+                            <a href={`mailto:${contacts.email}`} style={{ color: '#0029FF', textDecoration: 'none' }}>EMAIL</a>
+                        </h3>
+                    )}
+                    {contacts.jobsEmail && (
+                        <h3 style={{ margin: '12px 0', color: '#0029FF', textDecorationLine: 'underline', fontSize: mobile ? '10pt' : '11pt' }}>
+                            <a href={`mailto:${contacts.jobsEmail}`} style={{ color: '#0029FF', textDecoration: 'none' }}>JOBS</a>
+                        </h3>
+                    )}
+                    {contacts.otherLinks && contacts.otherLinks.map((link, index) => (
+                        <h3 key={index} style={{ margin: '12px 0', color: '#0029FF', textDecorationLine: 'underline', fontSize: mobile ? '10pt' : '11pt' }}>
+                            <a href={link.url} target='blank' style={{ color: '#0029FF', textDecoration: 'none' }}>{link.name}</a>
+                        </h3>
                     ))}
                 </div>
             </div>
@@ -111,5 +138,3 @@ const ContactPopup = ({ contacts, mobile, onMinimize, zIndex, onClick }) => {
 };
 
 export default ContactPopup;
-
-
