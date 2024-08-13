@@ -11,7 +11,7 @@ import invert from './assets/invert.png';
 import Stream from './stream';
 import cmsDataPromise from './cms/cmsImages.js';
 import cmsInfoDataPromise from './cms/cmsInfos.js';
-import cmsStreamDataPromise from './cms/cmsStream.js'; // Importing the CMS stream data
+import cmsStreamDataPromise from './cms/cmsStream.js'; 
 
 const useDesktopMediaQuery = () =>
     useMediaQuery({ query: "(min-width: 601px)" });
@@ -70,7 +70,7 @@ function App() {
             }
         });
 
-        cmsStreamDataPromise.then(streamData => { // Fetch online/offline state
+        cmsStreamDataPromise.then(streamData => {
             if (streamData) {
                 setIsOnline(streamData.online);
             }
