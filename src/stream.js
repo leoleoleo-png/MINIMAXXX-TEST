@@ -217,7 +217,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                                 left: '0',
                                 right: '0',
                                 display: 'flex',
-                                justifyContent: 'space-between',
+                                justifyContent: 'center',
                                 alignItems: 'center',
                                 backgroundColor: '#000000',
                                 height: '30px',
@@ -225,20 +225,25 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                                 zIndex: 2
                             }}
                         >
-                            <div style={{ width: '50px' }} />
                             <h3 style={{ fontSize: mobile ? '10pt' : '11pt' }}>
                                 {isOnline ? streamTitle : streamTitleOffline}
                             </h3>
-                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', paddingRight: '5px' }}>
+                        </div>
+
+                      
+                    
+                           
+                            <div style={{display: 'flex', flexDirection:'row', justifyContent: 'center', alignItems: 'center', paddingRight: '5px', position:'absolute', top:'3px', right:0 }}>
                                 <img
                                     onClick={handleMinimizeClick}
                                     onTouchStart={handleMinimizeClick}
                                     src={minimise}
-                                    style={{ width: '21px', height: '21px', cursor: 'pointer', paddingRight: '5px' }}
+                                    style={{ width: '21px', height: '21px', cursor: 'pointer', paddingRight: '5px', zIndex:10000 }}
                                 />
-                                <img src={move} style={{ width: '21px', height: '21px', pointerEvents: 'none' }} />
-                            </div>
-                        </div>
+                                <img src={move} style={{ width: '21px', height: '21px', pointerEvents: 'none',  zIndex:10000 }} />
+                            </div> 
+                     
+                        
                         {isOnline ? (
                             isLocked ? (
                                 <div className="blink" style={{
