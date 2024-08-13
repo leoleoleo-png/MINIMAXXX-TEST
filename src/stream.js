@@ -99,7 +99,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
             if (data) {
                 setIsOnline(data.online);
                 setIsLocked(data.online && data.secret); // Stream can only be locked if it is online
-                const constructedStreamLink = `https://player.twitch.tv/?channel=${data.streamLink}&parent=${data.domain}&muted=false&autoplay=true&controls=false`;
+                const constructedStreamLink = `https://player.twitch.tv/?channel=${data.streamLink}&parent=${data.domain}&muted=false&autoplay=${mobile ? 'false' : 'true'}&controls=false`;
                 setStreamLink(constructedStreamLink);
                 setStreamTitle(data.streamTitle);
                 setStreamTitleOffline(data.streamTitleOffline);
@@ -229,10 +229,6 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                                 {isOnline ? streamTitle : streamTitleOffline}
                             </h3>
                         </div>
-
-                      
-                    
-                           
                             <div style={{display: 'flex', flexDirection:'row', justifyContent: 'center', alignItems: 'center', paddingRight: '5px', position:'absolute', top:'3px', right:0 }}>
                                 <img
                                     onClick={handleMinimizeClick}
