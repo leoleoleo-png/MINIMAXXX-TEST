@@ -87,7 +87,8 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
             if (data) {
                 setIsOnline(data.online);
                 setIsLocked(data.online && data.secret); // Stream can only be locked if it is online
-                setStreamLink(data.streamLink);
+                const constructedStreamLink = `https://player.twitch.tv/?channel=${data.streamLink}&parent=${data.domain}&muted=false&autoplay=true&controls=false`;
+                setStreamLink(constructedStreamLink);
                 setStreamTitle(data.streamTitle);
                 setStreamTitleOffline(data.streamTitleOffline);
                 setInfos(data.infos);
@@ -326,18 +327,9 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                             </div>
                         )}
                         <img src={isOnline ? resize : resize_black} style={{ zIndex: 3, position: 'absolute', bottom: '0', right: '0', height: '21px', objectFit: 'contain', pointerEvents: 'none' }} />
-                        {/*  {true && (
-                            <>
-                                <div className="editable-indicator bottom-left corner-indicator"></div>
-                                <div className="editable-indicator bottom-right corner-indicator"></div>
-                                <div className="editable-indicator left-side"></div>
-                                <div className="editable-indicator right-side"></div>
-                                <div className="editable-indicator bottom-side"></div>
-                            </>
-                        )} */}
-                        <div style={{ position: 'absolute', top: '33px', right: '5px', background: 'red', borderRadius: '5px', padding: '2px 7px', animation: 'fadeInOut 1.5s infinite' }}>
+                     { isOnline && <div style={{ position: 'absolute', top: '33px', right: '5px', background: 'red', borderRadius: '5px', padding: '2px 7px', animation: 'fadeInOut 1.5s infinite' }}>
                             <h4 style={{ color: '#FFFFFF', margin: 0, letterSpacing: 0 }}>LIVE</h4>
-                        </div>
+                        </div> }   
                     </div>
                 </ResizableBox>
             </div>

@@ -40,6 +40,7 @@ const fetchStreamData = async () => {
       password: response.data.data.stream.password,
       secret: response.data.data.stream.secret,
       streamLink: response.data.data.stream.streamLink,
+      domain: response.data.data.stream.domain,
       streamTitle: response.data.data.stream.streamTitle,
       streamTitleOffline: response.data.data.stream.streamTitleOffline,
       infos: response.data.data.stream.infos.map(info => info.info),
