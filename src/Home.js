@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import runner from './assets/runner.png';
 import './App.css';
 import './home.css';
 import AboutPopup from './AboutPopup';
@@ -11,7 +10,9 @@ import invert from './assets/invert.png';
 import Stream from './stream';
 import cmsDataPromise from './cms/cmsImages.js';
 import cmsInfoDataPromise from './cms/cmsInfos.js';
-import cmsStreamDataPromise from './cms/cmsStream.js'; 
+import cmsStreamDataPromise from './cms/cmsStream.js';
+import CookiesComponent from './CookiesComponent.js';
+
 
 const useDesktopMediaQuery = () =>
     useMediaQuery({ query: "(min-width: 601px)" });
@@ -29,7 +30,9 @@ const TabletAndBelow = ({ children }) => {
     return isTabletAndBelow ? children : null;
 };
 
+
 function App() {
+
     const [wordmarkUrl, setWordmarkUrl] = useState('');
     const [runnerUrl, setRunnerUrl] = useState('');
     const [iconUrls, setIconUrls] = useState([]);
@@ -49,6 +52,7 @@ function App() {
     const [contactZIndex, setContactZIndex] = useState(1);
     const [loadingComplete, setLoadingComplete] = useState(false);
     const contacts = ["MAIL", "TIKTOK", "INSTAGRAM", "JOBS"];
+
 
     useEffect(() => {
         cmsDataPromise.then(data => {
@@ -141,26 +145,26 @@ function App() {
                         <img src={runnerUrl} style={{ position: 'absolute', top: 0, right: '0px', width: 'calc(75vh)', objectFit: 'contain' }} />
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', position: 'fixed', top: 'calc(24vh)', left: '4px' }}>
-                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '30px', border: 'solid', padding: '2px 12px', marginRight: '4px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', height: '30px', border: 'solid', padding: '2px 15px', marginRight: '4px', borderWidth: '1.2px' }}>
                             <h4 style={{ cursor: 'pointer' }}>ABOUT</h4>
                         </div>
-                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '30px', border: 'solid', padding: '2px 12px', marginRight: '4px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', height: '30px', border: 'solid', padding: '2px 15px', marginRight: '4px', borderWidth: '1.2px' }}>
                             <div style={{ height: '7px', width: '7px', animation: isOnline ? 'fadeInOut 1.5s infinite' : 'none', background: isOnline ? '#FF0000' : '#CACACA', borderRadius: '100px', marginRight: '5px' }} />
                             <h4 style={{ cursor: 'pointer', margin: 0 }}>LIVE</h4>
                         </div>
-                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '30px', border: 'solid', padding: '2px 12px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', height: '30px', border: 'solid', padding: '2px 15px', borderWidth: '1.2px' }}>
                             <h4 style={{ cursor: 'pointer' }}>CONTACT</h4>
                         </div>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', position: 'fixed', top: 'calc(24vh)', left: '4px', opacity: 0, zIndex: 100000 }}>
-                        <div onClick={showAbout} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '30px', border: 'solid', padding: '2px 12px', marginRight: '4px' }}>
+                        <div onClick={showAbout} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '30px', border: 'solid', padding: '2px 15px', marginRight: '4px' }}>
                             <h4 style={{ cursor: 'pointer' }}>ABOUT</h4>
                         </div>
-                        <div onClick={showStream} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '30px', border: 'solid', padding: '2px 12px', marginRight: '4px' }}>
+                        <div onClick={showStream} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '30px', border: 'solid', padding: '2px 15px', marginRight: '4px' }}>
                             <div style={{ height: '7px', width: '7px', background: '#CACACA', borderRadius: '100px', marginRight: '5px' }} />
                             <h4 style={{ cursor: 'pointer', margin: 0 }}>LIVE</h4>
                         </div>
-                        <div onClick={showContact} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '30px', border: 'solid', padding: '2px 12px' }}>
+                        <div onClick={showContact} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '30px', border: 'solid', padding: '2px 15px' }}>
                             <h4 style={{ cursor: 'pointer' }}>CONTACT</h4>
                         </div>
                     </div>
@@ -226,17 +230,18 @@ function App() {
                         </div>
                     </div>
                 )}
+                <CookiesComponent />
             </Desktop>
             <TabletAndBelow>
                 <div style={{ overflow: 'hidden', flex: 1, width: '100%' }}>
                     <img src={wordmarkUrl} style={{ position: 'absolute', top: '2px', left: '2px', right: '2px', width: '99%', height: 'auto', objectFit: 'contain' }} />
-                    <img src={runner} style={{ position: 'absolute', top: 0, right: '2px', width: '60%', objectFit: 'contain' }} />
+                    <img src={runnerUrl} style={{ position: 'absolute', top: 0, right: '2px', width: '45%', objectFit: 'contain' }} />
                     <div style={{ position: 'absolute', bottom: '60px', left: 0, right: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', paddingTop: '5px', minWidth: '23%', marginBottom: '-4px', maxWidth: '90%' }}>
-                            {isOnline ? null : <h2 style={{ fontSize: '22pt', marginBottom: '6px', letterSpacing: '-1px' }}>NEXT EVENT ::</h2>}
-                            <h2 style={{ fontSize: '22pt', marginBottom: '4px', letterSpacing: '-1px' }}>{eventName}</h2>
+                            {isOnline ? null : <h2 style={{ fontSize: '20pt', marginBottom: '6px', letterSpacing: '-1px' }}>NEXT EVENT ::</h2>}
+                            <h2 style={{ fontSize: '20pt', marginBottom: '4px', letterSpacing: '-1px' }}>{eventName}</h2>
                             {eventDetails.map((detail, index) => (
-                                <h2 key={index} style={index > 2 ? { paddingLeft: '35px' } : null}>— {detail}</h2>
+                                <h2 key={index} style={index > 2 ? { paddingLeft: '35px', fontSize:'12pt', lineHeight:'10pt' } : {fontSize:'12pt', lineHeight:'10pt'}}>— {detail}</h2>
                             ))}
                         </div>
                         <h1 style={{ fontSize: isOnline ? '50pt' : '60pt' }}>{isOnline ? largeText : largeTextOffline}</h1>
@@ -258,14 +263,14 @@ function App() {
                     </div>
 
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', position: 'absolute', bottom: '8px', left: '8px', right: '8px' }}>
-                        <div onClick={showAbout} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '35px', border: 'solid', borderWidth:'1px', flexGrow: 1, justifyContent: 'center' }}>
+                        <div onClick={showAbout} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '35px', border: 'solid', borderWidth: '1px', flexGrow: 1, justifyContent: 'center' }}>
                             <h4 style={{ cursor: 'pointer', margin: 0 }}>ABOUT</h4>
                         </div>
-                        <div onClick={showStream} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '35px', border: 'solid',  borderWidth:'1px', flexGrow: 1, justifyContent: 'center' }}>
-                            <div style={{ height: '7px', width: '7px',  animation: isOnline ? 'fadeInOut 1.5s infinite' : 'none', background: isOnline ? '#FF0000' : '#CACACA', borderRadius: '100px', marginRight: '5px' }} />
+                        <div onClick={showStream} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '35px', border: 'solid', borderWidth: '1px', flexGrow: 1, justifyContent: 'center' }}>
+                            <div style={{ height: '7px', width: '7px', animation: isOnline ? 'fadeInOut 1.5s infinite' : 'none', background: isOnline ? '#FF0000' : '#CACACA', borderRadius: '100px', marginRight: '5px' }} />
                             <h4 style={{ cursor: 'pointer', margin: 0 }}>LIVE</h4>
                         </div>
-                        <div onClick={showContact} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '35px', border: 'solid', borderWidth:'1px', flexGrow: 1, justifyContent: 'center' }}>
+                        <div onClick={showContact} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '35px', border: 'solid', borderWidth: '1px', flexGrow: 1, justifyContent: 'center' }}>
                             <h4 style={{ cursor: 'pointer', margin: 0 }}>CONTACT</h4>
                         </div>
                     </div>
@@ -311,6 +316,7 @@ function App() {
                         </div>
                     )}
                 </div>
+                <CookiesComponent/>
             </TabletAndBelow>
 
             {!loadingComplete && <Loading onComplete={() => setLoadingComplete(true)} />}

@@ -191,9 +191,9 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                                     onClick={handleMinimizeClick}
                                     onTouchStart={handleMinimizeClick}
                                     src={minimise}
-                                    style={{ width: '18px', height: '18px', cursor: 'pointer', paddingRight: '5px' }}
+                                    style={{ width: '21px', height: '21px', cursor: 'pointer', paddingRight: '5px' }}
                                 />
-                                <img src={move} style={{ width: '18px', height: '18px', pointerEvents: 'none' }} />
+                                <img src={move} style={{ width: '21px', height: '21px', pointerEvents: 'none' }} />
                             </div>
                         </div>
                         {isOnline ? (
@@ -282,7 +282,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                                 <h5 style={{ position: 'absolute', bottom: '10%', textAlign: 'center', color: '#000000', width: '70%', fontWeight: '400', fontSize: '7pt' }}>FIND INFORMATION ABOUT OUR NEXT EVENT BY MOVING THIS WINDOW OR BY HEADING TO OUR SOCIAL NETWORKS.</h5>
                             </div>
                         )}
-                        <img src={resize_black} style={{ zIndex: 3, position: 'absolute', bottom: '0', right: '0', height: '18px', objectFit: 'contain', pointerEvents: 'none' }} />
+                        <img src={resize_black} style={{ zIndex: 3, position: 'absolute', bottom: '0', right: '0', height: '21px', objectFit: 'contain', pointerEvents: 'none' }} />
                     </div>
                 </ResizableBox>
             </div>
