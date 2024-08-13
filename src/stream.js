@@ -28,6 +28,18 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
     const resizableBoxRef = useRef(null);
     const [bounds, setBounds] = useState({ left: 0, top: 0, right: window.innerWidth, bottom: window.innerHeight });
 
+    const handleStart = () => {
+        if (resizableBoxRef.current) {
+            resizableBoxRef.current.style.pointerEvents = 'none';
+        }
+    };
+    
+    const handleStop = () => {
+        if (resizableBoxRef.current) {
+            resizableBoxRef.current.style.pointerEvents = 'auto';
+        }
+    };
+
     const formatDate = (date) => {
         const days = ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"];
         const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
@@ -157,11 +169,13 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
 
     return (
         <Draggable
-            handle=".drag-handle"
-            disabled={isResizing}
-            bounds={bounds}
-            defaultPosition={initialPosition}
-            onMouseDown={onClick}
+        handle=".drag-handle"
+        disabled={isResizing}
+        bounds={bounds}
+        defaultPosition={initialPosition}
+        onStart={handleStart}
+        onStop={handleStop}
+        onMouseDown={onClick}
         >
             <div
                 ref={resizableBoxRef}
