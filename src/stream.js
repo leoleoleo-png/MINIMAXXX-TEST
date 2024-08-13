@@ -16,7 +16,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
     const [password, setPassword] = useState(new Array(6).fill(''));
     const [maskedPassword, setMaskedPassword] = useState(new Array(6).fill(''));
     const [wrongPassword, setWrongPassword] = useState(false);
-    const [cmsPassword, setCmsPassword] = useState(''); 
+    const [cmsPassword, setCmsPassword] = useState('');
     const [streamLink, setStreamLink] = useState('');
     const [streamTitle, setStreamTitle] = useState('MINIMAXXX PARIS AFTERPARTY');
     const [streamTitleOffline, setStreamTitleOffline] = useState('OFFLINE');
@@ -95,7 +95,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
 
             if (newPass.every((digit) => digit !== '')) {
                 const pass = newPass.join('');
-                if (pass === cmsPassword) { 
+                if (pass === cmsPassword) {
                     setIsLocked(false);
                     setWrongPassword(false);
                 } else {
@@ -146,8 +146,8 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
             >
                 <ResizableBox
                     width={mobile ? window.innerWidth / 1.2 : 700}
-                    height={mobile ? 220 : 450}
-                    minConstraints={mobile ? ['1%', 100] : [400, 225]}
+                    height={mobile ? window.innerWidth * 9 / 16 : 394}
+                    minConstraints={[mobile ? window.innerWidth / 1.5 : 400, mobile ? (window.innerWidth / 1.5) * 9 / 16 : 225]}
                     maxConstraints={[1200, 675]}
                     resizeHandles={['se']}
                     handle={<div style={{ position: 'absolute', bottom: 0, right: 0, height: mobile ? '100px' : '100%', width: mobile ? '100px' : '100px', cursor: 'se-resize' }} />}
@@ -164,7 +164,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                         display: 'flex',
                         justifyContent: 'flex-end',
                         flexDirection: 'column',
-                    /*     overflow: 'hidden' */
+                        /*     overflow: 'hidden' */
                     }}>
                         <div
                             ref={dragHandleRef}
@@ -284,7 +284,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                             </div>
                         )}
                         <img src={resize_black} style={{ zIndex: 3, position: 'absolute', bottom: '0', right: '0', height: '21px', objectFit: 'contain', pointerEvents: 'none' }} />
-                       {/*  {true && (
+                        {/*  {true && (
                             <>
                                 <div className="editable-indicator bottom-left corner-indicator"></div>
                                 <div className="editable-indicator bottom-right corner-indicator"></div>
