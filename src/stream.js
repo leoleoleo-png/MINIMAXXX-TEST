@@ -27,13 +27,14 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
     const dragHandleRef = useRef(null);
     const resizableBoxRef = useRef(null);
     const [bounds, setBounds] = useState({ left: 0, top: 0, right: window.innerWidth, bottom: window.innerHeight });
+    const [isPlaying, setIsPlaying] = useState(false);
 
     const handleStart = () => {
         if (resizableBoxRef.current) {
             resizableBoxRef.current.style.pointerEvents = 'none';
         }
     };
-    
+
     const handleStop = () => {
         if (resizableBoxRef.current) {
             resizableBoxRef.current.style.pointerEvents = 'auto';
@@ -169,27 +170,27 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
 
     return (
         <Draggable
-        handle=".drag-handle"
-        disabled={isResizing}
-        bounds={bounds}
-        defaultPosition={initialPosition}
-        onStart={handleStart}
-        onStop={handleStop}
-        onMouseDown={onClick}
+            handle=".drag-handle"
+            disabled={isResizing}
+            bounds={bounds}
+            defaultPosition={initialPosition}
+            onStart={handleStart}
+            onStop={handleStop}
+            onMouseDown={onClick}
         >
             <div
                 ref={resizableBoxRef}
                 style={{
-                    width: mobile ? window.innerWidth / 1.2 : 700,
-                    height: mobile ? 220 : 450,
+                    width: mobile ? window.innerWidth * 16 * 0.05 : 700,
+                    height: mobile ? window.innerWidth * 9 * 0.05 : 450,
                     position: 'relative',
                     zIndex: zIndex,
                 }}
             >
                 <ResizableBox
-                    width={mobile ? window.innerWidth / 1.2 : 700}
-                    height={mobile ? window.innerWidth * 9 / 16 : 394}
-                    minConstraints={[mobile ? window.innerWidth / 1.5 : 400, mobile ? (window.innerWidth / 1.5) * 9 / 16 : 225]}
+                    width={mobile ? window.innerWidth * 16 * 0.05 : 700}
+                    height={mobile ? window.innerWidth * 9 * 0.05 : 394}
+                    minConstraints={[mobile ? window.innerWidth * 16 * 0.05 : 400, mobile ? window.innerWidth * 9 * 0.05 : 225]}
                     maxConstraints={[1200, 675]}
                     resizeHandles={['se']}
                     handle={<div style={{ position: 'absolute', bottom: 0, right: 0, height: mobile ? '100px' : '100%', width: mobile ? '100px' : '100px', cursor: 'se-resize' }} />}
@@ -202,11 +203,10 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                         width: '100%',
                         height: '100%',
                         position: 'relative',
-                        background: '#CACACA',
+                        background: '#000000',
                         display: 'flex',
                         justifyContent: 'flex-end',
-                        flexDirection: 'column',
-                        /*     overflow: 'hidden' */
+                        flexDirection: 'column'
                     }}>
                         <div
                             ref={dragHandleRef}
@@ -222,24 +222,24 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                                 backgroundColor: '#000000',
                                 height: '30px',
                                 cursor: 'move',
-                                zIndex: 2
+                                zIndex: 100002
                             }}
                         >
                             <h3 style={{ fontSize: mobile ? '10pt' : '11pt' }}>
                                 {isOnline ? streamTitle : streamTitleOffline}
                             </h3>
                         </div>
-                            <div style={{display: 'flex', flexDirection:'row', justifyContent: 'center', alignItems: 'center', paddingRight: '5px', position:'absolute', top:'3px', right:0 }}>
-                                <img
-                                    onClick={handleMinimizeClick}
-                                    onTouchStart={handleMinimizeClick}
-                                    src={minimise}
-                                    style={{ width: '21px', height: '21px', cursor: 'pointer', paddingRight: '5px', zIndex:10000 }}
-                                />
-                                <img src={move} style={{ width: '21px', height: '21px', pointerEvents: 'none',  zIndex:10000 }} />
-                            </div> 
-                     
-                        
+                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingRight: '5px', position: 'absolute', top: '3px', right: 0 }}>
+                            <img
+                                onClick={handleMinimizeClick}
+                                onTouchStart={handleMinimizeClick}
+                                src={minimise}
+                                style={{ width: '21px', height: '21px', cursor: 'pointer', paddingRight: '5px', zIndex: 100003 }}
+                            />
+                            <img src={move} style={{ width: '21px', height: '21px', pointerEvents: 'none', zIndex: 100003 }} />
+                        </div>
+
+
                         {isOnline ? (
                             isLocked ? (
                                 <div className="blink" style={{
@@ -282,7 +282,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                                     {wrongPassword && <h5 style={{ textAlign: 'center', color: '#000000', width: '20%', fontWeight: '400', fontSize: '7pt' }}>YOU ENTERED THE WRONG PASSWORD</h5>}
                                 </div>
                             ) : (
-                                <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                                <div onClick={() => setIsPlaying(true)} style={{ width: '100%', height: '100%', zIndex: 100001 }}  >
                                     <iframe
                                         src={streamLink}
                                         title="Live Stream"
@@ -290,14 +290,19 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                                             width: '100%',
                                             height: '100%',
                                             border: 'none',
-                                            objectFit: 'cover',
+                                            position: 'absolute',
+                                            top: '30px',
+                                            left: 0,
+                                            right: 0,
+                                            bottom: 0,
+                                            objectFit: 'cover'
                                         }}
                                         allow="autoplay; fullscreen"
                                     />
-                                    {infoOverlay && (
+                                    {infoOverlay && !mobile && (
                                         <div style={{
                                             position: 'absolute',
-                                            bottom: '0',
+                                            bottom: '-30px',
                                             left: '0',
                                             backgroundColor: 'rgba(0, 0, 0, 0.5)',
                                             color: 'white',
@@ -311,8 +316,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                                             ))}
                                         </div>
                                     )}
-
-                                    {infoOverlay && (
+                                    {infoOverlay && !mobile && (
                                         <div style={{
                                             position: 'absolute',
                                             top: '28px',
@@ -342,10 +346,11 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                             </div>
                         )}
                         <img src={isOnline ? resize : resize_black} style={{ zIndex: 3, position: 'absolute', bottom: '0', right: '0', height: '21px', objectFit: 'contain', pointerEvents: 'none' }} />
-                     { isOnline && <div style={{ position: 'absolute', top: '33px', right: '5px', background: 'red', borderRadius: '5px', padding: '2px 7px', animation: 'fadeInOut 1.5s infinite' }}>
-                            <h4 style={{ color: '#FFFFFF', margin: 0, letterSpacing: 0 }}>LIVE</h4>
-                        </div> }   
+
                     </div>
+                    {isOnline && isPlaying && <div style={{ pointerEvents: 'none', position: 'absolute', top: '33px', right: '5px', background: 'red', borderRadius: '5px', padding: '2px 7px', animation: 'fadeInOut 1.5s infinite', zIndex: 100001 }}>
+                        <h4 style={{ color: '#FFFFFF', margin: 0, letterSpacing: 0, pointerEvents: 'none' }}>LIVE</h4>
+                    </div>}
                 </ResizableBox>
             </div>
         </Draggable>
