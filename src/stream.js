@@ -7,6 +7,7 @@ import move from './assets/move.png';
 import resize_black from './assets/resize_black.png';
 import minimise from './assets/minimise.png';
 import cmsStreamDataPromise from './cms/cmsStream.js';
+import './squares.css';
 
 const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
     const [isResizing, setIsResizing] = useState(false);
@@ -163,7 +164,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                         display: 'flex',
                         justifyContent: 'flex-end',
                         flexDirection: 'column',
-                        overflow: 'hidden'
+                    /*     overflow: 'hidden' */
                     }}>
                         <div
                             ref={dragHandleRef}
@@ -283,6 +284,15 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                             </div>
                         )}
                         <img src={resize_black} style={{ zIndex: 3, position: 'absolute', bottom: '0', right: '0', height: '21px', objectFit: 'contain', pointerEvents: 'none' }} />
+                       {/*  {true && (
+                            <>
+                                <div className="editable-indicator bottom-left corner-indicator"></div>
+                                <div className="editable-indicator bottom-right corner-indicator"></div>
+                                <div className="editable-indicator left-side"></div>
+                                <div className="editable-indicator right-side"></div>
+                                <div className="editable-indicator bottom-side"></div>
+                            </>
+                        )} */}
                     </div>
                 </ResizableBox>
             </div>

@@ -3,8 +3,9 @@ import Draggable from 'react-draggable';
 import { ResizableBox } from 'react-resizable';
 import 'react-resizable/css/styles.css';
 import './App.css';
+import './squares.css';
 import move from './assets/move.png';
-import resize from './assets/resize.png';
+import resize from './assets/resize_black.png';
 import minimise from './assets/minimise.png';
 
 const AboutPopup = ({ paragraph_1, paragraph_2, mobile, onMinimize, zIndex, onClick }) => {
@@ -144,10 +145,18 @@ const AboutPopup = ({ paragraph_1, paragraph_2, mobile, onMinimize, zIndex, onCl
                                 {paragraph_1} <br /><br /> {paragraph_2}
                             </h4>
                         </div>
-                        <div style={{ position: 'absolute', bottom: '0', right: '0', background:'#000000', height: '21px', width:'21px' }}>
-                        <img src={resize} style={{ zIndex: 3,height: '21px', objectFit: 'contain', pointerEvents: 'none' }} />
+                        <div style={{ position: 'absolute', bottom: '0', right: '0', height: '21px', width: '21px' }}>
+                            <img src={resize} style={{ zIndex: 3, height: '21px', objectFit: 'contain', pointerEvents: 'none' }} />
                         </div>
-                      
+                        {/*  {true && (
+                            <>
+                                <div className="editable-indicator bottom-left corner-indicator"></div>
+                                <div className="editable-indicator bottom-right corner-indicator"></div>
+                                <div className="editable-indicator left-side"></div>
+                                <div className="editable-indicator right-side"></div>
+                                <div className="editable-indicator bottom-side"></div>
+                            </>
+                        )} */}
                     </div>
                 </ResizableBox>
             </div>

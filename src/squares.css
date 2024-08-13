@@ -1,0 +1,57 @@
+.editable-indicator {
+    position: absolute;
+    background-color: blue;
+    width: 6px;
+    height: 6px;
+    pointer-events: none;
+}
+
+.corner-indicator {
+    background-color: blue;
+    width: 6px;
+    height: 6px;
+}
+
+.top-left {
+    top: -3px;
+    left: -3px;
+}
+
+.top-right {
+    top: -3px;
+    right: -3px;
+}
+
+.bottom-left {
+    bottom: -3px;
+    left: -3px;
+}
+
+.bottom-right {
+    bottom: -3px;
+    right: -3px;
+}
+
+.left-side {
+    top: 50%;
+    left: -3px;
+    transform: translateY(-50%);
+}
+
+.right-side {
+    top: 50%;
+    right: -3px;
+    transform: translateY(-50%);
+}
+
+.top-side {
+    top: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.bottom-side {
+    bottom: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+}
