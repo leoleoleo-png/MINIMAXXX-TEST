@@ -99,14 +99,14 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
         cmsStreamDataPromise.then(data => {
             if (data) {
                 setIsOnline(data.online);
-                setIsLocked(data.online && data.secret); // Stream can only be locked if it is online
+                setIsLocked(data.online && data.secret);
                 const constructedStreamLink = `https://player.twitch.tv/?channel=${data.streamLink}&parent=${data.domain}&muted=false&autoplay=${mobile ? 'false' : 'true'}&controls=false`;
                 setStreamLink(constructedStreamLink);
                 setStreamTitle(data.streamTitle);
                 setStreamTitleOffline(data.streamTitleOffline);
                 setInfos(data.infos);
                 setInfoOverlay(data.infoOverlay);
-                setCmsPassword(data.password); // Set the CMS password here
+                setCmsPassword(data.password);
             }
         });
     }, []);
@@ -190,10 +190,16 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                 <ResizableBox
                     width={mobile ? window.innerWidth * 16 * 0.05 : 700}
                     height={mobile ? window.innerWidth * 9 * 0.05 : 394}
-                    minConstraints={[mobile ? window.innerWidth * 16 * 0.05 : 400, mobile ? window.innerWidth * 9 * 0.05 : 225]}
-                    maxConstraints={[1200, 675]}
+                    minConstraints={[
+                        mobile ? window.innerWidth * 16 * 0.05 : 400,
+                        mobile ? window.innerWidth * 9 * 0.05 : 225
+                    ]}
+                    maxConstraints={[
+                        1200,
+                        1200 * 9 / 16
+                    ]}
                     resizeHandles={['se']}
-                    handle={<div style={{ position: 'absolute', bottom: 0, right: 0, height: mobile ? '100px' : '100%', width: mobile ? '100px' : '100px', cursor: 'se-resize' }} />}
+                    handle={<div style={{ position: 'absolute', bottom: '-30px', right: 0, height: mobile ? '100px' : '100%', width: mobile ? '100px' : '100px', cursor: 'se-resize', zIndex: 200000 }} />}
                     className="resizable-box"
                     onResizeStart={onResizeStart}
                     onResizeStop={onResizeStop}
@@ -345,10 +351,13 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick }) => {
                                 <h5 style={{ position: 'absolute', bottom: '10%', textAlign: 'center', color: '#000000', width: '70%', fontWeight: '400', fontSize: '7pt' }}>FIND INFORMATION ABOUT OUR NEXT EVENT BY MOVING THIS WINDOW OR BY HEADING TO OUR SOCIAL NETWORKS.</h5>
                             </div>
                         )}
-                        <img src={isOnline ? resize : resize_black} style={{ zIndex: 3, position: 'absolute', bottom: '0', right: '0', height: '21px', objectFit: 'contain', pointerEvents: 'none' }} />
+                        <div style={{ background: 'rgba(0,0,0,0.6)', position: 'absolute', bottom: '-30px', right: '0', height: '21px', width: '21px', pointerEvents: 'none', zIndex: 100001 }}>
+                            <img src={isOnline ? resize : resize_black} style={{ height: '21px', objectFit: 'contain' }} />
+                        </div>
+
 
                     </div>
-                    {isOnline && isPlaying && <div style={{ pointerEvents: 'none', position: 'absolute', top: '33px', right: '5px', background: 'red', borderRadius: '5px', padding: '2px 7px', animation: 'fadeInOut 1.5s infinite', zIndex: 100001 }}>
+                    {isOnline && /* isPlaying && */ <div style={{ pointerEvents: 'none', position: 'absolute', top: '33px', right: '5px', background: 'red', borderRadius: '5px', padding: '2px 7px', animation: 'fadeInOut 1.5s infinite', zIndex: 200003 }}>
                         <h4 style={{ color: '#FFFFFF', margin: 0, letterSpacing: 0, pointerEvents: 'none' }}>LIVE</h4>
                     </div>}
                 </ResizableBox>
