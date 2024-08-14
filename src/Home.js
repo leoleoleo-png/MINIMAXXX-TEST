@@ -45,7 +45,7 @@ function App() {
     const [largeText, setLargeText] = useState('');
     const [largeTextOffline, setLargeTextOffline] = useState('');
     const [isOnline, setIsOnline] = useState(false);
-    const [isInverted, setInverted] = useState(true);
+    const [isInverted, setInverted] = useState(false);
     const [isAboutVisible, setIsAboutVisible] = useState(false);
     const [isStreamVisible, setIsStreamVisible] = useState(false);
     const [isContactVisible, setIsContactVisible] = useState(false);
@@ -164,7 +164,7 @@ function App() {
                             <h4 >CONTACT</h4>
                         </div>
                         <div style={{ cursor: 'pointer', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', height: '30px', border: 'solid', padding: '2px 15px', borderWidth: '1px' }}>
-                            <h4>{isInverted ? 'LIGHT MODE' :'DARK MODE'}</h4>
+                            <h4>{isInverted ? 'LIGHT MODE' : 'DARK MODE'}</h4>
                         </div>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', position: 'fixed', top: 'calc(24vh)', left: '4px', opacity: 0, zIndex: 100000 }}>
@@ -182,7 +182,6 @@ function App() {
                             <h4>LIGHT MODE</h4>
                         </div>
                     </div>
-
                     <div style={{ position: 'absolute', bottom: '4px', left: 0, right: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', paddingTop: '5px', minWidth: '23%', marginBottom: '-4px', maxWidth: '32%' }}>
                             {isOnline ? null : <h2 style={{ fontSize: '22pt', marginBottom: '6px', letterSpacing: '-1px' }}>NEXT EVENT ::</h2>}
@@ -232,7 +231,6 @@ function App() {
                         </div>
                     )}
                 </div>
-
                 {isStreamVisible && (
                     <div className={isInverted ? "invert-effect" : null} style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
                         <div style={{ pointerEvents: 'auto' }}>
@@ -246,7 +244,6 @@ function App() {
                     </div>
                 )}
                 <CookiesComponent />
-                {/* <img src={invert} style={{ position: 'absolute', bottom: '20%', left: '62%', width: '21px', height: '21px'}} /> */}
             </Desktop>
             <TabletAndBelow>
                 <div style={{ overflow: 'hidden', flex: 1, width: '100%' }}>
