@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Draggable from 'react-draggable';
 import CookieConsent, { Cookies } from 'react-cookie-consent';
 import ReactGA from 'react-ga4';
@@ -9,8 +9,16 @@ const enableAnalytics = () => {
     ReactGA.send('pageview'); 
 };
 
-const CookiesComponent = ({mobile}) => {
-    const [isVisible, setIsVisible] = useState(true);
+const CookiesComponent = ({ mobile }) => {
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsVisible(true);
+        }, 4000); 
+
+        return () => clearTimeout(timer); // Cleanup the timer if the component unmounts
+    }, []);
 
     const handleAccept = () => {
         enableAnalytics(); 
@@ -25,7 +33,7 @@ const CookiesComponent = ({mobile}) => {
 
     if (!isVisible) return null;
 
-    return (
+    return(
         <Draggable handle=".drag-handle">
             <div
                 style={{

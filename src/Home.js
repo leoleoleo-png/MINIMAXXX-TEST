@@ -194,7 +194,7 @@ function App() {
                             /></h2>
                             {eventDetails.map((detail, index) => (
                                 <h2 key={index} style={index > 3 ? { paddingLeft: '85px' } : { paddingLeft: '25px' }}>
-                                    <span style={{ fontWeight: 400 }}>—</span>
+                                    <span style={{ fontWeight: 400 }}>— </span>
                                     <TypewriterText
                                         text={isSecret && isStreamLocked ? '*'.repeat(detail.length) : detail}
                                         speed={20}
@@ -217,7 +217,7 @@ function App() {
                     </div>
                     {isAboutVisible && (
                         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
-                            <div style={{ pointerEvents: 'auto' }}>
+                            <div className={isInverted ? "invert-effect" : null} style={{ pointerEvents: 'auto' }}>
                                 <AboutPopup
                                     paragraph_1={paragraph1}
                                     paragraph_2={paragraph2}
@@ -230,7 +230,7 @@ function App() {
                     )}
                     {isContactVisible && (
                         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
-                            <div style={{ pointerEvents: 'auto' }}>
+                            <div className={isInverted ? "invert-effect" : null} style={{ pointerEvents: 'auto' }}>
                                 <ContactPopup
                                     mobile={false}
                                     onMinimize={handleMinimizeContact}
@@ -269,7 +269,7 @@ function App() {
                             /></h2>
                             {eventDetails.map((detail, index) => (
                                 <h2 key={index} style={index > 3 ? { paddingLeft: '35px', fontSize: '12pt', lineHeight: '10pt' } : { fontSize: '12pt', lineHeight: '10pt' }}>
-                                    <span style={{ fontWeight: 400 }}>—</span>
+                                    <span style={{ fontWeight: 400 }}>— </span>
                                     
                                     <TypewriterText
                                         text={isSecret && isStreamLocked ? '*'.repeat(detail.length) : detail}
@@ -319,7 +319,7 @@ function App() {
 
                     {isAboutVisible && (
                         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
-                            <div style={{ pointerEvents: 'auto' }}>
+                            <div className={isInverted ? "invert-effect" : null} style={{ pointerEvents: 'auto' }}>
                                 <AboutPopup
                                     mobile
                                     paragraph_1={paragraph1}
@@ -346,7 +346,7 @@ function App() {
                     )}
                     {isContactVisible && (
                         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
-                            <div style={{ pointerEvents: 'auto' }}>
+                            <div className={isInverted ? "invert-effect" : null} style={{ pointerEvents: 'auto' }}>
                                 <ContactPopup
                                     mobile={true}
                                     onMinimize={handleMinimizeContact}

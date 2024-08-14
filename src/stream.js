@@ -240,7 +240,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick, onUnlock }) => {
                                 {isLocked ? 'MINIMAXXX SECRET EVENT' : isOnline ? streamTitle : streamTitleOffline}
                             </h3>
                         </div>
-                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: '0px 5px', position: 'absolute', top: 0, height:'30px', right: 0, left: 0 }}>
+                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: '0px 5px', position: 'absolute', top: 0, height: '30px', right: 0, left: 0 }}>
                             <img src={move} style={{ width: '21px', height: '21px', pointerEvents: 'none', zIndex: 100003 }} />
                             <div
                                 style={{
@@ -255,7 +255,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick, onUnlock }) => {
                                     src={minimise}
                                     style={{ width: '23px', height: '23px', pointerEvents: 'none' }}
                                 />
-                               
+
                             </div>
                         </div>
 
@@ -367,7 +367,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick, onUnlock }) => {
                                 <h5 style={{ position: 'absolute', bottom: '10%', textAlign: 'center', color: '#000000', width: '70%', fontWeight: '400', fontSize: '7pt' }}>FIND INFORMATION ABOUT OUR NEXT EVENT BY MOVING THIS WINDOW OR BY HEADING TO OUR SOCIAL NETWORKS.</h5>
                             </div>
                         )}
-                        <div style={{ background: 'rgba(0,0,0,0.6)', position: 'absolute', bottom: '0', right: '0', height: '21px', width: '21px', pointerEvents: 'none', zIndex: 100001 }}>
+                        <div style={{ background: isOnline || isLocked ? 'rgba(0,0,0,0.6)' : null, position: 'absolute', bottom: '0', right: '0', height: '21px', width: '21px', pointerEvents: 'none', zIndex: 100001 }}>
                             <img src={isOnline ? resize : resize_black} style={{ height: '21px', objectFit: 'contain' }} />
                         </div>
 

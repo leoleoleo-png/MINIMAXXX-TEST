@@ -130,18 +130,18 @@ const ContactPopup = ({ mobile, onMinimize, zIndex, onClick }) => {
                     paddingRight: '20px',
                 }}>
                     {contacts.email && (
-                        <h3 style={{ margin: '12px 0', color: '#0029FF', textDecorationLine: 'underline', fontSize: mobile ? '10pt' : '11pt' }}>
-                            <a href={`mailto:${contacts.email}`} style={{ color: '#0029FF', textDecoration: 'none' }}>EMAIL</a>
+                        <h3 style={{ margin: '12px 0', color: 'red', textDecorationLine: 'underline', fontSize: mobile ? '10pt' : '11pt' }}>
+                            <a href={`mailto:${contacts.email}`} style={{ color: 'red', textDecoration: 'none' }}>EMAIL</a>
                         </h3>
                     )}
                     {contacts.jobsEmail && (
-                        <h3 style={{ margin: '12px 0', color: '#0029FF', textDecorationLine: 'underline', fontSize: mobile ? '10pt' : '11pt' }}>
-                            <a href={`mailto:${contacts.jobsEmail}`} style={{ color: '#0029FF', textDecoration: 'none' }}>JOBS</a>
+                        <h3 style={{ margin: '12px 0', color: 'red', textDecorationLine: 'underline', fontSize: mobile ? '10pt' : '11pt' }}>
+                            <a href={`mailto:${contacts.jobsEmail}`} style={{ color: 'red', textDecoration: 'none' }}>JOBS</a>
                         </h3>
                     )}
                     {contacts.otherLinks && contacts.otherLinks.map((link, index) => (
-                        <h3 key={index} style={{ margin: '12px 0', color: '#0029FF', textDecorationLine: 'underline', fontSize: mobile ? '10pt' : '11pt' }}>
-                            <a href={link.url} target='blank' style={{ color: '#0029FF', textDecoration: 'none' }}>{link.name}</a>
+                        <h3 key={index} style={{ margin: '12px 0', color: 'red', textDecorationLine: 'underline', fontSize: mobile ? '10pt' : '11pt' }}>
+                            <a href={link.url} target='blank' style={{ color: 'red', textDecoration: 'none' }}>{link.name}</a>
                         </h3>
                     ))}
                 </div>
