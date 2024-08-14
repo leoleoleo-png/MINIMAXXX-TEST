@@ -185,7 +185,7 @@ function App() {
                     <div style={{ position: 'absolute', bottom: '4px', left: 0, right: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', paddingTop: '5px', minWidth: '23%', marginBottom: '-4px', maxWidth: '32%' }}>
                             {isOnline ? null : <h2 style={{ fontSize: '22pt', marginBottom: '6px', letterSpacing: '-1px' }}>NEXT EVENT ::</h2>}
-                            <h2 style={{ fontSize: '22pt', marginBottom: '4px' }}>{eventName}</h2>
+                            <h2 style={{ fontSize: '22pt', marginBottom: '4px' }}>{isSecret && isStreamLocked ? 'MINIMAXXX SECRET EVENT' : eventName}</h2>
                             {eventDetails.map((detail, index) => (
                                 <h2 key={index} style={index > 3 ? { paddingLeft: '85px' } : { paddingLeft: '25px' }}>
                                     <span style={{ fontWeight: 400 }}>—</span>
@@ -252,7 +252,7 @@ function App() {
                     <div style={{ position: 'absolute', bottom: '50px', left: 0, right: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', paddingTop: '5px', minWidth: '23%', marginBottom: '-4px', maxWidth: '90%' }}>
                             {isOnline ? null : <h2 style={{ fontSize: '20pt', marginBottom: '6px', letterSpacing: '-1px' }}>NEXT EVENT ::</h2>}
-                            <h2 style={{ fontSize: '20pt', marginBottom: '4px', letterSpacing: '-1px' }}>{eventName}</h2>
+                            <h2 style={{ fontSize: '20pt', marginBottom: '4px', letterSpacing: '-1px' }}>{isSecret && isStreamLocked ? 'MINIMAXXX SECRET EVENT' : eventName}</h2>
                             {eventDetails.map((detail, index) => (
                                 <h2 key={index} style={index > 3 ? { paddingLeft: '35px', fontSize: '12pt', lineHeight: '10pt' } : { fontSize: '12pt', lineHeight: '10pt' }}>
                                     <span style={{ fontWeight: 400 }}>—</span>
