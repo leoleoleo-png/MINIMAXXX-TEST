@@ -138,7 +138,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick, onUnlock }) => {
                 if (pass === cmsPassword) {
                     setIsLocked(false);
                     setWrongPassword(false);
-                    onUnlock(false);  // Notify parent component that stream is unlocked
+                    onUnlock(false);  
                 } else {
                     setWrongPassword(true);
                 }
@@ -191,11 +191,11 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick, onUnlock }) => {
                     width={mobile ? window.innerWidth * 16 * 0.05 : 700}
                     height={mobile ? window.innerWidth * 9 * 0.05 : 394}
                     minConstraints={[
-                        mobile ? window.innerWidth * 16 * 0.03 : 400,
+                        mobile ? window.innerWidth * 16 * 0.05 : 400,
                         mobile ? window.innerWidth * 9 * 0.03 : 225
                     ]}
                     maxConstraints={[
-                        1200,
+                       mobile ? window.innerWidth * 16 * 0.05 :  1200,
                         1200 * 9 / 16
                     ]}
                     resizeHandles={['se']}
