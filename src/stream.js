@@ -99,7 +99,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick, onUnlock }) => {
             if (data) {
                 setIsOnline(data.online);
                 setIsLocked(data.online && data.secret);
-                const constructedStreamLink = `https://player.twitch.tv/?channel=${data.streamLink}&parent=localhost&muted=false&autoplay=${mobile ? 'false' : 'true'}&controls=false`;
+                const constructedStreamLink = `https://player.twitch.tv/?channel=${data.streamLink}&parent=${data.domain}&muted=false&autoplay=${mobile ? 'false' : 'true'}&controls=false`;
                 setStreamLink(constructedStreamLink);
                 setStreamTitle(data.streamTitle);
                 setStreamTitleOffline(data.streamTitleOffline);
@@ -257,7 +257,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick, onUnlock }) => {
                                     alignItems: 'center',
                                     backgroundColor: 'red'
                                 }}>
-                                    <h2 style={{ textAlign: 'center', color: '#000000', width: mobile ? '90%' : '30%', marginBottom: mobile ? '0' : '10px' }}>ENTER PASSWORD TO UNLOCK THE STREAM</h2>
+                                    <h2 style={{ textAlign: 'center', color: '#000000', width: mobile ? '90%' : '30%', marginBottom: mobile ? '0' : '10px', paddingTop:'10px' }}>ENTER PASSWORD TO UNLOCK THE STREAM</h2>
                                     <div style={{ display: 'flex', gap: '10px', marginBottom: mobile ? '10px' : '20px' }}>
                                         {maskedPassword.map((digit, index) => (
                                             <input
