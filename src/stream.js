@@ -168,6 +168,10 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick, onUnlock }) => {
         }
     };
 
+    const handleInputClick = () => {
+        document.getElementById('password-input-0').focus();
+    };
+
     return (
         <Draggable
             handle=".drag-handle"
@@ -282,6 +286,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick, onUnlock }) => {
                                                     outline: 'none',
                                                     borderRadius: 0
                                                 }}
+                                                onClick={handleInputClick}
                                             />
                                         ))}
                                     </div>
