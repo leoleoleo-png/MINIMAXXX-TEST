@@ -274,7 +274,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick, onUnlock }) => {
                                                 maxLength="1"
                                                 autoComplete="off"
                                                 style={{
-                                                    width: '20px',
+                                                    width:  mobile ? '15px' :'20px',
                                                     fontFamily: 'nimbus-sans',
                                                     fontWeight: 700,
                                                     height: mobile ? '30px' : '40px',
