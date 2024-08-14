@@ -33,6 +33,8 @@ const TabletAndBelow = ({ children }) => {
 
 function App() {
 
+    const [isStreamLocked, setIsStreamLocked] = useState(true);
+    const [isSecret, setIsSecret] = useState(false);
     const [wordmarkUrl, setWordmarkUrl] = useState('');
     const [runnerUrl, setRunnerUrl] = useState('');
     const [iconUrls, setIconUrls] = useState([]);
@@ -77,9 +79,15 @@ function App() {
         cmsStreamDataPromise.then(streamData => {
             if (streamData) {
                 setIsOnline(streamData.online);
+                setIsSecret(streamData.secret);
+                setIsStreamLocked(streamData.online && streamData.secret);
             }
         });
     }, []);
+
+    const handleStreamUnlock = (isLocked) => {
+        setIsStreamLocked(isLocked);
+    };
 
     const handleMinimizeAbout = () => {
         setIsAboutVisible(false);
@@ -176,7 +184,10 @@ function App() {
 
                             <h2 style={{ fontSize: '22pt', marginBottom: '4px' }}>{eventName}</h2>
                             {eventDetails.map((detail, index) => (
-                                <h2 key={index} style={index > 3 ? { paddingLeft: '85px' } : { paddingLeft: '25px' }}><span style={{ fontWeight: 400 }}>—</span> {detail}</h2>
+                                <h2 key={index} style={index > 3 ? { paddingLeft: '85px' } : { paddingLeft: '25px' }}>
+                                    <span style={{ fontWeight: 400 }}>—</span>
+                                    {isSecret && isStreamLocked ? '*'.repeat(detail.length) : detail}
+                                </h2>
                             ))}
                         </div>
                         <h1 style={{ fontSize: isOnline ? '60pt' : '70pt' }}>{isOnline ? largeText : largeTextOffline}</h1>
@@ -222,6 +233,7 @@ function App() {
                     <div className={isInverted ? "invert-effect" : null} style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
                         <div style={{ pointerEvents: 'auto' }}>
                             <Stream
+                                onUnlock={handleStreamUnlock}
                                 onMinimize={handleMinimizeStream}
                                 zIndex={streamZIndex}
                                 onClick={bringStreamToFront}
@@ -240,8 +252,12 @@ function App() {
                             {isOnline ? null : <h2 style={{ fontSize: '20pt', marginBottom: '6px', letterSpacing: '-1px' }}>NEXT EVENT ::</h2>}
                             <h2 style={{ fontSize: '20pt', marginBottom: '4px', letterSpacing: '-1px' }}>{eventName}</h2>
                             {eventDetails.map((detail, index) => (
-                                <h2 key={index} style={index > 2 ? { paddingLeft: '35px', fontSize: '12pt', lineHeight: '10pt' } : { fontSize: '12pt', lineHeight: '10pt' }}>— {detail}</h2>
+                                <h2 key={index} style={index > 3 ? { paddingLeft: '35px', fontSize: '12pt', lineHeight: '10pt' } : { fontSize: '12pt', lineHeight: '10pt' }}>
+                                    <span style={{ fontWeight: 400 }}>—</span>
+                                    {isSecret && isStreamLocked ? '*'.repeat(detail.length) : detail}
+                                </h2>
                             ))}
+
                         </div>
                         <h1 style={{ fontSize: isOnline ? '50pt' : '60pt' }}>{isOnline ? largeText : largeTextOffline}</h1>
                         <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', marginTop: '-1%' }}>
@@ -297,6 +313,7 @@ function App() {
                                     onMinimize={handleMinimizeStream}
                                     zIndex={streamZIndex}
                                     onClick={bringStreamToFront}
+                                    onUnlock={handleStreamUnlock}
                                 />
                             </div>
                         </div>
