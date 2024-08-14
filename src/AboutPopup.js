@@ -128,7 +128,7 @@ const AboutPopup = ({ paragraph_1, paragraph_2, mobile, onMinimize, zIndex, onCl
                             >
                                 <img
                                     src={minimise}
-                                    style={{ width: '23px', height: '23px', pointerEvents: 'none' }}
+                                    style={{ width: '23px', height: '23px', pointerEvents: 'none', marginBottom:'-4px' }}
                                 />
                                 <div style={{
                                     content: '""',

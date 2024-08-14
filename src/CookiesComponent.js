@@ -51,12 +51,13 @@ const CookiesComponent = ({mobile}) => {
                         height: '30px',
                         cursor: 'move',
                         zIndex: 2,
-                        padding: '0 10px',
+                        padding: '0 5px',
                     }}
                 >
-                    <div style={{ width: '21px' }} />
+                    
+                    <img src={move} alt="Move" style={{ width: '21px', height: '21px', pointerEvents: 'none'}} />
                     <h3 style={{ fontSize: '11pt', color: '#FFFFFF', margin: 0, textAlign: 'center' }}>COOKIES</h3>
-                    <img src={move} alt="Move" style={{ width: '21px', height: '21px', pointerEvents: 'none', marginRight: '-4px' }} />
+                    <div style={{ width: '21px' }} />
                 </div>
                 <div style={{
                     padding: '20px',

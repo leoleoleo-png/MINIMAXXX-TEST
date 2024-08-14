@@ -108,7 +108,7 @@ const ContactPopup = ({ mobile, onMinimize, zIndex, onClick }) => {
                     >
                         <img
                             src={minimise}
-                            style={{ width: '23px', height: '23px', pointerEvents: 'none' }}
+                            style={{ width: '23px', height: '23px', pointerEvents: 'none', marginBottom: '-4px' }}
                         />
                         <div style={{
                             content: '""',

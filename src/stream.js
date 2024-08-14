@@ -240,12 +240,13 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick, onUnlock }) => {
                                 {isLocked ? 'MINIMAXXX SECRET EVENT' : isOnline ? streamTitle : streamTitleOffline}
                             </h3>
                         </div>
-                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: '0px 5px', position: 'absolute', top: '3px', right: 0, left: 0 }}>
+                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: '0px 5px', position: 'absolute', top: 0, height:'30px', right: 0, left: 0 }}>
                             <img src={move} style={{ width: '21px', height: '21px', pointerEvents: 'none', zIndex: 100003 }} />
                             <div
                                 style={{
                                     cursor: 'pointer',
-                                    zIndex: 100003
+                                    zIndex: 100003,
+                                    width: '23px', height: '23px'
                                 }}
                                 onClick={handleMinimizeClick}
                                 onTouchStart={handleMinimizeClick}
@@ -254,14 +255,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick, onUnlock }) => {
                                     src={minimise}
                                     style={{ width: '23px', height: '23px', pointerEvents: 'none' }}
                                 />
-                                <div style={{
-                                    content: '""',
-                                    position: 'absolute',
-                                    top: '-10px',
-                                    bottom: '-10px',
-                                    left: '-10px',
-                                    right: '-10px',
-                                }}></div>
+                               
                             </div>
                         </div>
 
