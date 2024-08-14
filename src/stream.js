@@ -138,7 +138,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick, onUnlock }) => {
                 if (pass === cmsPassword) {
                     setIsLocked(false);
                     setWrongPassword(false);
-                    onUnlock(false);  
+                    onUnlock(false);
                 } else {
                     setWrongPassword(true);
                 }
@@ -199,7 +199,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick, onUnlock }) => {
                         mobile ? window.innerWidth * 9 * 0.03 : 225
                     ]}
                     maxConstraints={[
-                       mobile ? window.innerWidth * 16 * 0.05 :  1200,
+                        mobile ? window.innerWidth * 16 * 0.05 : 1200,
                         1200 * 9 / 16
                     ]}
                     resizeHandles={['se']}
@@ -232,22 +232,39 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick, onUnlock }) => {
                                 backgroundColor: '#000000',
                                 height: '30px',
                                 cursor: 'move',
-                                zIndex: 100002
+                                zIndex: 100002,
+
                             }}
                         >
                             <h3 style={{ fontSize: mobile ? '10pt' : '11pt' }}>
-                                { isLocked ? 'MINIMAXXX SECRET EVENT' : isOnline ? streamTitle : streamTitleOffline}
+                                {isLocked ? 'MINIMAXXX SECRET EVENT' : isOnline ? streamTitle : streamTitleOffline}
                             </h3>
                         </div>
-                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingRight: '5px', position: 'absolute', top: '3px', right: 0 }}>
-                            <img
+                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: '0px 5px', position: 'absolute', top: '3px', right: 0, left: 0 }}>
+                            <img src={move} style={{ width: '21px', height: '21px', pointerEvents: 'none', zIndex: 100003 }} />
+                            <div
+                                style={{
+                                    cursor: 'pointer',
+                                    zIndex: 100003
+                                }}
                                 onClick={handleMinimizeClick}
                                 onTouchStart={handleMinimizeClick}
-                                src={minimise}
-                                style={{ width: '21px', height: '21px', cursor: 'pointer', paddingRight: '5px', zIndex: 100003 }}
-                            />
-                            <img src={move} style={{ width: '21px', height: '21px', pointerEvents: 'none', zIndex: 100003 }} />
+                            >
+                                <img
+                                    src={minimise}
+                                    style={{ width: '23px', height: '23px', pointerEvents: 'none' }}
+                                />
+                                <div style={{
+                                    content: '""',
+                                    position: 'absolute',
+                                    top: '-10px',
+                                    bottom: '-10px',
+                                    left: '-10px',
+                                    right: '-10px',
+                                }}></div>
+                            </div>
                         </div>
+
 
 
                         {isOnline ? (
@@ -261,7 +278,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick, onUnlock }) => {
                                     alignItems: 'center',
                                     backgroundColor: 'red'
                                 }}>
-                                    <h2 style={{ textAlign: 'center', color: '#000000', width: mobile ? '90%' : '30%', marginBottom: mobile ? '0' : '10px', paddingTop:'10px' }}>ENTER PASSWORD TO UNLOCK THE STREAM</h2>
+                                    <h2 style={{ textAlign: 'center', color: '#000000', width: mobile ? '90%' : '30%', marginBottom: mobile ? '0' : '10px', paddingTop: '10px' }}>ENTER PASSWORD TO UNLOCK THE STREAM</h2>
                                     <div style={{ display: 'flex', gap: '10px', marginBottom: mobile ? '10px' : '20px' }}>
                                         {maskedPassword.map((digit, index) => (
                                             <input
@@ -274,7 +291,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick, onUnlock }) => {
                                                 maxLength="1"
                                                 autoComplete="off"
                                                 style={{
-                                                    width:  mobile ? '15px' :'20px',
+                                                    width: mobile ? '15px' : '20px',
                                                     fontFamily: 'nimbus-sans',
                                                     fontWeight: 700,
                                                     height: mobile ? '30px' : '40px',

@@ -117,3 +117,12 @@ h3 {
 iframe {
   will-change: transform;
 }
+
+.smooth-opacity {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.smooth-opacity:hover {
+  opacity: 0.7;
+}

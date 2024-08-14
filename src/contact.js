@@ -91,20 +91,33 @@ const ContactPopup = ({ mobile, onMinimize, zIndex, onClick }) => {
                         alignItems: 'center',
                         backgroundColor: '#000000',
                         height: '30px',
+                        padding: '0px 5px',
                         cursor: 'move',
                         zIndex: 2
                     }}
                 >
-                    <div style={{ width: '50px' }} />
+                    <img src={move} style={{ width: '21px', height: '21px', pointerEvents: 'none' }} />
                     <h3 style={{ fontSize: mobile ? '10pt' : '11pt' }}>CONTACT</h3>
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', paddingRight: '5px' }}>
+                    <div
+                        style={{
+                            position: 'relative',
+                            cursor: 'pointer',
+                        }}
+                        onClick={handleMinimizeClick}
+                        onTouchStart={handleMinimizeClick}
+                    >
                         <img
-                            onClick={handleMinimizeClick}
-                            onTouchStart={handleMinimizeClick}
                             src={minimise}
-                            style={{ width: '21px', height: '21px', cursor: 'pointer', paddingRight: '5px' }}
+                            style={{ width: '23px', height: '23px', pointerEvents: 'none' }}
                         />
-                        <img src={move} style={{ width: '21px', height: '21px', pointerEvents: 'none' }} />
+                        <div style={{
+                            content: '""',
+                            position: 'absolute',
+                            top: '-10px',
+                            bottom: '-10px',
+                            left: '-10px',
+                            right: '-10px',
+                        }}></div>
                     </div>
                 </div>
                 <div style={{

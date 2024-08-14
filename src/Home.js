@@ -153,7 +153,7 @@ function App() {
                         <img src={runnerUrl} style={{ position: 'absolute', top: 0, right: '0px', width: 'calc(70vh)', objectFit: 'contain' }} />
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', position: 'fixed', top: 'calc(24vh)', left: '4px' }}>
-                        <div style={{ cursor: 'pointer', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', height: '30px', border: 'solid', padding: '2px 15px', marginRight: '4px', borderWidth: '1px' }}>
+                        <div className="smooth-opacity" style={{ cursor: 'pointer', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', height: '30px', border: 'solid', padding: '2px 15px', marginRight: '4px', borderWidth: '1px' }}>
                             <h4>ABOUT</h4>
                         </div>
                         <div style={{ cursor: 'pointer', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', height: '30px', border: 'solid', padding: '2px 15px', marginRight: '4px', borderWidth: '1px' }}>
