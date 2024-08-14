@@ -236,7 +236,7 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick, onUnlock }) => {
                             }}
                         >
                             <h3 style={{ fontSize: mobile ? '10pt' : '11pt' }}>
-                                {isOnline ? streamTitle : streamTitleOffline}
+                                { isLocked ? 'MINIMAXXX SECRET EVENT' : isOnline ? streamTitle : streamTitleOffline}
                             </h3>
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingRight: '5px', position: 'absolute', top: '3px', right: 0 }}>
