@@ -45,7 +45,7 @@ function App() {
     const [largeText, setLargeText] = useState('');
     const [largeTextOffline, setLargeTextOffline] = useState('');
     const [isOnline, setIsOnline] = useState(false);
-    const [isInverted, setInverted] = useState(false);
+    const [isInverted, setInverted] = useState(true);
     const [isAboutVisible, setIsAboutVisible] = useState(false);
     const [isStreamVisible, setIsStreamVisible] = useState(false);
     const [isContactVisible, setIsContactVisible] = useState(false);
@@ -145,7 +145,7 @@ function App() {
     };
 
     return (
-        <div /* className={isInverted ? "invert-effect" : null} */ style={{ overflow: 'hidden', width: '100%', flex: 1, background: '#FFFFFF' }}>
+        <div className={isInverted ? "invert-effect" : null} style={{ overflow: 'hidden', width: '100%', flex: 1, background: '#FFFFFF' }}>
             <Desktop>
                 <div style={{ overflow: 'hidden', flex: 1, height: 'calc(100vh)', width: '100%' }}>
                     <div style={{ position: 'absolute', top: 0, left: 0, right: 0 }}>
@@ -157,11 +157,14 @@ function App() {
                             <h4>ABOUT</h4>
                         </div>
                         <div style={{ cursor: 'pointer', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', height: '30px', border: 'solid', padding: '2px 15px', marginRight: '4px', borderWidth: '1px' }}>
-                            <div style={{ height: '7px', width: '7px', animation: isOnline ? 'fadeInOut 1.5s infinite' : 'none', background: isOnline ? '#FF0000' : '#CACACA', borderRadius: '100px', marginRight: '5px' }} />
+                            <div className={isInverted ? "invert-effect" : null} style={{ height: '7px', width: '7px', animation: isOnline ? 'fadeInOut 1.5s infinite' : 'none', background: isOnline ? '#FF0000' : '#CACACA', borderRadius: '100px', marginRight: '5px' }} />
                             <h4 style={{ margin: 0 }}>LIVE</h4>
                         </div>
-                        <div style={{ cursor: 'pointer', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', height: '30px', border: 'solid', padding: '2px 15px', borderWidth: '1px' }}>
+                        <div style={{ cursor: 'pointer', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', height: '30px', border: 'solid', padding: '2px 15px', borderWidth: '1px', marginRight: '4px', }}>
                             <h4 >CONTACT</h4>
+                        </div>
+                        <div style={{ cursor: 'pointer', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', height: '30px', border: 'solid', padding: '2px 15px', borderWidth: '1px' }}>
+                            <h4>{isInverted ? 'LIGHT MODE' :'DARK MODE'}</h4>
                         </div>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', position: 'fixed', top: 'calc(24vh)', left: '4px', opacity: 0, zIndex: 100000 }}>
@@ -175,13 +178,14 @@ function App() {
                         <div onClick={showContact} style={{ cursor: 'pointer', display: 'flex', flexDirection: 'row', alignItems: 'center', height: '30px', border: 'solid', padding: '2px 15px' }}>
                             <h4 style={{ cursor: 'pointer' }}>CONTACT</h4>
                         </div>
+                        <div onClick={handleInvert} style={{ cursor: 'pointer', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', height: '30px', border: 'solid', padding: '2px 15px', borderWidth: '1px' }}>
+                            <h4>LIGHT MODE</h4>
+                        </div>
                     </div>
 
                     <div style={{ position: 'absolute', bottom: '4px', left: 0, right: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', paddingTop: '5px', minWidth: '23%', marginBottom: '-4px', maxWidth: '32%' }}>
-
                             {isOnline ? null : <h2 style={{ fontSize: '22pt', marginBottom: '6px', letterSpacing: '-1px' }}>NEXT EVENT ::</h2>}
-
                             <h2 style={{ fontSize: '22pt', marginBottom: '4px' }}>{eventName}</h2>
                             {eventDetails.map((detail, index) => (
                                 <h2 key={index} style={index > 3 ? { paddingLeft: '85px' } : { paddingLeft: '25px' }}>
@@ -242,6 +246,7 @@ function App() {
                     </div>
                 )}
                 <CookiesComponent />
+                {/* <img src={invert} style={{ position: 'absolute', bottom: '20%', left: '62%', width: '21px', height: '21px'}} /> */}
             </Desktop>
             <TabletAndBelow>
                 <div style={{ overflow: 'hidden', flex: 1, width: '100%' }}>
@@ -282,7 +287,7 @@ function App() {
                             <h4 style={{ cursor: 'pointer', margin: 0 }}>ABOUT</h4>
                         </div>
                         <div onClick={showStream} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '35px', border: 'solid', borderWidth: '1px', flexGrow: 1, justifyContent: 'center' }}>
-                            <div style={{ height: '7px', width: '7px', animation: isOnline ? 'fadeInOut 1.5s infinite' : 'none', background: isOnline ? '#FF0000' : '#CACACA', borderRadius: '100px', marginRight: '5px' }} />
+                            <div className={isInverted ? "invert-effect" : null} style={{ height: '7px', width: '7px', animation: isOnline ? 'fadeInOut 1.5s infinite' : 'none', background: isOnline ? '#FF0000' : '#CACACA', borderRadius: '100px', marginRight: '5px' }} />
                             <h4 style={{ cursor: 'pointer', margin: 0 }}>LIVE</h4>
                         </div>
                         <div onClick={showContact} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '35px', border: 'solid', borderWidth: '1px', flexGrow: 1, justifyContent: 'center' }}>
