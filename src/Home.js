@@ -308,14 +308,14 @@ function App() {
                     <img src={runnerUrl} style={{ position: 'absolute', top: 0, right: '2px', width: '45%', objectFit: 'contain' }} />
                     <div style={{ position: 'absolute', bottom: '50px', left: 0, right: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', paddingTop: '5px', minWidth: '23%', marginBottom: '-4px', maxWidth: '90%' }}>
-                            {isOnline ? null : <h2 style={{ fontSize: '18pt', marginBottom: '5px', letterSpacing: '-1px' }}>NEXT EVENT ::</h2>}
-                            <h2 style={{ fontSize: '18pt', marginBottom: '3px', letterSpacing: '-1px' }}><TypewriterText
+                            {isOnline ? null : <h2 style={{ fontSize: '16pt', marginBottom: '4px', letterSpacing: '-0.5px' }}>NEXT EVENT ::</h2>}
+                            <h2 style={{ fontSize: '16pt', marginBottom: '1.5px', letterSpacing: '-0.5px' }}><TypewriterText
                                 text={isSecret && isStreamLocked ? 'MINIMAXXX SECRET EVENT' : eventName}
                                 speed={50}
                                 startDelay={2500}
                             /></h2>
                             {eventDetails.map((detail, index) => (
-                                <h2 key={index} style={index > 3 ? { paddingLeft: '35px', lineHeight: '10pt' } : { lineHeight: '10pt' }}>
+                                <h2 key={index} style={index > 3 ? { paddingLeft: '35px', lineHeight: '9pt', fontSize:'11pt' } : { lineHeight: '9pt', fontSize:'11pt' }}>
                                     <span style={{ fontWeight: 400 }}>— </span>
                                     <TypewriterText
                                         text={isSecret && isStreamLocked ? '*'.repeat(detail.length) : detail}
@@ -344,16 +344,16 @@ function App() {
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px', position: 'absolute', bottom: '8px', left: '8px', right: '8px' }}>
                         <div onClick={showAbout} style={{ display: 'flex', flexDirection: 'row', height: '30px', border: 'solid', borderWidth: '1px', flexGrow: 1, padding: '3px 0px 0px 4px' }}>
-                            <h4 style={{ margin: 0, letterSpacing: 0 }}>ABOUT</h4>
+                            <h4 style={{ margin: 0, letterSpacing: 0, fontSize:'9.5pt' }}>ABOUT</h4>
                         </div>
                         <div onClick={showStream} style={{ display: 'flex', flexDirection: 'row', height: '30px', border: 'solid', borderWidth: '1px', flexGrow: 1, padding: '3px 0px 0px 4px' }}>
                             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '15px' }}>
-                                <div className={isInverted ? "invert-effect" : null} style={{ height: '7px', width: '7px', animation: isOnline ? 'fadeInOut 1.5s infinite' : 'none', background: isOnline ? '#FF0000' : '#CACACA', borderRadius: '100px', marginRight: '4px' }} />
-                                <h4 style={{ margin: 0, letterSpacing: 0 }}>LIVE</h4>
+                                <div className={isInverted ? "invert-effect" : null} style={{ height: '6px', width: '6px', animation: isOnline ? 'fadeInOut 1.5s infinite' : 'none', background: isOnline ? '#FF0000' : '#CACACA', borderRadius: '100px', marginRight: '3px' }} />
+                                <h4 style={{ margin: 0, letterSpacing: 0, fontSize:'9.5pt' }}>LIVE</h4>
                             </div>
                         </div>
                         <div onClick={showContact} style={{ display: 'flex', flexDirection: 'row', height: '30px', border: 'solid', borderWidth: '1px', flexGrow: 1, padding: '3px 0px 0px 4px' }}>
-                            <h4 style={{ margin: 0, letterSpacing: 0 }}>CONTACT</h4>
+                            <h4 style={{ margin: 0, letterSpacing: 0, fontSize:'9.5pt' }}>CONTACT</h4>
                         </div>
                     </div>
                     {isAboutVisible && (
