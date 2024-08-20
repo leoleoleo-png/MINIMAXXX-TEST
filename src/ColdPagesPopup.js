@@ -7,12 +7,28 @@ import './squares.css';
 import move from './assets/move.png';
 import resize from './assets/resize_black.png';
 import minimise from './assets/minimise.png';
+import cmsColdPageDataPromise from './cms/cmsColdPages';
 
-const AboutPopup = ({ paragraph_1, paragraph_2, mobile, onMinimize, zIndex, onClick }) => {
+const ColdPagesPopup = ({ contentType, mobile, onMinimize, zIndex, onClick }) => {
     const [isResizing, setIsResizing] = useState(false);
+    const [content, setContent] = useState('');
     const dragHandleRef = useRef(null);
     const resizableBoxRef = useRef(null);
     const [bounds, setBounds] = useState({ left: 0, top: 0, right: window.innerWidth, bottom: window.innerHeight });
+
+    useEffect(() => {
+        cmsColdPageDataPromise.then(data => {
+            if (data) {
+                if (contentType === 'privacyPolicy') {
+                    setContent(data.coldPage.privacyPolicy);
+                } else if (contentType === 'termsOfUse') {
+                    setContent(data.coldPage.termsOfUse);
+                }
+            }
+        }).catch(error => {
+            console.error('Failed to load cold page data:', error);
+        });
+    }, [contentType]);
 
     const onResizeStart = () => {
         setIsResizing(true);
@@ -57,6 +73,8 @@ const AboutPopup = ({ paragraph_1, paragraph_2, mobile, onMinimize, zIndex, onCl
             onMinimize();
         }
     };
+
+    const title = contentType === 'privacyPolicy' ? 'PRIVACY POLICY' : 'TERMS OF USE';
 
     return (
         <Draggable
@@ -116,8 +134,7 @@ const AboutPopup = ({ paragraph_1, paragraph_2, mobile, onMinimize, zIndex, onCl
                             }}
                         >
                             <img src={move} style={{ width: '21px', height: '21px', pointerEvents: 'none' }} />
-
-                            <h3 style={{ fontSize: '10pt' }}>ABOUT</h3>
+                            <h3 style={{ fontSize: '10pt' }}>{title}</h3>
                             <div
                                 style={{
                                     position: 'relative',
@@ -155,7 +172,8 @@ const AboutPopup = ({ paragraph_1, paragraph_2, mobile, onMinimize, zIndex, onCl
                                 paddingLeft: '20px',
                                 paddingRight: '20px',
                                 whiteSpace: 'pre-wrap',
-                            }}>{paragraph_1}<br /><br />{paragraph_2}</h4>
+                                textTransform: 'uppercase'  // This will capitalize the paragraph content
+                            }}>{content}</h4>
                         </div>
                         <div style={{ position: 'absolute', bottom: '0', right: '0', height: '21px', width: '21px' }}>
                             <img src={resize} style={{ zIndex: 3, height: '21px', objectFit: 'contain', pointerEvents: 'none' }} />
@@ -167,4 +185,4 @@ const AboutPopup = ({ paragraph_1, paragraph_2, mobile, onMinimize, zIndex, onCl
     );
 };
 
-export default AboutPopup;
+export default ColdPagesPopup;

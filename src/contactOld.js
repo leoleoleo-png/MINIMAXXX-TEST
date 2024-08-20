@@ -3,31 +3,14 @@ import Draggable from 'react-draggable';
 import './App.css';
 import move from './assets/move.png';
 import minimise from './assets/minimise.png';
-import cmsContactDataPromise from './cms/cmsContact';
+import cmsContactDataPromise from './cms/cmsContact'; // Importing the CMS data
 
-const ContactPopup = ({ mobile, onMinimize, zIndex, onClick, onShowPrivacyPolicy, onShowTermsOfUse }) => {
+const ContactPopup = ({ mobile, onMinimize, zIndex, onClick }) => {
     const dragHandleRef = useRef(null);
     const popupRef = useRef(null);
     const [bounds, setBounds] = useState({ left: 0, top: 0, right: window.innerWidth, bottom: window.innerHeight });
     const [contacts, setContacts] = useState(null);
 
-    const buttonStyle = {
-        margin: '3px 0',
-        width: '95%',
-        height: '22px',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        textDecorationLine: 'underline',
-        fontSize: mobile ? '10pt' : '11pt',
-        border: 'solid',
-        borderWidth: '1px',
-        borderColor: '#000000',
-        textDecoration: 'none',
-        fontSize: '9.5pt',
-        cursor: 'pointer',
-        letterSpacing: -0.2
-    }
     const updateBounds = () => {
         if (popupRef.current) {
             const popup = popupRef.current;
@@ -49,6 +32,7 @@ const ContactPopup = ({ mobile, onMinimize, zIndex, onClick, onShowPrivacyPolicy
     }, []);
 
     useEffect(() => {
+        // Fetch the contact data from the CMS
         cmsContactDataPromise.then(data => {
             setContacts(data);
         }).catch(error => {
@@ -72,7 +56,7 @@ const ContactPopup = ({ mobile, onMinimize, zIndex, onClick, onShowPrivacyPolicy
     };
 
     if (!contacts) {
-        return null;
+        return null; // Render nothing or a loading indicator while data is being fetched
     }
 
     return (
@@ -113,7 +97,7 @@ const ContactPopup = ({ mobile, onMinimize, zIndex, onClick, onShowPrivacyPolicy
                     }}
                 >
                     <img src={move} style={{ width: '21px', height: '21px', pointerEvents: 'none' }} />
-                    <h3 style={{ fontSize: '10pt' }}>CONTACT</h3>
+                    <h3 style={{ fontSize: mobile ? '10pt' : '11pt' }}>CONTACT</h3>
                     <div
                         style={{
                             position: 'relative',
@@ -140,32 +124,26 @@ const ContactPopup = ({ mobile, onMinimize, zIndex, onClick, onShowPrivacyPolicy
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    paddingTop: '48px',
+                    paddingTop: '40px',
                     paddingBottom: '20px',
                     paddingLeft: '20px',
                     paddingRight: '20px',
                 }}>
                     {contacts.email && (
-                        <h2 style={buttonStyle}>
-                            <a href={`mailto:${contacts.email}`} style={{ color: '#000000', textDecoration: 'none' }}>EMAIL</a>
-                        </h2>
+                        <h3 style={{ margin: '12px 0', color: 'red', textDecorationLine: 'underline', fontSize: mobile ? '10pt' : '11pt' }}>
+                            <a href={`mailto:${contacts.email}`} style={{ color: 'red', textDecoration: 'none' }}>EMAIL</a>
+                        </h3>
                     )}
                     {contacts.jobsEmail && (
-                        <h2 style={buttonStyle}>
-                            <a href={`mailto:${contacts.jobsEmail}`} style={{ color: '#000000', textDecoration: 'none' }}>JOBS</a>
-                        </h2>
+                        <h3 style={{ margin: '12px 0', color: 'red', textDecorationLine: 'underline', fontSize: mobile ? '10pt' : '11pt' }}>
+                            <a href={`mailto:${contacts.jobsEmail}`} style={{ color: 'red', textDecoration: 'none' }}>JOBS</a>
+                        </h3>
                     )}
                     {contacts.otherLinks && contacts.otherLinks.map((link, index) => (
-                        <h2 style={buttonStyle}>
-                            <a href={link.url} target='blank' style={{ color: '#000000', textDecoration: 'none' }}>{link.name}</a>
-                        </h2>
+                        <h3 key={index} style={{ margin: '12px 0', color: 'red', textDecorationLine: 'underline', fontSize: mobile ? '10pt' : '11pt' }}>
+                            <a href={link.url} target='blank' style={{ color: 'red', textDecoration: 'none' }}>{link.name}</a>
+                        </h3>
                     ))}
-                    <h2 style={buttonStyle}>
-                        <a onClick={onShowPrivacyPolicy} style={{ color: '#000000', textDecoration: 'none' }}>PRIVACY POLICY</a>
-                    </h2>
-                    <h2 onClick={onShowTermsOfUse} style={buttonStyle}>
-                        <a style={{ color: '#000000', textDecoration: 'none' }}>TERMS OF USE</a>
-                    </h2>
                 </div>
             </div>
         </Draggable>

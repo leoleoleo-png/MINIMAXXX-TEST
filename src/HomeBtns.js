@@ -13,7 +13,6 @@ import cmsInfoDataPromise from './cms/cmsInfos.js';
 import cmsStreamDataPromise from './cms/cmsStream.js';
 import CookiesComponent from './CookiesComponent.js';
 import TypewriterText from './TypewriterText.js';
-import ColdPagesPopup from './ColdPagesPopup.js';
 
 
 
@@ -36,9 +35,6 @@ const TabletAndBelow = ({ children }) => {
 
 function App() {
 
-    const [isColdPageVisible, setIsColdPageVisible] = useState(false);
-    const [coldPageContent, setColdPageContent] = useState('');
-    const [coldPageZIndex, setColdPageZIndex] = useState(1);
     const [isStreamLocked, setIsStreamLocked] = useState(true);
     const [isSecret, setIsSecret] = useState(false);
     const [wordmarkUrl, setWordmarkUrl] = useState('');
@@ -61,21 +57,6 @@ function App() {
     const [loadingComplete, setLoadingComplete] = useState(false);
 
 
-    const showPrivacyPolicy = () => {
-        setColdPageContent('privacyPolicy');
-        setIsColdPageVisible(true);
-        setColdPageZIndex(3);
-    };
-
-    const showTermsOfUse = () => {
-        setColdPageContent('termsOfUse');
-        setIsColdPageVisible(true);
-        setColdPageZIndex(3);
-    };
-
-    const handleMinimizeColdPage = () => {
-        setIsColdPageVisible(false);
-    };
 
     useEffect(() => {
         cmsDataPromise.then(data => {
@@ -125,27 +106,24 @@ function App() {
     const handleMinimizeContact = () => {
         setIsContactVisible(false);
     };
+
     const bringAboutToFront = () => {
         setAboutZIndex(3);
         setStreamZIndex(2);
         setContactZIndex(2);
-        setColdPageZIndex(2);
     };
 
     const bringStreamToFront = () => {
         setAboutZIndex(2);
         setStreamZIndex(3);
         setContactZIndex(2);
-        setColdPageZIndex(2);
     };
 
     const bringContactToFront = () => {
         setAboutZIndex(2);
         setStreamZIndex(2);
         setContactZIndex(3);
-        setColdPageZIndex(2);
     };
-
 
     const showAbout = () => {
         setIsAboutVisible(!isAboutVisible);
@@ -168,18 +146,6 @@ function App() {
         setStreamZIndex(2);
     };
 
-    const buttonStyle = {
-        cursor: 'pointer',
-        display: 'flex',
-        flexDirection: 'row',
-        height: '22px',
-        width: '138px',
-        border: 'solid',
-        padding: '4px 0px 0px 4px',
-        marginRight: '4px',
-        borderWidth: '1px'
-    }
-
     return (
         <div className={isInverted ? "invert-effect" : null} style={{ overflow: 'hidden', width: '100%', flex: 1, background: '#FFFFFF' }}>
             <Desktop>
@@ -189,27 +155,34 @@ function App() {
                         <img src={runnerUrl} style={{ position: 'absolute', top: 0, right: '0px', width: 'calc(70vh)', objectFit: 'contain' }} />
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', position: 'fixed', top: 'calc(24vh)', left: '4px' }}>
-                        <div style={buttonStyle}>
-                            <h2 style={{ margin: 0, fontSize: '9.5pt', letterSpacing: -0.2 }}>ABOUT</h2>
+                        <div className="smooth-opacity" style={{ cursor: 'pointer', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', height: '30px', border: 'solid', padding: '2px 15px', marginRight: '4px', borderWidth: '1px' }}>
+                            <h4>ABOUT</h4>
                         </div>
-                        <div style={buttonStyle}>
-                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '13px', paddingLeft: '2px' }}>
-                                <div className={isInverted ? "invert-effect" : null} style={{ height: '7px', width: '7px', animation: isOnline ? 'fadeInOut 1.5s infinite' : 'none', background: isOnline ? '#FF0000' : '#CACACA', borderRadius: '100px', marginRight: '3px' }} />
-                                <h2 style={{ margin: 0, fontSize: '9.5pt', letterSpacing: -0.2 }}>LIVE</h2>
-                            </div>
+                        <div style={{ cursor: 'pointer', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', height: '30px', border: 'solid', padding: '2px 15px', marginRight: '4px', borderWidth: '1px' }}>
+                            <div className={isInverted ? "invert-effect" : null} style={{ height: '7px', width: '7px', animation: isOnline ? 'fadeInOut 1.5s infinite' : 'none', background: isOnline ? '#FF0000' : '#CACACA', borderRadius: '100px', marginRight: '5px' }} />
+                            <h4 style={{ margin: 0 }}>LIVE</h4>
                         </div>
-                        <div style={buttonStyle}>
-                            <h2 style={{ margin: 0, fontSize: '9.5pt', letterSpacing: -0.2 }}>CONTACT</h2>
+                        <div style={{ cursor: 'pointer', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', height: '30px', border: 'solid', padding: '2px 15px', borderWidth: '1px', marginRight: '4px', }}>
+                            <h4 >CONTACT</h4>
                         </div>
-                        <div style={buttonStyle}>
-                            <h2 style={{ margin: 0, fontSize: '9.5pt', letterSpacing: -0.2 }}>{isInverted ? 'LIGHT MODE' : 'DARK MODE'}</h2>
+                        <div style={{ cursor: 'pointer', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', height: '30px', border: 'solid', padding: '2px 15px', borderWidth: '1px' }}>
+                            <h4>{isInverted ? 'LIGHT MODE' : 'DARK MODE'}</h4>
                         </div>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', position: 'fixed', top: 'calc(24vh)', left: '4px', opacity: 0, zIndex: 100000 }}>
-                        <div onClick={showAbout} style={buttonStyle} />
-                        <div onClick={showStream} style={buttonStyle} />
-                        <div onClick={showContact} style={buttonStyle} />
-                        <div onClick={handleInvert} style={buttonStyle} />
+                        <div onClick={showAbout} style={{ cursor: 'pointer', display: 'flex', flexDirection: 'row', alignItems: 'center', height: '30px', border: 'solid', padding: '2px 15px', marginRight: '4px' }}>
+                            <h4 style={{ cursor: 'pointer' }}>ABOUT</h4>
+                        </div>
+                        <div onClick={showStream} style={{ cursor: 'pointer', display: 'flex', flexDirection: 'row', alignItems: 'center', height: '30px', border: 'solid', padding: '2px 15px', marginRight: '4px' }}>
+                            <div style={{ height: '7px', width: '7px', background: '#CACACA', borderRadius: '100px', marginRight: '5px' }} />
+                            <h4 style={{ cursor: 'pointer', margin: 0 }}>LIVE</h4>
+                        </div>
+                        <div onClick={showContact} style={{ cursor: 'pointer', display: 'flex', flexDirection: 'row', alignItems: 'center', height: '30px', border: 'solid', padding: '2px 15px' }}>
+                            <h4 style={{ cursor: 'pointer' }}>CONTACT</h4>
+                        </div>
+                        <div onClick={handleInvert} style={{ cursor: 'pointer', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', height: '30px', border: 'solid', padding: '2px 15px', borderWidth: '1px' }}>
+                            <h4>LIGHT MODE</h4>
+                        </div>
                     </div>
                     <div style={{ position: 'absolute', bottom: '4px', left: 0, right: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', paddingTop: '5px', minWidth: '23%', marginBottom: '-4px', maxWidth: '32%' }}>
@@ -263,26 +236,6 @@ function App() {
                                     onMinimize={handleMinimizeContact}
                                     zIndex={contactZIndex}
                                     onClick={bringContactToFront}
-                                    onShowPrivacyPolicy={showPrivacyPolicy}
-                                    onShowTermsOfUse={showTermsOfUse}
-                                />
-                            </div>
-                        </div>
-                    )}
-                    {isColdPageVisible && (
-                        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
-                            <div className={isInverted ? "invert-effect" : null} style={{ pointerEvents: 'auto' }}>
-                                <ColdPagesPopup
-                                    contentType={coldPageContent}
-                                    mobile={false}
-                                    onMinimize={handleMinimizeColdPage}
-                                    zIndex={coldPageZIndex}
-                                    onClick={() => {
-                                        setColdPageZIndex(3);
-                                        setAboutZIndex(2);
-                                        setStreamZIndex(2);
-                                        setContactZIndex(2);
-                                    }}
                                 />
                             </div>
                         </div>
@@ -341,21 +294,23 @@ function App() {
                             <img src={iconUrls[5]} style={{ width: '35px', objectFit: 'contain', paddingRight: '6px' }} />
                             <img src={iconUrls[6]} style={{ width: '30px', objectFit: 'contain' }} />
                         </div>
+
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', position: 'absolute', bottom: '8px', left: '8px', right: '8px' }}>
-                        <div onClick={showAbout} style={{ display: 'flex', flexDirection: 'row', height: '30px', border: 'solid', borderWidth: '1px', flexGrow: 1, padding: '3px 0px 0px 4px' }}>
-                            <h4 style={{ margin: 0, letterSpacing: 0 }}>ABOUT</h4>
+
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', position: 'absolute', bottom: '8px', left: '8px', right: '8px' }}>
+                        <div onClick={showAbout} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '35px', border: 'solid', borderWidth: '1px', flexGrow: 1, justifyContent: 'center' }}>
+                            <h4 style={{ cursor: 'pointer', margin: 0 }}>ABOUT</h4>
                         </div>
-                        <div onClick={showStream} style={{ display: 'flex', flexDirection: 'row', height: '30px', border: 'solid', borderWidth: '1px', flexGrow: 1, padding: '3px 0px 0px 4px' }}>
-                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '15px' }}>
-                                <div className={isInverted ? "invert-effect" : null} style={{ height: '7px', width: '7px', animation: isOnline ? 'fadeInOut 1.5s infinite' : 'none', background: isOnline ? '#FF0000' : '#CACACA', borderRadius: '100px', marginRight: '4px' }} />
-                                <h4 style={{ margin: 0, letterSpacing: 0 }}>LIVE</h4>
-                            </div>
+                        <div onClick={showStream} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '35px', border: 'solid', borderWidth: '1px', flexGrow: 1, justifyContent: 'center' }}>
+                            <div className={isInverted ? "invert-effect" : null} style={{ height: '7px', width: '7px', animation: isOnline ? 'fadeInOut 1.5s infinite' : 'none', background: isOnline ? '#FF0000' : '#CACACA', borderRadius: '100px', marginRight: '5px' }} />
+                            <h4 style={{ cursor: 'pointer', margin: 0 }}>LIVE</h4>
                         </div>
-                        <div onClick={showContact} style={{ display: 'flex', flexDirection: 'row', height: '30px', border: 'solid', borderWidth: '1px', flexGrow: 1, padding: '3px 0px 0px 4px' }}>
-                            <h4 style={{ margin: 0, letterSpacing: 0 }}>CONTACT</h4>
+                        <div onClick={showContact} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', height: '35px', border: 'solid', borderWidth: '1px', flexGrow: 1, justifyContent: 'center' }}>
+                            <h4 style={{ cursor: 'pointer', margin: 0 }}>CONTACT</h4>
                         </div>
                     </div>
+
+
                     {isAboutVisible && (
                         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
                             <div className={isInverted ? "invert-effect" : null} style={{ pointerEvents: 'auto' }}>
@@ -391,26 +346,6 @@ function App() {
                                     onMinimize={handleMinimizeContact}
                                     zIndex={contactZIndex}
                                     onClick={bringContactToFront}
-                                    onShowPrivacyPolicy={showPrivacyPolicy}
-                                    onShowTermsOfUse={showTermsOfUse}
-                                />
-                            </div>
-                        </div>
-                    )}
-                     {isColdPageVisible && (
-                        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
-                            <div className={isInverted ? "invert-effect" : null} style={{ pointerEvents: 'auto' }}>
-                                <ColdPagesPopup
-                                    contentType={coldPageContent}
-                                    mobile={true}
-                                    onMinimize={handleMinimizeColdPage}
-                                    zIndex={coldPageZIndex}
-                                    onClick={() => {
-                                        setColdPageZIndex(3);
-                                        setAboutZIndex(2);
-                                        setStreamZIndex(2);
-                                        setContactZIndex(2);
-                                    }}
                                 />
                             </div>
                         </div>

@@ -258,9 +258,6 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick, onUnlock }) => {
 
                             </div>
                         </div>
-
-
-
                         {isOnline ? (
                             isLocked ? (
                                 <div className="blink" style={{
@@ -363,15 +360,13 @@ const Stream = ({ mobile, onMinimize, zIndex, onClick, onUnlock }) => {
                                 justifyContent: 'center',
                                 alignItems: 'center',
                             }}>
-                                <h2 style={{ textAlign: 'center', color: '#000000', width: '80%' }}>THE STREAM IS CURRENTLY OFFLINE. COME BACK FOR THE NEXT EVENT OR JOIN US IN PERSON.</h2>
+                                <h2 style={{ textAlign: 'center', color: '#000000', width: '80%', fontSize:'15pt', lineHeight:'13pt' }}>THE STREAM IS CURRENTLY OFFLINE. COME BACK FOR THE NEXT EVENT OR JOIN US IN PERSON.</h2>
                                 <h5 style={{ position: 'absolute', bottom: '10%', textAlign: 'center', color: '#000000', width: '70%', fontWeight: '400', fontSize: '7pt' }}>FIND INFORMATION ABOUT OUR NEXT EVENT BY MOVING THIS WINDOW OR BY HEADING TO OUR SOCIAL NETWORKS.</h5>
                             </div>
                         )}
                         <div style={{ background: isOnline || isLocked ? 'rgba(0,0,0,0.6)' : null, position: 'absolute', bottom: '0', right: '0', height: '21px', width: '21px', pointerEvents: 'none', zIndex: 100001 }}>
                             <img src={isOnline ? resize : resize_black} style={{ height: '21px', objectFit: 'contain' }} />
                         </div>
-
-
                     </div>
                     {isOnline && !isLocked && <div style={{ pointerEvents: 'none', position: 'absolute', top: '33px', right: '5px', background: 'red', borderRadius: '5px', padding: '2px 7px', animation: 'fadeInOut 1.5s infinite', zIndex: 200003 }}>
                         <h4 style={{ color: '#FFFFFF', margin: 0, letterSpacing: 0, pointerEvents: 'none' }}>LIVE</h4>

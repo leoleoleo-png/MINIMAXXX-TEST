@@ -6,7 +6,7 @@ import move from './assets/move.png';
 
 const enableAnalytics = () => {
     ReactGA.initialize('G-4SYSCT19H9');
-    ReactGA.send('pageview'); 
+    ReactGA.send('pageview');
 };
 
 const CookiesComponent = ({ mobile }) => {
@@ -15,13 +15,13 @@ const CookiesComponent = ({ mobile }) => {
     useEffect(() => {
         const timer = setTimeout(() => {
             setIsVisible(true);
-        }, 4000); 
+        }, 4000);
 
-        return () => clearTimeout(timer); // Cleanup the timer if the component unmounts
+        return () => clearTimeout(timer); 
     }, []);
 
     const handleAccept = () => {
-        enableAnalytics(); 
+        enableAnalytics();
         Cookies.set('mySiteCookieConsent', 'true', { expires: 365 });
         setIsVisible(false);
     };
@@ -31,9 +31,28 @@ const CookiesComponent = ({ mobile }) => {
         setIsVisible(false);
     };
 
+    const buttonStyle = {
+        margin: '8px 0',
+        width: '95%',
+        height: '22px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        textDecorationLine: 'underline',
+        fontSize: mobile ? '10pt' : '11pt',
+        border: 'solid',
+        borderWidth: '1px',
+        borderColor: '#000000',
+        textDecoration: 'none',
+        fontSize: '9.5pt',
+        cursor: 'pointer',
+        letterSpacing: -0.2,
+        background: '#FFFFFF'
+    }
+
     if (!isVisible) return null;
 
-    return(
+    return (
         <Draggable handle=".drag-handle">
             <div
                 style={{
@@ -62,8 +81,8 @@ const CookiesComponent = ({ mobile }) => {
                         padding: '0 5px',
                     }}
                 >
-                    
-                    <img src={move} alt="Move" style={{ width: '21px', height: '21px', pointerEvents: 'none'}} />
+
+                    <img src={move} alt="Move" style={{ width: '21px', height: '21px', pointerEvents: 'none' }} />
                     <h3 style={{ fontSize: '11pt', color: '#FFFFFF', margin: 0, textAlign: 'center' }}>COOKIES</h3>
                     <div style={{ width: '21px' }} />
                 </div>
@@ -71,34 +90,16 @@ const CookiesComponent = ({ mobile }) => {
                     padding: '20px',
                     textAlign: 'center',
                 }}>
-                    <h4>ALLOW COOKIES?</h4>
+                    <h4 style={{ margin: 0, paddingBottom: '15px' }}>ALLOW COOKIES?</h4>
                     <button
                         onClick={handleAccept}
-                        style={{
-                            borderStyle: 'solid',
-                            borderWidth: '1px',
-                            borderColor: '#000000',
-                            background: '#FFFFFF',
-                            cursor: 'pointer',
-                            height: '30px',
-                            padding: '2px 35px',
-                            marginRight: '10px'
-                        }}
+                        style={buttonStyle}
                     >
                         <h4 style={{ margin: 0 }}>YES</h4>
                     </button>
                     <button
                         onClick={handleDecline}
-                        style={{
-                            borderStyle: 'solid',
-                            borderWidth: '1px',
-                            borderColor: '#000000',
-                            background: 'red',
-                            cursor: 'pointer',
-                            height: '30px',
-                            padding: '2px 35px',
-                            marginRight: '4px'
-                        }}
+                        style={buttonStyle}
                     >
                         <h4 style={{ margin: 0 }}>NO</h4>
                     </button>
