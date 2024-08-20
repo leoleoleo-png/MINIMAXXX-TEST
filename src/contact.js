@@ -146,22 +146,22 @@ const ContactPopup = ({ mobile, onMinimize, zIndex, onClick, onShowPrivacyPolicy
                     paddingRight: '20px',
                 }}>
                     {contacts.email && (
-                        <h2 style={buttonStyle}>
-                            <a href={`mailto:${contacts.email}`} style={{ color: '#000000', textDecoration: 'none' }}>EMAIL</a>
+                        <h2 onClick={() => window.location.href = `mailto:${contacts.email}`} style={buttonStyle}>
+                            <a style={{ color: '#000000', textDecoration: 'none' }}>EMAIL</a>
                         </h2>
                     )}
                     {contacts.jobsEmail && (
-                        <h2 style={buttonStyle}>
-                            <a href={`mailto:${contacts.jobsEmail}`} style={{ color: '#000000', textDecoration: 'none' }}>JOBS</a>
+                        <h2 onClick={() => window.location.href = `mailto:${contacts.jobsEmail}`} style={buttonStyle}>
+                            <a style={{ color: '#000000', textDecoration: 'none' }}>JOBS</a>
                         </h2>
                     )}
                     {contacts.otherLinks && contacts.otherLinks.map((link, index) => (
-                        <h2 style={buttonStyle}>
-                            <a href={link.url} target='blank' style={{ color: '#000000', textDecoration: 'none' }}>{link.name}</a>
+                        <h2 onClick={() => window.open(link.url, '_blank')} style={buttonStyle}>
+                            <a target='blank' style={{ color: '#000000', textDecoration: 'none' }}>{link.name}</a>
                         </h2>
                     ))}
-                    <h2 style={buttonStyle}>
-                        <a onClick={onShowPrivacyPolicy} style={{ color: '#000000', textDecoration: 'none' }}>PRIVACY POLICY</a>
+                    <h2 onClick={onShowPrivacyPolicy} style={buttonStyle}>
+                        <a style={{ color: '#000000', textDecoration: 'none' }}>PRIVACY POLICY</a>
                     </h2>
                     <h2 onClick={onShowTermsOfUse} style={buttonStyle}>
                         <a style={{ color: '#000000', textDecoration: 'none' }}>TERMS OF USE</a>

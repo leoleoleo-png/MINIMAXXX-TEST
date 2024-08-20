@@ -315,7 +315,7 @@ function App() {
                                 startDelay={2500}
                             /></h2>
                             {eventDetails.map((detail, index) => (
-                                <h2 key={index} style={index > 3 ? { paddingLeft: '35px', lineHeight: '9pt', fontSize:'11pt' } : { lineHeight: '9pt', fontSize:'11pt' }}>
+                                <h2 key={index} style={index > 3 ? { paddingLeft: '35px', lineHeight: '9pt', fontSize: '11pt' } : { lineHeight: '9pt', fontSize: '11pt' }}>
                                     <span style={{ fontWeight: 400 }}>— </span>
                                     <TypewriterText
                                         text={isSecret && isStreamLocked ? '*'.repeat(detail.length) : detail}
@@ -344,16 +344,16 @@ function App() {
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px', position: 'absolute', bottom: '8px', left: '8px', right: '8px' }}>
                         <div onClick={showAbout} style={{ display: 'flex', flexDirection: 'row', height: '30px', border: 'solid', borderWidth: '1px', flexGrow: 1, padding: '3px 0px 0px 4px' }}>
-                            <h4 style={{ margin: 0, letterSpacing: 0, fontSize:'9.5pt' }}>ABOUT</h4>
+                            <h4 style={{ margin: 0, letterSpacing: 0, fontSize: '9.5pt' }}>ABOUT</h4>
                         </div>
                         <div onClick={showStream} style={{ display: 'flex', flexDirection: 'row', height: '30px', border: 'solid', borderWidth: '1px', flexGrow: 1, padding: '3px 0px 0px 4px' }}>
                             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '15px' }}>
                                 <div className={isInverted ? "invert-effect" : null} style={{ height: '6px', width: '6px', animation: isOnline ? 'fadeInOut 1.5s infinite' : 'none', background: isOnline ? '#FF0000' : '#CACACA', borderRadius: '100px', marginRight: '3px' }} />
-                                <h4 style={{ margin: 0, letterSpacing: 0, fontSize:'9.5pt' }}>LIVE</h4>
+                                <h4 style={{ margin: 0, letterSpacing: 0, fontSize: '9.5pt' }}>LIVE</h4>
                             </div>
                         </div>
                         <div onClick={showContact} style={{ display: 'flex', flexDirection: 'row', height: '30px', border: 'solid', borderWidth: '1px', flexGrow: 1, padding: '3px 0px 0px 4px' }}>
-                            <h4 style={{ margin: 0, letterSpacing: 0, fontSize:'9.5pt' }}>CONTACT</h4>
+                            <h4 style={{ margin: 0, letterSpacing: 0, fontSize: '9.5pt' }}>CONTACT</h4>
                         </div>
                     </div>
                     {isAboutVisible && (
@@ -397,7 +397,7 @@ function App() {
                             </div>
                         </div>
                     )}
-                     {isColdPageVisible && (
+                    {isColdPageVisible && (
                         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
                             <div className={isInverted ? "invert-effect" : null} style={{ pointerEvents: 'auto' }}>
                                 <ColdPagesPopup
