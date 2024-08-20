@@ -213,8 +213,8 @@ function App() {
                     </div>
                     <div style={{ position: 'absolute', bottom: '4px', left: 0, right: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', paddingTop: '5px', minWidth: '23%', marginBottom: '-4px', maxWidth: '32%' }}>
-                            {isOnline ? null : <h2 style={{ fontSize: '16pt', lineHeight: '10pt', letterSpacing: '-1px', marginBottom: '3.5px' }}>NEXT EVENT ::</h2>}
-                            <h2 style={{ fontSize: '16pt', lineHeight: '10pt', marginBottom: '1px' }}><TypewriterText
+                            {isOnline ? null : <h2 style={{ fontSize: '15pt', lineHeight: '10pt', letterSpacing: '-1px', marginBottom: '3px' }}>NEXT EVENT ::</h2>}
+                            <h2 style={{ fontSize: '15pt', lineHeight: '10pt', marginBottom: '1px' }}><TypewriterText
                                 text={isSecret && isStreamLocked ? 'MINIMAXXX SECRET EVENT' : eventName}
                                 speed={50}
                                 startDelay={2500}
