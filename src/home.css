@@ -7,10 +7,17 @@
   --lightGrey: #D8D8D8;
 }
 
+@media screen and (max-width:767px) {
+  html, body {
+    overflow: hidden;
+  }
+  }
+  
 body,
 html {
   height: 100%;
   margin: 0;
+  overflow: hidden;
   font-family: Helvetica, Arial, sans-serif;
 }
 

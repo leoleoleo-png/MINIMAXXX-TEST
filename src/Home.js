@@ -181,7 +181,7 @@ function App() {
     }
 
     return (
-        <div className={isInverted ? "invert-effect" : null} style={{ overflow: 'hidden', width: '100%', flex: 1, background: '#FFFFFF' }}>
+        <div className={isInverted ? "invert-effect" : null} style={{ position: 'fixed', top: 0, left: 0, overflow: 'hidden', height: '100%', width: '100%', flex: 1, background: '#FFFFFF' }}>
             <Desktop>
                 <div style={{ overflow: 'hidden', flex: 1, height: 'calc(100vh)', width: '100%' }}>
                     <div style={{ position: 'absolute', top: 0, left: 0, right: 0 }}>
@@ -303,7 +303,7 @@ function App() {
                 <CookiesComponent />
             </Desktop>
             <TabletAndBelow>
-                <div style={{ overflow: 'hidden', flex: 1, width: '100%' }}>
+                <div style={{ overflow: 'hidden', flex: 1, width: '100%', position:'fixed', top:0, left:0, height:'100%' }}>
                     <img src={wordmarkUrl} style={{ position: 'absolute', top: '2px', left: '2px', right: '2px', width: '99%', height: 'auto', objectFit: 'contain' }} />
                     <img src={runnerUrl} style={{ position: 'absolute', top: 0, right: '2px', width: '45%', objectFit: 'contain' }} />
                     <div style={{ position: 'absolute', bottom: '50px', left: 0, right: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
@@ -342,22 +342,22 @@ function App() {
                             <img src={iconUrls[6]} style={{ width: '30px', objectFit: 'contain' }} />
                         </div>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', position: 'absolute', bottom: '8px', left: '8px', right: '8px' }}>
-                        <div onClick={showAbout} style={{ display: 'flex', flexDirection: 'row', height: '30px', border: 'solid', borderWidth: '1px', flexGrow: 1, padding: '3px 0px 0px 4px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', position: 'absolute', bottom: '8px', left: '8px', right: '8px', zIndex: 100 }}>
+                        <div onClick={showAbout} style={{ background: '#FFFFFF', display: 'flex', flexDirection: 'row', height: '30px', border: 'solid', borderWidth: '1px', flexGrow: 1, padding: '3px 0px 0px 4px' }}>
                             <h4 style={{ margin: 0, letterSpacing: 0, fontSize: '9.5pt' }}>ABOUT</h4>
                         </div>
-                        <div onClick={showStream} style={{ display: 'flex', flexDirection: 'row', height: '30px', border: 'solid', borderWidth: '1px', flexGrow: 1, padding: '3px 0px 0px 4px' }}>
+                        <div onClick={showStream} style={{ background: '#FFFFFF', display: 'flex', flexDirection: 'row', height: '30px', border: 'solid', borderWidth: '1px', flexGrow: 1, padding: '3px 0px 0px 4px' }}>
                             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '15px' }}>
                                 <div className={isInverted ? "invert-effect" : null} style={{ height: '6px', width: '6px', animation: isOnline ? 'fadeInOut 1.5s infinite' : 'none', background: isOnline ? '#FF0000' : '#CACACA', borderRadius: '100px', marginRight: '3px' }} />
                                 <h4 style={{ margin: 0, letterSpacing: 0, fontSize: '9.5pt' }}>LIVE</h4>
                             </div>
                         </div>
-                        <div onClick={showContact} style={{ display: 'flex', flexDirection: 'row', height: '30px', border: 'solid', borderWidth: '1px', flexGrow: 1, padding: '3px 0px 0px 4px' }}>
+                        <div onClick={showContact} style={{ background: '#FFFFFF', display: 'flex', flexDirection: 'row', height: '30px', border: 'solid', borderWidth: '1px', flexGrow: 1, padding: '3px 0px 0px 4px' }}>
                             <h4 style={{ margin: 0, letterSpacing: 0, fontSize: '9.5pt' }}>CONTACT</h4>
                         </div>
                     </div>
                     {isAboutVisible && (
-                        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
+                        <div style={{ position: 'absolute', pointerEvents: 'none' }}>
                             <div className={isInverted ? "invert-effect" : null} style={{ pointerEvents: 'auto' }}>
                                 <AboutPopup
                                     mobile

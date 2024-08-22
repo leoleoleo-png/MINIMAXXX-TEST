@@ -17,7 +17,7 @@ const CookiesComponent = ({ mobile }) => {
             setIsVisible(true);
         }, 4000);
 
-        return () => clearTimeout(timer); 
+        return () => clearTimeout(timer);
     }, []);
 
     const handleAccept = () => {
@@ -58,9 +58,9 @@ const CookiesComponent = ({ mobile }) => {
                 style={{
                     position: 'fixed',
                     top: '20%',
-                    left: mobile ? '15%' : '25%',
+                    left: mobile ? '5%' : '25%',
                     transform: 'translate(-50%, -50%)',
-                    zIndex: 1000,
+                    zIndex: 99,
                     background: '#FFFFFF',
                     border: '1px solid #000000',
                     display: 'flex',
@@ -91,17 +91,18 @@ const CookiesComponent = ({ mobile }) => {
                     textAlign: 'center',
                 }}>
                     <h4 style={{ margin: 0, paddingBottom: '15px' }}>ALLOW COOKIES?</h4>
-                    <button
-                        onClick={handleAccept}
-                        style={buttonStyle}
-                    >
-                        <h4 style={{ margin: 0 }}>YES</h4>
-                    </button>
+                   
                     <button
                         onClick={handleDecline}
                         style={buttonStyle}
                     >
                         <h4 style={{ margin: 0 }}>NO</h4>
+                    </button>
+                    <button
+                        onClick={handleAccept}
+                        style={buttonStyle}
+                    >
+                        <h4 style={{ margin: 0 }}>YES</h4>
                     </button>
                 </div>
             </div>
